@@ -4,7 +4,7 @@ QR 코드 큐싱 탐지 시스템 Q-Guard의 서버와 Android 앱을 한 폴더
 앱이 QR에서 읽은 URL을 서버로 보내면, 서버가 ML 앙상블 예측과 VirusTotal(VT) 정보를 상황 적응형으로 융합해 안전(SECURED) / 주의(SUSPICIOUS) / 위험(BLOCKED)을 돌려줍니다.
 
 📄 최종 발표자료, 포스터, 학술대회 논문(PDF)은 [`docs/`](docs/)에 있습니다.
-개발 기록(커밋 이력)은 원본 레포 [Q-Guarder-App](https://github.com/Q-Guarder/Q-Guarder-App)과 Q-Guarder-Server에 있습니다.
+개발 기록(커밋 이력)은 원본 레포 [Q-Guarder-App](https://github.com/Q-Guarder/Q-Guarder-App)과 [Q-Guarder-Server](https://github.com/Q-Guarder/Q-Guarder-Server)에 있습니다.
 
 목차: [1. 디렉터리 구조](#1-디렉터리-구조) · [2. 데이터 설명](#2-데이터-설명) · [3. 서버 실행](#3-서버-실행-docker) · [4. 앱 실행](#4-앱-실행-android-studio--에뮬레이터) · [5. 앱 ↔ 서버 API 대응](#5-앱--서버-api-대응) · [6. 통합하면서 바꾼 것](#6-통합하면서-바꾼-것) · [7. 알아둘 점](#7-알아둘-점)
 
