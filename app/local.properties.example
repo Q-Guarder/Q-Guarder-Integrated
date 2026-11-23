@@ -1,0 +1,16 @@
+# local.properties 예시 파일
+# 이 파일을 local.properties 로 복사한 뒤 값을 채운다 (local.properties 는 git 미추적)
+
+# 안드로이드 SDK 경로 (Android Studio 로 열면 자동으로 채워짐)
+sdk.dir=
+
+# 서버 주소 — 반드시 '/' 로 끝나야 한다 (Retrofit baseUrl 규칙)
+#
+#  1) 같은 PC 에서 server/ 를 docker compose 로 띄우고 에뮬레이터로 실행 (기본)
+#       BASE_URL=http://10.0.2.2:8000/
+#  2) ngrok 등 HTTPS 터널 / 배포된 API Gateway
+#       BASE_URL=https://xxxx.ngrok-free.app/
+#
+#  http:// 주소는 debug 빌드에서 10.0.2.2 · localhost 만 허용된다
+#  (app/src/debug/res/xml/network_security_config.xml).
+BASE_URL=http://10.0.2.2:8000/

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    방문 기록 전용 아이템 레이아웃.
+    스캔 로그(item_log.xml)와 카드 구조는 같지만 내부 콘텐츠가 다르다:
+      - 아이콘: ic_activity (방문을 나타내는 발자국/활동 아이콘)
+      - "방문" 칩 배지 + 위험도 레이블을 나란히 표시
+      - 신고 버튼 없음
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="?attr/colorOutlineVariant">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- 왼쪽: 원형 아이콘 (위험도 색상) -->
+        <FrameLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="12dp">
+
+            <View
+                android:id="@+id/icon_bg_visit"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_circle_green" />
+
+            <ImageView
+                android:id="@+id/iv_visit_icon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_activity"
+                android:contentDescription="방문"
+                app:tint="#FFFFFF" />
+
+        </FrameLayout>
+
+        <!-- 가운데: 배지 행 + URL -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- "방문" 칩 + 위험도 레이블 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="3dp">
+
+                <TextView
+                    android:id="@+id/tv_visit_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="방문"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="#1D9E75"
+                    android:background="@drawable/bg_tag_visit"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginEnd="6dp" />
+
+                <!-- 위험도 (SECURED / SUSPICIOUS / BLOCKED) -->
+                <TextView
+                    android:id="@+id/tv_visit_risk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SECURED"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="#1D9E75"
+                    android:letterSpacing="0.04" />
+
+            </LinearLayout>
+
+            <!-- URL -->
+            <TextView
+                android:id="@+id/tv_visit_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="https://example.com"
+                android:textSize="12sp"
+                android:textColor="?attr/colorOnSurface"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+        </LinearLayout>
+
+        <!-- 오른쪽: 시간 -->
+        <TextView
+            android:id="@+id/tv_visit_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="top"
+            android:text="오전 07:26"
+            android:textSize="11sp"
+            android:textColor="?attr/colorOnSurfaceVariant" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

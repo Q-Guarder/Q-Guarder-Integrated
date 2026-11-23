@@ -1,0 +1,152 @@
+{
+  "params": {
+    "alpha": 18.4,
+    "d_high": 5,
+    "tau_s": 0.45,
+    "tau_b": 0.65,
+    "w_a_high": 0.25,
+    "w_a_low": 0.5,
+    "w_b": 0.3,
+    "w_b_deep": 0.5,
+    "w_c": 0.8,
+    "theta": 0.05
+  },
+  "selected_on": "validation (n=500)",
+  "criteria": {
+    "R1_parsimony": "1차 심사본 값이 검증 집합의 성능 고원(최적 대비 F1 차이 < 1.0%p) 안에 있으면 그 값을 유지한다 (과적합 방지). 고원 밖이면 F1 최대 값으로 이동(동률: Recall 최대, FPR 최소).",
+    "R2_anchor": "VT 쪽 파라미터는 d_high 하나에 정합시킨다: α = n̄/d_high (d ≥ d_high 에서 S_VT 가 1로 포화 → 'd_high 이상 = 높은 합의'라는 정의가 점수에 그대로 반영), θ = d_high/n̄ (Override 가 A_HIGH 경계와 같은 지점에서 작동). n̄ = 검증 집합 VT 응답 엔진 수 중앙값.",
+    "suspicious_level": "탐지 기준 = SUSPICIOUS 이상. 비교 지표 F1 (Recall·FPR 병기)",
+    "blocked_level": "τH: 정상→BLOCKED 비율 ≤ 1.0% 인 후보 중 BLOCKED Recall 최대 (R1 적용: 1차 값 대비 개선 < 1.0%p 면 유지)",
+    "case_b": "구조 제약: 최종 점수 상한 W_ML(B)·1.0 이 τL 을 넘어야 함(ML 확신이 매우 높으면 SUSPICIOUS 가능). ML 신뢰도가 확인된 경로 포함 URL(deep)에만 적용하고, 검증 집합에서 추가 오탐률이 2.0%p 이하인 가장 큰 W 를 택한다.",
+    "note": "모든 선정은 검증 집합(1차 심사본 500건)에서만 수행. 테스트 집합 결과를 보고 파라미터를 바꾸지 않는다."
+  },
+  "case_b_rule": "구조 제약: 최종 점수 상한 W_ML(B)·1.0 이 τL 을 넘어야 함(ML 확신이 매우 높으면 SUSPICIOUS 가능). ML 신뢰도가 확인된 경로 포함 URL(deep)에만 적용하고, 검증 집합에서 추가 오탐률이 2.0%p 이하인 가장 큰 W 를 택한다.",
+  "selected_at": "2026-10-18T02:05:49.695016+00:00",
+  "n_ref_engines_median": 92.0,
+  "selection_log": [
+    {
+      "param": "d_high",
+      "from": 5,
+      "to": 5,
+      "rule": "R1_parsimony",
+      "f1_before": 93.07,
+      "f1_after": 93.07,
+      "recall_after": 94.0,
+      "fpr_after": 8.0,
+      "blocked_recall_after": 19.6,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 10
+    },
+    {
+      "param": "alpha",
+      "from": 3.0,
+      "to": 18.4,
+      "rule": "R2_anchor (n̄=92.0 / d_high=5)",
+      "f1_before": 93.07,
+      "f1_after": 94.8,
+      "recall_after": 98.4,
+      "fpr_after": 9.2,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 5.0
+    },
+    {
+      "param": "w_a_high",
+      "from": 0.25,
+      "to": 0.25,
+      "rule": "R1_parsimony",
+      "f1_before": 94.8,
+      "f1_after": 94.8,
+      "recall_after": 98.4,
+      "fpr_after": 9.2,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 0.1
+    },
+    {
+      "param": "w_a_low",
+      "from": 0.5,
+      "to": 0.5,
+      "rule": "R1_parsimony",
+      "f1_before": 94.8,
+      "f1_after": 94.8,
+      "recall_after": 98.4,
+      "fpr_after": 9.2,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 0.3
+    },
+    {
+      "param": "w_c",
+      "from": 0.8,
+      "to": 0.8,
+      "rule": "R1_parsimony",
+      "f1_before": 94.8,
+      "f1_after": 94.8,
+      "recall_after": 98.4,
+      "fpr_after": 9.2,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 0.5
+    },
+    {
+      "param": "tau_s",
+      "from": 0.35,
+      "to": 0.45,
+      "rule": "R1_parsimony",
+      "f1_before": 94.8,
+      "f1_after": 96.08,
+      "recall_after": 98.0,
+      "fpr_after": 6.0,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 0.45
+    },
+    {
+      "param": "w_b_deep",
+      "from": null,
+      "to": 0.5,
+      "rule": "case_b 구조 제약 (τL=0.45, 추가 FPR ≤ 2.0%p)",
+      "f1_before": null,
+      "f1_after": null,
+      "recall_after": null,
+      "fpr_after": null,
+      "blocked_recall_after": null,
+      "blocked_fpr_after": null,
+      "best_in_grid": null,
+      "iteration": 1
+    },
+    {
+      "param": "tau_b",
+      "from": 0.65,
+      "to": 0.65,
+      "rule": "blocked_level + R1_parsimony",
+      "f1_before": 95.52,
+      "f1_after": 95.52,
+      "recall_after": 98.0,
+      "fpr_after": 7.2,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": 0.45
+    },
+    {
+      "param": "theta",
+      "from": 0.3,
+      "to": 0.05,
+      "rule": "R2_anchor (d_high/n̄ = 0.054 → 격자 0.05)",
+      "f1_before": 95.52,
+      "f1_after": 95.52,
+      "recall_after": 98.0,
+      "fpr_after": 7.2,
+      "blocked_recall_after": 96.4,
+      "blocked_fpr_after": 0.8,
+      "best_in_grid": null
+    }
+  ],
+  "baseline_fixed": {
+    "alpha": 18.4,
+    "tau_s": 0.5,
+    "tau_b": 0.6,
+    "rule": "검증 집합에서 고정 융합 자체 선정: τL = F1 최대(격자 0.25~0.65), τH = 정상→BLOCKED ≤ 1% 중 BLOCKED Recall 최대"
+  }
+}

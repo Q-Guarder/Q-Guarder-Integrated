@@ -1,0 +1,1447 @@
+{
+  "meta": {
+    "generated_at": "2026-10-20T08:45:48.461650+00:00",
+    "mode": "evaluate",
+    "model_file": "final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl",
+    "ml_threshold": 0.41,
+    "n_validation": 500,
+    "n_test": 500,
+    "split_column_present": true,
+    "criteria": {
+      "R1_parsimony": "1차 심사본 값이 검증 집합의 성능 고원(최적 대비 F1 차이 < 1.0%p) 안에 있으면 그 값을 유지한다 (과적합 방지). 고원 밖이면 F1 최대 값으로 이동(동률: Recall 최대, FPR 최소).",
+      "R2_anchor": "VT 쪽 파라미터는 d_high 하나에 정합시킨다: α = n̄/d_high (d ≥ d_high 에서 S_VT 가 1로 포화 → 'd_high 이상 = 높은 합의'라는 정의가 점수에 그대로 반영), θ = d_high/n̄ (Override 가 A_HIGH 경계와 같은 지점에서 작동). n̄ = 검증 집합 VT 응답 엔진 수 중앙값.",
+      "suspicious_level": "탐지 기준 = SUSPICIOUS 이상. 비교 지표 F1 (Recall·FPR 병기)",
+      "blocked_level": "τH: 정상→BLOCKED 비율 ≤ 1.0% 인 후보 중 BLOCKED Recall 최대 (R1 적용: 1차 값 대비 개선 < 1.0%p 면 유지)",
+      "case_b": "구조 제약: 최종 점수 상한 W_ML(B)·1.0 이 τL 을 넘어야 함(ML 확신이 매우 높으면 SUSPICIOUS 가능). ML 신뢰도가 확인된 경로 포함 URL(deep)에만 적용하고, 검증 집합에서 추가 오탐률이 2.0%p 이하인 가장 큰 W 를 택한다.",
+      "note": "모든 선정은 검증 집합(1차 심사본 500건)에서만 수행. 테스트 집합 결과를 보고 파라미터를 바꾸지 않는다."
+    },
+    "grids": {
+      "alpha": [
+        1.0,
+        2.0,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        6.0,
+        8.0,
+        10.0,
+        12.0,
+        15.0,
+        18.4,
+        20.0,
+        25.0
+      ],
+      "d_high": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ],
+      "w_a_high": [
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5
+      ],
+      "w_a_low": [
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7
+      ],
+      "w_c": [
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "tau_s": [
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45
+      ],
+      "tau_b": [
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85
+      ],
+      "theta": [
+        null,
+        0.3,
+        0.25,
+        0.2,
+        0.15,
+        0.1,
+        0.075,
+        0.05,
+        0.03
+      ],
+      "w_b_deep": [
+        0.36,
+        0.38,
+        0.4,
+        0.42,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.7
+      ],
+      "w_b_all": [
+        0.3,
+        0.35,
+        0.36,
+        0.38,
+        0.4,
+        0.45,
+        0.5,
+        0.6
+      ]
+    },
+    "note": "융합 계산은 app.services.fusion.fuse() — 서버와 동일. VT 재호출 0건."
+  },
+  "overlap_check": {
+    "splits": {
+      "validation": 500,
+      "test": 500
+    },
+    "between_splits": {
+      "pair": [
+        "test",
+        "validation"
+      ],
+      "url_overlap": 0,
+      "domain_overlap": 13,
+      "domains_shared": [
+        "blogspot.com",
+        "cisco.com",
+        "com.ml",
+        "github.io",
+        "google.com",
+        "mybluehost.me",
+        "netlify.app",
+        "pages.dev",
+        "tinyurl.com",
+        "typedream.app",
+        "vercel.app",
+        "weebly.com",
+        "workers.dev"
+      ]
+    },
+    "offline": {
+      "file": "C:\\Users\\user\\Desktop\\프로젝트 모음집\\Q-Guarder-Server\\Q-Guarder-Server\\experiments\\data\\raw\\offline_urls.csv",
+      "status": "없음 — Drive Q-Guard/dataset/preprocessed_dataset.csv 를 experiments/data/raw/offline_urls.csv 로 두면 자동 검사"
+    },
+    "parameter_selection_history": "1차 심사본: results.json 의 sweeps(α·τH·d_high·W_ML(B))와 override 실험이 동일 500건에서 수행됨 → 500건은 독립 테스트셋이 아니라 검증 집합으로 선언"
+  },
+  "final_params": {
+    "alpha": 18.4,
+    "d_high": 5,
+    "tau_s": 0.45,
+    "tau_b": 0.65,
+    "w_a_high": 0.25,
+    "w_a_low": 0.5,
+    "w_b": 0.3,
+    "w_b_deep": 0.5,
+    "w_c": 0.8,
+    "theta": 0.05
+  },
+  "baseline_fixed_tau": {
+    "alpha": 18.4,
+    "tau_s": 0.5,
+    "tau_b": 0.6,
+    "rule": "검증 집합에서 고정 융합 자체 선정: τL = F1 최대(격자 0.25~0.65), τH = 정상→BLOCKED ≤ 1% 중 BLOCKED Recall 최대"
+  },
+  "fixed_params_selected_at": "2026-10-18T02:05:49.695016+00:00",
+  "evaluation_test": {
+    "split": "test",
+    "n": 500,
+    "composition": {
+      "n": 500,
+      "by_label_path": {
+        "benign/root": 125,
+        "benign/deep": 125,
+        "phishing/root": 166,
+        "phishing/deep": 84
+      },
+      "by_vt_band": {
+        "ok · d≥5 (A_HIGH)": {
+          "benign": 0,
+          "phishing": 225
+        },
+        "ok · 1≤d<5 (A_LOW)": {
+          "benign": 16,
+          "phishing": 18
+        },
+        "ok · d=0 (B)": {
+          "benign": 173,
+          "phishing": 0
+        },
+        "not_found (C)": {
+          "benign": 61,
+          "phishing": 7
+        }
+      },
+      "static_resources": 77
+    },
+    "strategies": {
+      "ML only (threshold 0.41)": {
+        "suspicious": {
+          "n": 500,
+          "tp": 211,
+          "tn": 79,
+          "fp": 171,
+          "fn": 39,
+          "accuracy": 0.58,
+          "precision": 0.5523560209424084,
+          "recall": 0.844,
+          "fpr": 0.684,
+          "f1": 0.6677215189873418,
+          "recall_ci": [
+            0.7938530425287444,
+            0.8837348705635146
+          ],
+          "precision_ci": [
+            0.5022153511189943,
+            0.6014541339754073
+          ],
+          "fpr_ci": [
+            0.6239541772841809,
+            0.7384765669279577
+          ],
+          "accuracy_pct": 58.0,
+          "precision_pct": 55.24,
+          "recall_pct": 84.4,
+          "fpr_pct": 68.4,
+          "f1_pct": 66.77,
+          "recall_ci_pct": [
+            79.4,
+            88.4
+          ],
+          "precision_ci_pct": [
+            50.2,
+            60.1
+          ],
+          "fpr_ci_pct": [
+            62.4,
+            73.8
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 211,
+          "tn": 79,
+          "fp": 171,
+          "fn": 39,
+          "accuracy": 0.58,
+          "precision": 0.5523560209424084,
+          "recall": 0.844,
+          "fpr": 0.684,
+          "f1": 0.6677215189873418,
+          "recall_ci": [
+            0.7938530425287444,
+            0.8837348705635146
+          ],
+          "precision_ci": [
+            0.5022153511189943,
+            0.6014541339754073
+          ],
+          "fpr_ci": [
+            0.6239541772841809,
+            0.7384765669279577
+          ],
+          "accuracy_pct": 58.0,
+          "precision_pct": 55.24,
+          "recall_pct": 84.4,
+          "fpr_pct": 68.4,
+          "f1_pct": 66.77,
+          "recall_ci_pct": [
+            79.4,
+            88.4
+          ],
+          "precision_ci_pct": [
+            50.2,
+            60.1
+          ],
+          "fpr_ci_pct": [
+            62.4,
+            73.8
+          ]
+        }
+      },
+      "VT only (d≥1) — 참고": {
+        "suspicious": {
+          "n": 500,
+          "tp": 243,
+          "tn": 234,
+          "fp": 16,
+          "fn": 7,
+          "accuracy": 0.954,
+          "precision": 0.9382239382239382,
+          "recall": 0.972,
+          "fpr": 0.064,
+          "f1": 0.9548133595284872,
+          "recall_ci": [
+            0.943341533054129,
+            0.9863721151422264
+          ],
+          "precision_ci": [
+            0.9020172878634467,
+            0.9616207359501352
+          ],
+          "fpr_ci": [
+            0.039774400710777265,
+            0.10142231409089433
+          ],
+          "accuracy_pct": 95.4,
+          "precision_pct": 93.82,
+          "recall_pct": 97.2,
+          "fpr_pct": 6.4,
+          "f1_pct": 95.48,
+          "recall_ci_pct": [
+            94.3,
+            98.6
+          ],
+          "precision_ci_pct": [
+            90.2,
+            96.2
+          ],
+          "fpr_ci_pct": [
+            4.0,
+            10.1
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 243,
+          "tn": 234,
+          "fp": 16,
+          "fn": 7,
+          "accuracy": 0.954,
+          "precision": 0.9382239382239382,
+          "recall": 0.972,
+          "fpr": 0.064,
+          "f1": 0.9548133595284872,
+          "recall_ci": [
+            0.943341533054129,
+            0.9863721151422264
+          ],
+          "precision_ci": [
+            0.9020172878634467,
+            0.9616207359501352
+          ],
+          "fpr_ci": [
+            0.039774400710777265,
+            0.10142231409089433
+          ],
+          "accuracy_pct": 95.4,
+          "precision_pct": 93.82,
+          "recall_pct": 97.2,
+          "fpr_pct": 6.4,
+          "f1_pct": 95.48,
+          "recall_ci_pct": [
+            94.3,
+            98.6
+          ],
+          "precision_ci_pct": [
+            90.2,
+            96.2
+          ],
+          "fpr_ci_pct": [
+            4.0,
+            10.1
+          ]
+        }
+      },
+      "VT only (d≥5) — 참고": {
+        "suspicious": {
+          "n": 500,
+          "tp": 225,
+          "tn": 250,
+          "fp": 0,
+          "fn": 25,
+          "accuracy": 0.95,
+          "precision": 1.0,
+          "recall": 0.9,
+          "fpr": 0.0,
+          "f1": 0.9473684210526316,
+          "recall_ci": [
+            0.8565473757413067,
+            0.9313455464589946
+          ],
+          "precision_ci": [
+            0.9832128424202591,
+            0.9999999999999998
+          ],
+          "fpr_ci": [
+            0.0,
+            0.015133847249623387
+          ],
+          "accuracy_pct": 95.0,
+          "precision_pct": 100.0,
+          "recall_pct": 90.0,
+          "fpr_pct": 0.0,
+          "f1_pct": 94.74,
+          "recall_ci_pct": [
+            85.7,
+            93.1
+          ],
+          "precision_ci_pct": [
+            98.3,
+            100.0
+          ],
+          "fpr_ci_pct": [
+            0.0,
+            1.5
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 225,
+          "tn": 250,
+          "fp": 0,
+          "fn": 25,
+          "accuracy": 0.95,
+          "precision": 1.0,
+          "recall": 0.9,
+          "fpr": 0.0,
+          "f1": 0.9473684210526316,
+          "recall_ci": [
+            0.8565473757413067,
+            0.9313455464589946
+          ],
+          "precision_ci": [
+            0.9832128424202591,
+            0.9999999999999998
+          ],
+          "fpr_ci": [
+            0.0,
+            0.015133847249623387
+          ],
+          "accuracy_pct": 95.0,
+          "precision_pct": 100.0,
+          "recall_pct": 90.0,
+          "fpr_pct": 0.0,
+          "f1_pct": 94.74,
+          "recall_ci_pct": [
+            85.7,
+            93.1
+          ],
+          "precision_ci_pct": [
+            98.3,
+            100.0
+          ],
+          "fpr_ci_pct": [
+            0.0,
+            1.5
+          ]
+        }
+      },
+      "Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0)": {
+        "suspicious": {
+          "n": 500,
+          "tp": 210,
+          "tn": 122,
+          "fp": 128,
+          "fn": 40,
+          "accuracy": 0.664,
+          "precision": 0.621301775147929,
+          "recall": 0.84,
+          "fpr": 0.512,
+          "f1": 0.7142857142857143,
+          "recall_ci": [
+            0.7894621432010622,
+            0.8802468406691939
+          ],
+          "precision_ci": [
+            0.5684994036797152,
+            0.6713777792026489
+          ],
+          "fpr_ci": [
+            0.45032599170719884,
+            0.5733107959588102
+          ],
+          "accuracy_pct": 66.4,
+          "precision_pct": 62.13,
+          "recall_pct": 84.0,
+          "fpr_pct": 51.2,
+          "f1_pct": 71.43,
+          "recall_ci_pct": [
+            78.9,
+            88.0
+          ],
+          "precision_ci_pct": [
+            56.8,
+            67.1
+          ],
+          "fpr_ci_pct": [
+            45.0,
+            57.3
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 62,
+          "tn": 250,
+          "fp": 0,
+          "fn": 188,
+          "accuracy": 0.624,
+          "precision": 1.0,
+          "recall": 0.248,
+          "fpr": 0.0,
+          "f1": 0.3974358974358974,
+          "recall_ci": [
+            0.19855073569865583,
+            0.3050767233151544
+          ],
+          "precision_ci": [
+            0.9416539087749995,
+            1.0
+          ],
+          "fpr_ci": [
+            0.0,
+            0.015133847249623387
+          ],
+          "accuracy_pct": 62.4,
+          "precision_pct": 100.0,
+          "recall_pct": 24.8,
+          "fpr_pct": 0.0,
+          "f1_pct": 39.74,
+          "recall_ci_pct": [
+            19.9,
+            30.5
+          ],
+          "precision_ci_pct": [
+            94.2,
+            100.0
+          ],
+          "fpr_ci_pct": [
+            0.0,
+            1.5
+          ]
+        }
+      },
+      "Fixed 0.5:0.5 — 수정 α·τ 적용": {
+        "suspicious": {
+          "n": 500,
+          "tp": 242,
+          "tn": 157,
+          "fp": 93,
+          "fn": 8,
+          "accuracy": 0.798,
+          "precision": 0.7223880597014926,
+          "recall": 0.968,
+          "fpr": 0.372,
+          "f1": 0.8273504273504273,
+          "recall_ci": [
+            0.9381368887054249,
+            0.9836978302689277
+          ],
+          "precision_ci": [
+            0.6721172990590238,
+            0.7676161929325145
+          ],
+          "fpr_ci": [
+            0.3144454410853008,
+            0.43342882381060277
+          ],
+          "accuracy_pct": 79.8,
+          "precision_pct": 72.24,
+          "recall_pct": 96.8,
+          "fpr_pct": 37.2,
+          "f1_pct": 82.74,
+          "recall_ci_pct": [
+            93.8,
+            98.4
+          ],
+          "precision_ci_pct": [
+            67.2,
+            76.8
+          ],
+          "fpr_ci_pct": [
+            31.4,
+            43.3
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 212,
+          "tn": 246,
+          "fp": 4,
+          "fn": 38,
+          "accuracy": 0.916,
+          "precision": 0.9814814814814815,
+          "recall": 0.848,
+          "fpr": 0.016,
+          "f1": 0.9098712446351932,
+          "recall_ci": [
+            0.7982538839765846,
+            0.8872129583376774
+          ],
+          "precision_ci": [
+            0.9533601149657861,
+            0.9927756482382665
+          ],
+          "fpr_ci": [
+            0.006239123654412256,
+            0.04041044048322319
+          ],
+          "accuracy_pct": 91.6,
+          "precision_pct": 98.15,
+          "recall_pct": 84.8,
+          "fpr_pct": 1.6,
+          "f1_pct": 90.99,
+          "recall_ci_pct": [
+            79.8,
+            88.7
+          ],
+          "precision_ci_pct": [
+            95.3,
+            99.3
+          ],
+          "fpr_ci_pct": [
+            0.6,
+            4.0
+          ]
+        }
+      },
+      "Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6)": {
+        "suspicious": {
+          "n": 500,
+          "tp": 241,
+          "tn": 239,
+          "fp": 11,
+          "fn": 9,
+          "accuracy": 0.96,
+          "precision": 0.9563492063492064,
+          "recall": 0.964,
+          "fpr": 0.044,
+          "f1": 0.9601593625498007,
+          "recall_ci": [
+            0.9330088524397113,
+            0.980946937312638
+          ],
+          "precision_ci": [
+            0.9235395223932511,
+            0.9754542299910368
+          ],
+          "fpr_ci": [
+            0.024743541619069078,
+            0.07705852707258744
+          ],
+          "accuracy_pct": 96.0,
+          "precision_pct": 95.63,
+          "recall_pct": 96.4,
+          "fpr_pct": 4.4,
+          "f1_pct": 96.02,
+          "recall_ci_pct": [
+            93.3,
+            98.1
+          ],
+          "precision_ci_pct": [
+            92.4,
+            97.5
+          ],
+          "fpr_ci_pct": [
+            2.5,
+            7.7
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 222,
+          "tn": 246,
+          "fp": 4,
+          "fn": 28,
+          "accuracy": 0.936,
+          "precision": 0.9823008849557522,
+          "recall": 0.888,
+          "fpr": 0.016,
+          "f1": 0.9327731092436975,
+          "recall_ci": [
+            0.8428899288546563,
+            0.9213662056796359
+          ],
+          "precision_ci": [
+            0.955383012489435,
+            0.9930962880375364
+          ],
+          "fpr_ci": [
+            0.006239123654412256,
+            0.04041044048322319
+          ],
+          "accuracy_pct": 93.6,
+          "precision_pct": 98.23,
+          "recall_pct": 88.8,
+          "fpr_pct": 1.6,
+          "f1_pct": 93.28,
+          "recall_ci_pct": [
+            84.3,
+            92.1
+          ],
+          "precision_ci_pct": [
+            95.5,
+            99.3
+          ],
+          "fpr_ci_pct": [
+            0.6,
+            4.0
+          ]
+        }
+      },
+      "Adaptive — 1차 심사본 파라미터": {
+        "suspicious": {
+          "n": 500,
+          "tp": 209,
+          "tn": 224,
+          "fp": 26,
+          "fn": 41,
+          "accuracy": 0.866,
+          "precision": 0.8893617021276595,
+          "recall": 0.836,
+          "fpr": 0.104,
+          "f1": 0.8618556701030927,
+          "recall_ci": [
+            0.7850808922234535,
+            0.8767491624247995
+          ],
+          "precision_ci": [
+            0.842826586636782,
+            0.9233715965942798
+          ],
+          "fpr_ci": [
+            0.07196474410827003,
+            0.14802126291343168
+          ],
+          "accuracy_pct": 86.6,
+          "precision_pct": 88.94,
+          "recall_pct": 83.6,
+          "fpr_pct": 10.4,
+          "f1_pct": 86.19,
+          "recall_ci_pct": [
+            78.5,
+            87.7
+          ],
+          "precision_ci_pct": [
+            84.3,
+            92.3
+          ],
+          "fpr_ci_pct": [
+            7.2,
+            14.8
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 29,
+          "tn": 245,
+          "fp": 5,
+          "fn": 221,
+          "accuracy": 0.548,
+          "precision": 0.8529411764705882,
+          "recall": 0.116,
+          "fpr": 0.02,
+          "f1": 0.2042253521126761,
+          "recall_ci": [
+            0.08199108127964577,
+            0.161631713408065
+          ],
+          "precision_ci": [
+            0.6987161182594804,
+            0.9355065361737359
+          ],
+          "fpr_ci": [
+            0.008572197944651562,
+            0.045956295414986886
+          ],
+          "accuracy_pct": 54.8,
+          "precision_pct": 85.29,
+          "recall_pct": 11.6,
+          "fpr_pct": 2.0,
+          "f1_pct": 20.42,
+          "recall_ci_pct": [
+            8.2,
+            16.2
+          ],
+          "precision_ci_pct": [
+            69.9,
+            93.6
+          ],
+          "fpr_ci_pct": [
+            0.9,
+            4.6
+          ]
+        },
+        "params": {
+          "alpha": 3.0,
+          "d_high": 5,
+          "tau_s": 0.35,
+          "tau_b": 0.65,
+          "w_a_high": 0.25,
+          "w_a_low": 0.5,
+          "w_b": 0.3,
+          "w_b_deep": null,
+          "w_c": 0.8,
+          "theta": 0.3
+        },
+        "by_case": {
+          "CASE_A_HIGH": {
+            "n": 225,
+            "benign": 0,
+            "phishing": 225,
+            "tp": 191,
+            "fn": 34,
+            "fp": 0,
+            "tn": 0
+          },
+          "CASE_A_LOW": {
+            "n": 34,
+            "benign": 16,
+            "phishing": 18,
+            "tp": 13,
+            "fn": 5,
+            "fp": 11,
+            "tn": 5
+          },
+          "CASE_B": {
+            "n": 173,
+            "benign": 173,
+            "phishing": 0,
+            "tp": 0,
+            "fn": 0,
+            "fp": 0,
+            "tn": 173
+          },
+          "CASE_C": {
+            "n": 68,
+            "benign": 61,
+            "phishing": 7,
+            "tp": 5,
+            "fn": 2,
+            "fp": 15,
+            "tn": 46
+          }
+        },
+        "fn_urls": [
+          "https://tokemix-cdn07-hk07.club/",
+          "http://simulacioncred.click/",
+          "http://tokevim-cdn26-hk26.club/",
+          "http://authorized-livenow.netlify.app/",
+          "http://www.mobilelegendsdailyupdates.blogspot.com/",
+          "https://www.shopee7557.blogspot.com/",
+          "http://lib-iscpolobcu.org/adobe-acrobat-reader/Mac/utility.php",
+          "https://tiktokvip.cyou/",
+          "http://amkeu.cc/",
+          "http://tokevim-cdn90-hk90.club/",
+          "http://menuuu-aktivasi.kruer.web.id/",
+          "https://linkschmiede.click/s/v1.WyJodHRwczovL3BydWZ1bmdyaWNobGluZS5jbGljay8iLCJpbWFnZV9jbGVhbiIsMTA4NCwyMDA1MjMyXQ.75ad502c504804640df05721",
+          "http://www.poodle-piccolo-wwnn.squarespace.com/",
+          "http://mum.lxf.temporary.site/pdolf/fg",
+          "http://www.portalinmobiliario.com/venta/parcela",
+          "http://sd-hope.org/wpp",
+          "http://theholyoliveoil.com/",
+          "https://greeninme.com/gfgchvjghvjb",
+          "http://tributosdevidos.com/",
+          "https://toseefarafique.github.io/amazon-clone",
+          "http://sauv.info/Roundcube.zip",
+          "http://klimabonus-beantragen.net/ch/postfinance",
+          "http://sign.documents.review.scann.store/",
+          "http://stevecoures.github.io/Ment/Agree.html",
+          "http://dayoadeyemo.com/wp-content/uploads/e1tyxmv/dwlqv1x/ubmqvdy/new/outlook.html",
+          "http://reasedrt.keesheetmetal.com/index.html",
+          "http://startjunopage.github.io/",
+          "http://lagerhaus-freising.de/os/oj.html",
+          "http://somosbanplusjuridicos.vercel.app/",
+          "http://tokanim-cdn19-hk19.club/",
+          "https://menu-aktivasipaycs.achlifhs.my.id/",
+          "http://muneebahkanwal1.github.io/Muneebah---Portfolio/amazon-inspired/index.html",
+          "http://www.rasaenclavepalwal.com/blogs/log/Ziggo",
+          "https://wellsbhyugy.pages.dev/favicon.ico",
+          "http://cerropai.click/",
+          "https://gxfcom.my/",
+          "http://gopay-layananind.vdann.web.id/",
+          "http://support-paypul.top/",
+          "http://find-mylphone.top/link/Tdzg",
+          "https://mslogin.oauth-live.com/jsDisabled.srf?mkt=EN-US&lc=1033&uaid=84651455702342cebdc1e14c631cf2ee",
+          "https://zbc.zfs.mybluehost.me/index1.html"
+        ],
+        "fp_urls": [
+          "https://timeweb.ru",
+          "https://taobao.com",
+          "https://ip-api.com",
+          "https://www.cisco.com/etc.clientlibs/cisco-cdc/clientlibs/clientlib-dependencies.lc-2be5daf0f0285b651461f9ebc9d0033e-lc.min.css",
+          "https://calendly.com",
+          "https://www.indexexchange.com/de",
+          "https://www.gov.uk/assets/frontend/application-720f6ec115de1ae5c67657aa30a0a54aa21b50890a40ce14ffc2f62c342c8c49.css",
+          "https://www.datadoghq.com/css/styles.min.eaae95fea6f9b9fe6572f6698c8f42ba2f7342c9b0b81a925267086df065aa35.css",
+          "https://www.hcaptcha.com/images/64da82f6bf67de1b1278926d_favicon-at-3x.png",
+          "https://www.gov.uk/assets/frontend/favicon-24f9fbe064118d58937932e73edafd1d50cb60f7bd84f52308382a309bc2d655.ico",
+          "https://store.steampowered.com/login?redir=&redir_ssl=1&snr=1_4_4__global-header",
+          "https://www.cm.com/apple-touch-icon.png",
+          "https://www.datadoghq.com/styles/tw-iconfont.min.9faef8d795a8904d49a6e689317b2970de73b9fa4fa2b73068ae3a83f78264cf.css",
+          "https://publicnode.com",
+          "https://substack.com",
+          "https://www.cm.com/manifest.json",
+          "https://tinyurl.com",
+          "https://www.zendesk.kr/platform",
+          "https://www.harvard.edu/_static??-eJyVjEkKgDAMAD9kG9tL6UF8S6kRA11CE/D79qAP8DYwzMDNJvem2BT0wooCuQ+EJII6WQQOktdBYjbae1FiW6nZqRf4dTipKA756r1uLsTVBe+jewCKqTMT",
+          "https://www.name.com/_nuxt/BPP7zKmg.js",
+          "https://duckdns.org",
+          "https://ipify.org",
+          "https://steamcommunity.com",
+          "https://www.alibabacloud.com/pt-BR?_p_lc=1",
+          "https://skybridge.click",
+          "https://www.triplinkintl.com/home"
+        ],
+        "override_fired": 0
+      },
+      "Adaptive — 수정 파라미터, Override 없음": {
+        "suspicious": {
+          "n": 500,
+          "tp": 245,
+          "tn": 228,
+          "fp": 22,
+          "fn": 5,
+          "accuracy": 0.946,
+          "precision": 0.9176029962546817,
+          "recall": 0.98,
+          "fpr": 0.088,
+          "f1": 0.9477756286266924,
+          "recall_ci": [
+            0.9540437045850131,
+            0.9914278020553485
+          ],
+          "precision_ci": [
+            0.8784006152631099,
+            0.9449588686566426
+          ],
+          "fpr_ci": [
+            0.058830921041025906,
+            0.12963936909266374
+          ],
+          "accuracy_pct": 94.6,
+          "precision_pct": 91.76,
+          "recall_pct": 98.0,
+          "fpr_pct": 8.8,
+          "f1_pct": 94.78,
+          "recall_ci_pct": [
+            95.4,
+            99.1
+          ],
+          "precision_ci_pct": [
+            87.8,
+            94.5
+          ],
+          "fpr_ci_pct": [
+            5.9,
+            13.0
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 240,
+          "tn": 241,
+          "fp": 9,
+          "fn": 10,
+          "accuracy": 0.962,
+          "precision": 0.963855421686747,
+          "recall": 0.96,
+          "fpr": 0.036,
+          "f1": 0.9619238476953907,
+          "recall_ci": [
+            0.9279465354073034,
+            0.978130325123043
+          ],
+          "precision_ci": [
+            0.9327455241388056,
+            0.9808699568579924
+          ],
+          "fpr_ci": [
+            0.019053062687361854,
+            0.06699114756028864
+          ],
+          "accuracy_pct": 96.2,
+          "precision_pct": 96.39,
+          "recall_pct": 96.0,
+          "fpr_pct": 3.6,
+          "f1_pct": 96.19,
+          "recall_ci_pct": [
+            92.8,
+            97.8
+          ],
+          "precision_ci_pct": [
+            93.3,
+            98.1
+          ],
+          "fpr_ci_pct": [
+            1.9,
+            6.7
+          ]
+        },
+        "params": {
+          "alpha": 18.4,
+          "d_high": 5,
+          "tau_s": 0.45,
+          "tau_b": 0.65,
+          "w_a_high": 0.25,
+          "w_a_low": 0.5,
+          "w_b": 0.3,
+          "w_b_deep": 0.5,
+          "w_c": 0.8,
+          "theta": null
+        },
+        "by_case": {
+          "CASE_A_HIGH": {
+            "n": 225,
+            "benign": 0,
+            "phishing": 225,
+            "tp": 225,
+            "fn": 0,
+            "fp": 0,
+            "tn": 0
+          },
+          "CASE_A_LOW": {
+            "n": 34,
+            "benign": 16,
+            "phishing": 18,
+            "tp": 16,
+            "fn": 2,
+            "fp": 11,
+            "tn": 5
+          },
+          "CASE_B": {
+            "n": 173,
+            "benign": 173,
+            "phishing": 0,
+            "tp": 0,
+            "fn": 0,
+            "fp": 0,
+            "tn": 173
+          },
+          "CASE_C": {
+            "n": 68,
+            "benign": 61,
+            "phishing": 7,
+            "tp": 4,
+            "fn": 3,
+            "fp": 11,
+            "tn": 50
+          }
+        },
+        "fn_urls": [
+          "http://www.imtouken.com/english",
+          "http://amkeu.cc/",
+          "http://www.portalinmobiliario.com/venta/parcela",
+          "https://greeninme.com/gfgchvjghvjb",
+          "http://www.rasaenclavepalwal.com/blogs/log/Ziggo"
+        ],
+        "fp_urls": [
+          "https://timeweb.ru",
+          "https://taobao.com",
+          "https://ip-api.com",
+          "https://www.cisco.com/etc.clientlibs/cisco-cdc/clientlibs/clientlib-dependencies.lc-2be5daf0f0285b651461f9ebc9d0033e-lc.min.css",
+          "https://calendly.com",
+          "https://www.indexexchange.com/de",
+          "https://www.gov.uk/assets/frontend/application-720f6ec115de1ae5c67657aa30a0a54aa21b50890a40ce14ffc2f62c342c8c49.css",
+          "https://www.hcaptcha.com/images/64da82f6bf67de1b1278926d_favicon-at-3x.png",
+          "https://www.gov.uk/assets/frontend/favicon-24f9fbe064118d58937932e73edafd1d50cb60f7bd84f52308382a309bc2d655.ico",
+          "https://store.steampowered.com/login?redir=&redir_ssl=1&snr=1_4_4__global-header",
+          "https://www.cm.com/apple-touch-icon.png",
+          "https://publicnode.com",
+          "https://substack.com",
+          "https://www.cm.com/manifest.json",
+          "https://tinyurl.com",
+          "https://www.harvard.edu/_static??-eJyVjEkKgDAMAD9kG9tL6UF8S6kRA11CE/D79qAP8DYwzMDNJvem2BT0wooCuQ+EJII6WQQOktdBYjbae1FiW6nZqRf4dTipKA756r1uLsTVBe+jewCKqTMT",
+          "https://www.name.com/_nuxt/BPP7zKmg.js",
+          "https://duckdns.org",
+          "https://ipify.org",
+          "https://steamcommunity.com",
+          "https://www.alibabacloud.com/pt-BR?_p_lc=1",
+          "https://skybridge.click"
+        ],
+        "override_fired": 0
+      },
+      "Adaptive — 수정 파라미터 + Override": {
+        "suspicious": {
+          "n": 500,
+          "tp": 245,
+          "tn": 228,
+          "fp": 22,
+          "fn": 5,
+          "accuracy": 0.946,
+          "precision": 0.9176029962546817,
+          "recall": 0.98,
+          "fpr": 0.088,
+          "f1": 0.9477756286266924,
+          "recall_ci": [
+            0.9540437045850131,
+            0.9914278020553485
+          ],
+          "precision_ci": [
+            0.8784006152631099,
+            0.9449588686566426
+          ],
+          "fpr_ci": [
+            0.058830921041025906,
+            0.12963936909266374
+          ],
+          "accuracy_pct": 94.6,
+          "precision_pct": 91.76,
+          "recall_pct": 98.0,
+          "fpr_pct": 8.8,
+          "f1_pct": 94.78,
+          "recall_ci_pct": [
+            95.4,
+            99.1
+          ],
+          "precision_ci_pct": [
+            87.8,
+            94.5
+          ],
+          "fpr_ci_pct": [
+            5.9,
+            13.0
+          ]
+        },
+        "blocked": {
+          "n": 500,
+          "tp": 240,
+          "tn": 241,
+          "fp": 9,
+          "fn": 10,
+          "accuracy": 0.962,
+          "precision": 0.963855421686747,
+          "recall": 0.96,
+          "fpr": 0.036,
+          "f1": 0.9619238476953907,
+          "recall_ci": [
+            0.9279465354073034,
+            0.978130325123043
+          ],
+          "precision_ci": [
+            0.9327455241388056,
+            0.9808699568579924
+          ],
+          "fpr_ci": [
+            0.019053062687361854,
+            0.06699114756028864
+          ],
+          "accuracy_pct": 96.2,
+          "precision_pct": 96.39,
+          "recall_pct": 96.0,
+          "fpr_pct": 3.6,
+          "f1_pct": 96.19,
+          "recall_ci_pct": [
+            92.8,
+            97.8
+          ],
+          "precision_ci_pct": [
+            93.3,
+            98.1
+          ],
+          "fpr_ci_pct": [
+            1.9,
+            6.7
+          ]
+        },
+        "params": {
+          "alpha": 18.4,
+          "d_high": 5,
+          "tau_s": 0.45,
+          "tau_b": 0.65,
+          "w_a_high": 0.25,
+          "w_a_low": 0.5,
+          "w_b": 0.3,
+          "w_b_deep": 0.5,
+          "w_c": 0.8,
+          "theta": 0.05
+        },
+        "by_case": {
+          "CASE_A_HIGH": {
+            "n": 225,
+            "benign": 0,
+            "phishing": 225,
+            "tp": 225,
+            "fn": 0,
+            "fp": 0,
+            "tn": 0
+          },
+          "CASE_A_LOW": {
+            "n": 34,
+            "benign": 16,
+            "phishing": 18,
+            "tp": 16,
+            "fn": 2,
+            "fp": 11,
+            "tn": 5
+          },
+          "CASE_B": {
+            "n": 173,
+            "benign": 173,
+            "phishing": 0,
+            "tp": 0,
+            "fn": 0,
+            "fp": 0,
+            "tn": 173
+          },
+          "CASE_C": {
+            "n": 68,
+            "benign": 61,
+            "phishing": 7,
+            "tp": 4,
+            "fn": 3,
+            "fp": 11,
+            "tn": 50
+          }
+        },
+        "fn_urls": [
+          "http://www.imtouken.com/english",
+          "http://amkeu.cc/",
+          "http://www.portalinmobiliario.com/venta/parcela",
+          "https://greeninme.com/gfgchvjghvjb",
+          "http://www.rasaenclavepalwal.com/blogs/log/Ziggo"
+        ],
+        "fp_urls": [
+          "https://timeweb.ru",
+          "https://taobao.com",
+          "https://ip-api.com",
+          "https://www.cisco.com/etc.clientlibs/cisco-cdc/clientlibs/clientlib-dependencies.lc-2be5daf0f0285b651461f9ebc9d0033e-lc.min.css",
+          "https://calendly.com",
+          "https://www.indexexchange.com/de",
+          "https://www.gov.uk/assets/frontend/application-720f6ec115de1ae5c67657aa30a0a54aa21b50890a40ce14ffc2f62c342c8c49.css",
+          "https://www.hcaptcha.com/images/64da82f6bf67de1b1278926d_favicon-at-3x.png",
+          "https://www.gov.uk/assets/frontend/favicon-24f9fbe064118d58937932e73edafd1d50cb60f7bd84f52308382a309bc2d655.ico",
+          "https://store.steampowered.com/login?redir=&redir_ssl=1&snr=1_4_4__global-header",
+          "https://www.cm.com/apple-touch-icon.png",
+          "https://publicnode.com",
+          "https://substack.com",
+          "https://www.cm.com/manifest.json",
+          "https://tinyurl.com",
+          "https://www.harvard.edu/_static??-eJyVjEkKgDAMAD9kG9tL6UF8S6kRA11CE/D79qAP8DYwzMDNJvem2BT0wooCuQ+EJII6WQQOktdBYjbae1FiW6nZqRf4dTipKA756r1uLsTVBe+jewCKqTMT",
+          "https://www.name.com/_nuxt/BPP7zKmg.js",
+          "https://duckdns.org",
+          "https://ipify.org",
+          "https://steamcommunity.com",
+          "https://www.alibabacloud.com/pt-BR?_p_lc=1",
+          "https://skybridge.click"
+        ],
+        "override_fired": 225
+      }
+    },
+    "baseline_fixed_tau": {
+      "alpha": 18.4,
+      "tau_s": 0.5,
+      "tau_b": 0.6,
+      "rule": "검증 집합에서 고정 융합 자체 선정: τL = F1 최대(격자 0.25~0.65), τH = 정상→BLOCKED ≤ 1% 중 BLOCKED Recall 최대"
+    },
+    "mcnemar": {
+      "Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0) vs Adaptive — 1차 심사본 파라미터": {
+        "b": 22,
+        "c": 123,
+        "p_value": 1.0020016756912618e-16,
+        "method": "chi2-continuity"
+      },
+      "Fixed 0.5:0.5 — 수정 α·τ 적용 vs Adaptive — 수정 파라미터 + Override": {
+        "b": 10,
+        "c": 84,
+        "p_value": 5.0983728344386775e-14,
+        "method": "chi2-continuity"
+      },
+      "Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6) vs Adaptive — 수정 파라미터 + Override": {
+        "b": 11,
+        "c": 4,
+        "p_value": 0.11846923828125,
+        "method": "exact-binomial"
+      },
+      "Adaptive — 1차 심사본 파라미터 vs Adaptive — 수정 파라미터 + Override": {
+        "b": 1,
+        "c": 41,
+        "p_value": 1.767699828306824e-09,
+        "method": "chi2-continuity"
+      },
+      "Adaptive — 수정 파라미터, Override 없음 vs Adaptive — 수정 파라미터 + Override": {
+        "b": 0,
+        "c": 0,
+        "p_value": 1.0,
+        "method": "no-discordant-pairs"
+      },
+      "ML only (threshold 0.41) vs Adaptive — 수정 파라미터 + Override": {
+        "b": 1,
+        "c": 184,
+        "p_value": 7.818832155325503e-41,
+        "method": "chi2-continuity"
+      },
+      "VT only (d≥1) — 참고 vs Adaptive — 수정 파라미터 + Override": {
+        "b": 13,
+        "c": 9,
+        "p_value": 0.5234670639038086,
+        "method": "exact-binomial"
+      },
+      "VT only (d≥5) — 참고 vs Adaptive — 수정 파라미터 + Override": {
+        "b": 22,
+        "c": 20,
+        "p_value": 0.8773705560641434,
+        "method": "chi2-continuity"
+      }
+    },
+    "zero_day": {
+      "n_zero_day_phishing": 7,
+      "n_case_b_phishing": 0,
+      "ML only (threshold 0.41)": {
+        "hit": 5,
+        "n": 7,
+        "recall_pct": 71.43,
+        "wilson_ci_pct": [
+          35.9,
+          91.8
+        ]
+      },
+      "Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0)": {
+        "hit": 1,
+        "n": 7,
+        "recall_pct": 14.29,
+        "wilson_ci_pct": [
+          2.6,
+          51.3
+        ]
+      },
+      "Fixed 0.5:0.5 — 수정 α·τ 적용": {
+        "hit": 1,
+        "n": 7,
+        "recall_pct": 14.29,
+        "wilson_ci_pct": [
+          2.6,
+          51.3
+        ]
+      },
+      "Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6)": {
+        "hit": 0,
+        "n": 7,
+        "recall_pct": 0.0,
+        "wilson_ci_pct": [
+          0.0,
+          35.4
+        ]
+      },
+      "Adaptive — 1차 심사본 파라미터": {
+        "hit": 5,
+        "n": 7,
+        "recall_pct": 71.43,
+        "wilson_ci_pct": [
+          35.9,
+          91.8
+        ]
+      },
+      "Adaptive — 수정 파라미터, Override 없음": {
+        "hit": 4,
+        "n": 7,
+        "recall_pct": 57.14,
+        "wilson_ci_pct": [
+          25.0,
+          84.2
+        ]
+      },
+      "Adaptive — 수정 파라미터 + Override": {
+        "hit": 4,
+        "n": 7,
+        "recall_pct": 57.14,
+        "wilson_ci_pct": [
+          25.0,
+          84.2
+        ]
+      },
+      "paired_fixed_v1_vs_paper_v1": {
+        "b": 0,
+        "c": 4,
+        "p_value": 0.125,
+        "method": "exact-binomial"
+      },
+      "paired_fixed_same_vs_proposed": {
+        "b": 0,
+        "c": 3,
+        "p_value": 0.25,
+        "method": "exact-binomial"
+      },
+      "paired_fixed_own_vs_proposed (공식 비교)": {
+        "b": 0,
+        "c": 4,
+        "p_value": 0.125,
+        "method": "exact-binomial"
+      },
+      "paired_paper_v1_vs_proposed": {
+        "b": 1,
+        "c": 0,
+        "p_value": 1.0,
+        "method": "exact-binomial"
+      }
+    }
+  },
+  "latency_from_results_json": {
+    "stages": {
+      "Feature extraction": {
+        "n": 500,
+        "mean": 2.4593499999999997,
+        "p50": 2.235,
+        "p95": 4.0,
+        "max": 5.065
+      },
+      "Ensemble inference": {
+        "n": 500,
+        "mean": 22.582548,
+        "p50": 22.704,
+        "p95": 25.667,
+        "max": 35.757
+      },
+      "ML subtotal": {
+        "n": 500,
+        "mean": 25.041898,
+        "p50": 25.059,
+        "p95": 28.724999999999998,
+        "max": 39.912
+      },
+      "VirusTotal lookup": {
+        "n": 500,
+        "mean": 900.5268000000001,
+        "p50": 825.305,
+        "p95": 1426.033,
+        "max": 1993.937
+      },
+      "End-to-end": {
+        "n": 500,
+        "mean": 925.5686979999999,
+        "p50": 849.8810000000001,
+        "p95": 1455.522,
+        "max": 2014.319
+      }
+    },
+    "cold_start_ms": 67.99219991080463,
+    "vt_share_of_e2e": 97.29443119088714
+  }
+}

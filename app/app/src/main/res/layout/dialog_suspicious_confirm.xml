@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="24dp">
+
+        <!-- 타이틀: 손실 프레이밍 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="의심 신호 탐지됨"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FF8F00"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이 URL은 피싱·사기 사이트로 의심됩니다.\n접속 시 개인정보가 노출될 수 있습니다."
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:lineSpacingMultiplier="1.4"
+            android:layout_marginBottom="24dp" />
+
+        <!-- 주 CTA: 안전하게 돌아가기 (기본 선택 강조) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_stay_safe"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="← 안전하게 돌아가기"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="#FF8F00"
+            app:cornerRadius="12dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- 부 옵션: 초기 비활성화, 카운트다운 후 활성화 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_proceed"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="3초 후 활성화"
+            android:textSize="12sp"
+            android:textColor="#AAAAAA"
+            android:enabled="false" />
+
+    </LinearLayout>
+
+    <!-- X 닫기 버튼 (오른쪽 상단, 반투명, 테두리 있음) -->
+    <TextView
+        android:id="@+id/btn_close"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="10dp"
+        android:text="✕"
+        android:textSize="11sp"
+        android:textColor="#99000000"
+        android:gravity="center"
+        android:background="@drawable/bg_dialog_close"
+        android:alpha="0.65"
+        android:clickable="true"
+        android:focusable="true" />
+
+</FrameLayout>

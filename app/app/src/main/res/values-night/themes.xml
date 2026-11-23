@@ -1,0 +1,49 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme (Dark) -->
+    <style name="Base.Theme.Qguardapp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary -->
+        <item name="colorPrimary">@color/color_primary_light</item>
+        <item name="colorPrimaryDark">@color/color_primary</item>
+        <item name="colorOnPrimary">#1A1A2E</item>
+        <item name="colorPrimaryContainer">#1A237E</item>
+        <item name="colorOnPrimaryContainer">@color/color_primary_light</item>
+
+        <!-- Secondary -->
+        <item name="colorSecondary">@color/color_safe</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- Error -->
+        <item name="colorError">#EF5350</item>
+        <item name="colorOnError">#FFFFFF</item>
+        <item name="colorErrorContainer">#3D1212</item>
+
+        <!-- Surface -->
+        <item name="colorSurface">#121212</item>
+        <item name="colorOnSurface">#E8E8E8</item>
+        <item name="colorSurfaceVariant">#1E1E1E</item>
+        <item name="colorOnSurfaceVariant">#B0B0B0</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">#121212</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">#333333</item>
+        <item name="colorOutlineVariant">#262626</item>
+
+        <!-- Status bar (edge-to-edge: 투명 처리, 아이콘은 라이트) -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Navigation bar (edge-to-edge: 투명 처리, 버튼은 라이트) -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+
+    <!-- BottomSheet: 다크모드 대응 — Light 고정이던 테마를 Dark 부모로 오버라이드 -->
+    <style name="Theme.QGuard.BottomSheet.Full" parent="Theme.Material3.Dark.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.QGuard.BottomSheet.Full</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

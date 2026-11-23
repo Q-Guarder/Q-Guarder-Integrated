@@ -1,0 +1,141 @@
+2026-10-18 07:54:25,170 [INFO] VT 캐시에서 500건 로드 (평가셋 500건 중)
+2026-10-18 07:54:25,170 [INFO] ML 추론 시작 (500건)
+
+
+
+2026-10-18 07:54:26,906 [INFO] ML 모델 로컬 로드 완료: /tmp/claude-0/-home-claude/c44992fd-b5ab-5750-808c-9efbc59a1687/scratchpad/qg/local_models/final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl
+2026-10-18 07:54:26,907 [INFO] 모델 검증 통과 — 서브모델 2개 (피처 수: 17, 17 / 추출기 26개)
+2026-10-18 07:54:33,502 [INFO] ML 추론 완료 (500건)
+2026-10-18 07:54:33,503 [WARNING] evalset.csv에 split 열이 없음 — 전체 500건을 단일 집합으로 보고. 이 집합은 1차 심사본에서 파라미터 선정에도 사용되었으므로 독립 테스트셋으로 기술하지 말 것.
+
+══════════════════════════════════════════════════════════════════════════════
+ [all (split 미분리)] n=500
+══════════════════════════════════════════════════════════════════════════════
+
+논문 Table 4 대조: {
+ "(1) ML Only": {
+  "recall": {
+   "paper": 82.8,
+   "from_confusion": 82.8,
+   "match": true
+  },
+  "precision": {
+   "paper": 55.95,
+   "from_confusion": 55.95,
+   "match": true
+  },
+  "f1": {
+   "paper": 66.77,
+   "from_confusion": 66.77,
+   "match": true
+  },
+  "fpr": {
+   "paper": 65.2,
+   "from_confusion": 65.2,
+   "match": true
+  }
+ },
+ "(2) Fixed 0.5:0.5": {
+  "recall": {
+   "paper": 89.2,
+   "from_confusion": 89.2,
+   "match": true
+  },
+  "precision": {
+   "paper": 62.82,
+   "from_confusion": 62.82,
+   "match": true
+  },
+  "f1": {
+   "paper": 73.72,
+   "from_confusion": 73.72,
+   "match": true
+  },
+  "fpr": {
+   "paper": 52.8,
+   "from_confusion": 52.8,
+   "match": true
+  }
+ },
+ "(4) 4-Case + Override": {
+  "recall": {
+   "paper": 94.0,
+   "from_confusion": 94.0,
+   "match": true
+  },
+  "precision": {
+   "paper": 92.16,
+   "from_confusion": 92.16,
+   "match": true
+  },
+  "f1": {
+   "paper": 93.07,
+   "from_confusion": 93.07,
+   "match": true
+  },
+  "fpr": {
+   "paper": 8.0,
+   "from_confusion": 8.0,
+   "match": true
+  }
+ },
+ "text_FN_27_to_15": {
+  "paper": [
+   27,
+   15
+  ],
+  "from_confusion": [
+   27,
+   15
+  ],
+  "match": true
+ },
+ "ALL_MATCH": true
+}
+
+## 평가셋 레이블 분포 — all (split 미분리) (n=500)
+
+| 구분 | root | deep | 합계 |
+|---|---:|---:|---:|
+| 정상 (Tranco) | 125 | 125 | 250 |
+| 피싱 (OpenPhish) | 141 | 109 | 250 |
+| 합계 | 266 | 234 | 500 |
+
+| VT 응답 상태 (케이스) | 정상 | 피싱 | 합계 |
+|---|---:|---:|---:|
+| ok · d≥5 → CASE_A_HIGH | 0 | 234 | 234 |
+| ok · 1≤d<5 → CASE_A_LOW | 22 | 1 | 23 |
+| ok · d=0 → CASE_B | 187 | 0 | 187 |
+| not_found (미등재) → CASE_C | 41 | 15 | 56 |
+
+## 전략별 혼동행렬 및 지표 — all (split 미분리) (판정 기준: SUSPICIOUS 이상)
+
+| Method | TP | FP | TN | FN | Accuracy | Precision | Recall [95% CI] | F1 | FPR |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| (0a) VT only (d>=1) *(참고, 융합 없음)* | 235 | 22 | 228 | 15 | 92.60 | 91.44 | 94.00 [90.3, 96.3] | 92.70 | 8.80 |
+| (0b) VT only (d>=5) *(참고, 융합 없음)* | 234 | 0 | 250 | 16 | 96.80 | 100.00 | 93.60 [89.9, 96.0] | 96.69 | 0.00 |
+| (1) ML Only | 207 | 163 | 87 | 43 | 58.80 | 55.95 | 82.80 [77.6, 87.0] | 66.77 | 65.20 |
+| (2) Fixed 0.5:0.5 | 223 | 132 | 118 | 27 | 68.20 | 62.82 | 89.20 [84.7, 92.5] | 73.72 | 52.80 |
+| (3) 4-Case Adaptive | 235 | 20 | 230 | 15 | 93.00 | 92.16 | 94.00 [90.3, 96.3] | 93.07 | 8.00 |
+| (4) 4-Case + Override | 235 | 20 | 230 | 15 | 93.00 | 92.16 | 94.00 [90.3, 96.3] | 93.07 | 8.00 |
+
+## 케이스별 혼동행렬 — (4) 4-Case + Override (all (split 미분리))
+
+| Case | n | 정상 | 피싱 | TP | FN | FP | TN | Recall | FPR |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| CASE_A_HIGH | 234 | 0 | 234 | 223 | 11 | 0 | 0 | 95.30% | — |
+| CASE_A_LOW | 23 | 22 | 1 | 0 | 1 | 9 | 13 | 0.00% | 40.91% |
+| CASE_B | 187 | 187 | 0 | 0 | 0 | 0 | 187 | — | 0.00% |
+| CASE_C | 56 | 41 | 15 | 12 | 3 | 11 | 30 | 80.00% | 26.83% |
+
+## BLOCKED 기준 혼동행렬 — all (split 미분리) (참고: Override 효과 확인용)
+
+| Method | TP | FP | TN | FN | Recall | Precision | FPR |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| (1) ML Only | 207 | 163 | 87 | 43 | 82.80 | 55.95 | 65.20 |
+| (2) Fixed 0.5:0.5 | 126 | 0 | 250 | 124 | 50.40 | 100.00 | 0.00 |
+| (3) 4-Case Adaptive | 49 | 2 | 248 | 201 | 19.60 | 96.08 | 0.80 |
+| (4) 4-Case + Override | 49 | 2 | 248 | 201 | 19.60 | 96.08 | 0.80 |
+
+
+산출물: /tmp/claude-0/-home-claude/c44992fd-b5ab-5750-808c-9efbc59a1687/scratchpad/qg/experiments/data/confusion/confusion_summary.json · confusion_tables.md · per_url_predictions.csv

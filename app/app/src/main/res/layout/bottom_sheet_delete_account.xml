@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/colorSurface">
+
+    <!-- Drag handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:background="@color/color_outline"
+        android:alpha="0.5" />
+
+    <!-- Loading indicator -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:trackCornerRadius="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/space_xl"
+        android:paddingTop="@dimen/space_base"
+        android:paddingBottom="@dimen/space_2xl">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원 탈퇴"
+            android:textAppearance="@style/TextAppearance.QGuard.HeadlineSmall"
+            android:textColor="@color/color_threat"
+            android:layout_marginBottom="@dimen/space_base" />
+
+        <!-- Warning card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.QGuard.Card.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/color_threat_container"
+            android:layout_marginBottom="@dimen/space_xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_base">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="탈퇴 전 반드시 확인하세요"
+                    android:textAppearance="@style/TextAppearance.QGuard.TitleSmall"
+                    android:textColor="@color/color_threat"
+                    android:layout_marginBottom="@dimen/space_sm" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="&#8226; 탈퇴 신청 후 30일간 계정이 유지됩니다.\n&#8226; 30일 이내 재로그인 시 탈퇴가 자동 취소됩니다.\n&#8226; 30일 경과 후 모든 데이터가 영구 삭제됩니다.\n&#8226; 삭제된 데이터는 복구할 수 없습니다."
+                    android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+                    android:textColor="@color/color_threat"
+                    android:lineSpacingMultiplier="1.5" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            style="@style/Widget.QGuard.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호 확인"
+            app:endIconMode="password_toggle"
+            app:endIconDrawable="@drawable/ic_password_visibility_toggle"
+            android:layout_marginBottom="@dimen/space_sm">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:imeOptions="actionDone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+            android:textColor="@color/color_threat"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/space_base" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete"
+            style="@style/Widget.QGuard.Button.Danger"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_md"
+            android:text="탈퇴하기"
+            android:layout_marginBottom="@dimen/space_sm" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.QGuard.Button.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="취소" />
+
+    </LinearLayout>
+</LinearLayout>

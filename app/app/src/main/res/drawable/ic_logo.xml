@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="140dp"
+    android:height="140dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- 외곽 글로우 (크고 투명) -->
+    <path
+        android:fillColor="#12FFFFFF"
+        android:pathData="M4,50 A46,46 0 1,0 96,50 A46,46 0 1,0 4,50 Z"/>
+
+    <!-- 내부 글로우 -->
+    <path
+        android:fillColor="#18FFFFFF"
+        android:pathData="M9,50 A41,41 0 1,0 91,50 A41,41 0 1,0 9,50 Z"/>
+
+    <!-- 방패 다크 림 -->
+    <path
+        android:fillColor="#0B188C"
+        android:pathData="M50,13 C28,13 12,23 12,38 L12,60 C12,78 29,90 50,95 C71,90 88,78 88,60 L88,38 C88,23 72,13 50,13 Z"/>
+
+    <!-- 방패 메인 바디 -->
+    <path
+        android:fillColor="#2543CC"
+        android:pathData="M50,17 C30,17 16,26 16,40 L16,59 C16,76 32,87 50,91 C68,87 84,76 84,59 L84,40 C84,26 70,17 50,17 Z"/>
+
+    <!-- 방패 상단 광택 -->
+    <path
+        android:fillColor="#26FFFFFF"
+        android:pathData="M50,17 C30,17 16,26 16,40 L16,56 C32,48 68,48 84,56 L84,40 C84,26 70,17 50,17 Z"/>
+
+    <!-- 방패 내부 라이트 림 -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#30FFFFFF"
+        android:strokeWidth="1.2"
+        android:pathData="M50,20 C32,20 19,28 19,41 L19,59 C19,75 34,85 50,89 C66,85 81,75 81,59 L81,41 C81,28 68,20 50,20 Z"/>
+
+    <!-- ═══════════════════════════════
+         대문자 Q
+         링: 중심(50,50), 외경r=19, 내경r=11  링두께=8
+         꼬리: 45° 대각 바, 폭=7 (링두께와 동일)
+               (56,55)·(51,60) → 내부 구멍 안 (r≈7.8, 10.1 < 11) ✓
+               (68,77)·(73,72) → 링 바깥 (r≈32) ✓
+         ═══════════════════════════════ -->
+
+    <!-- Q 링 본체 — 방사형 그라데이션 -->
+    <path
+        android:fillType="evenOdd"
+        android:pathData="M31,50 A19,19 0 1,0 69,50 A19,19 0 1,0 31,50 Z
+                          M39,50 A11,11 0 1,1 61,50 A11,11 0 1,1 39,50 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="radial"
+                android:centerX="50"
+                android:centerY="31"
+                android:gradientRadius="40"
+                android:startColor="#FFFFFF"
+                android:endColor="#92B4FF"/>
+        </aapt:attr>
+    </path>
+
+    <!-- Q 링 외곽 하이라이트 -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#55FFFFFF"
+        android:strokeWidth="1.2"
+        android:pathData="M31,50 A19,19 0 1,0 69,50 A19,19 0 1,0 31,50 Z"/>
+
+    <!-- Q 링 내부 엣지 섀도 -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#30001060"
+        android:strokeWidth="1.5"
+        android:pathData="M39,50 A11,11 0 1,1 61,50 A11,11 0 1,1 39,50 Z"/>
+
+    <!-- Q 링 상단 하이라이트 크레센트 -->
+    <path
+        android:fillColor="#35FFFFFF"
+        android:pathData="M42,35 A10.5,8 0 0,1 58,35 L56,41 A7,5.5 0 0,0 44,41 Z"/>
+
+    <!-- Q 꼬리 — 45° 대각 바 (링과 동일 그라데이션)
+         꼬리 돌출: 링 외곽(r=19)에서 10단위 = 링두께(8)와 균형
+         끝점 중심(68,72) r≈28.3, 시작 중심(53.5,57.5) r≈8.1 -->
+    <path
+        android:pathData="M56,55 L51,60 L66,75 L70,70 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="53"
+                android:startY="57"
+                android:endX="68"
+                android:endY="72"
+                android:startColor="#FFFFFF"
+                android:endColor="#92B4FF"/>
+        </aapt:attr>
+    </path>
+
+    <!-- Q 꼬리 엣지 하이라이트 -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#45FFFFFF"
+        android:strokeWidth="0.8"
+        android:pathData="M56,55 L51,60 L66,75 L70,70 Z"/>
+
+</vector>

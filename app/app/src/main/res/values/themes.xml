@@ -1,0 +1,63 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme -->
+    <style name="Base.Theme.Qguardapp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorPrimaryContainer">@color/color_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/color_on_primary_container</item>
+
+        <!-- Secondary (uses safe green) -->
+        <item name="colorSecondary">@color/color_safe</item>
+        <item name="colorOnSecondary">@color/color_on_safe</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/color_threat</item>
+        <item name="colorOnError">@color/color_on_threat</item>
+        <item name="colorErrorContainer">@color/color_threat_container</item>
+
+        <!-- Surface -->
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="colorOnSurface">@color/color_text_primary</item>
+        <item name="colorSurfaceVariant">@color/color_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/color_text_secondary</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/color_background</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/color_outline</item>
+        <item name="colorOutlineVariant">@color/color_outline_variant</item>
+
+        <!-- Status bar (edge-to-edge: 투명 처리, 아이콘은 다크) -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation bar (edge-to-edge: 투명 처리, 버튼은 다크) -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="Theme.Qguardapp" parent="Base.Theme.Qguardapp" />
+
+    <!-- Scan screen overlay theme (dark status bar) -->
+    <style name="Theme.Qguardapp.Scan">
+        <item name="android:statusBarColor">@color/color_bg_scan</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Full-screen Bottom Sheet theme for Terms/Privacy -->
+    <style name="Theme.QGuard.BottomSheet.Full" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.QGuard.BottomSheet.Full</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Widget.QGuard.BottomSheet.Full" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_rounded</item>
+        <item name="behavior_peekHeight">0dp</item>
+        <item name="behavior_skipCollapsed">true</item>
+    </style>
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/space_xl"
+    android:background="?attr/colorSurface">
+
+    <!-- 브랜드 로고 영역 -->
+    <LinearLayout
+        android:id="@+id/ll_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/space_3xl"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_shield"
+            android:contentDescription="Q-Guard"
+            app:tint="@color/color_primary"
+            android:layout_marginEnd="@dimen/space_sm" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q-Guard"
+            android:textAppearance="@style/TextAppearance.QGuard.TitleLarge"
+            android:textColor="@color/color_primary" />
+
+    </LinearLayout>
+
+    <!-- 타이틀 -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:textAppearance="@style/TextAppearance.QGuard.HeadlineLarge"
+        android:textColor="?attr/colorOnSurface"
+        android:layout_marginTop="@dimen/space_2xl"
+        app:layout_constraintTop_toBottomOf="@id/ll_brand"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q-Guard에 오신 걸 환영합니다"
+        android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:layout_marginTop="@dimen/space_sm"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 이메일 -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="@style/Widget.QGuard.TextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="이메일"
+        android:layout_marginTop="@dimen/space_2xl"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionNext" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 비밀번호 -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="@style/Widget.QGuard.TextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호"
+        android:layout_marginTop="@dimen/space_base"
+        app:endIconMode="password_toggle"
+        app:endIconDrawable="@drawable/ic_password_visibility_toggle"
+        app:layout_constraintTop_toBottomOf="@id/til_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 비밀번호 찾기 -->
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호를 잊으셨나요?"
+        android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+        android:textColor="?attr/colorPrimary"
+        android:padding="@dimen/space_xs"
+        android:layout_marginTop="@dimen/space_sm"
+        app:layout_constraintTop_toBottomOf="@id/til_password"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 로그인 버튼 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        style="@style/Widget.QGuard.Button.Primary"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/button_height_md"
+        android:text="로그인"
+        android:textAppearance="@style/TextAppearance.QGuard.TitleMedium"
+        android:layout_marginTop="@dimen/space_xl"
+        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 로딩 -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/space_base"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 회원가입 -->
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="계정이 없으신가요? 회원가입"
+        android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:padding="@dimen/space_sm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/space_2xl" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

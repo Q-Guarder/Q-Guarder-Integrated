@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- API 30 이하 백업 규칙 -->
+<full-backup-content>
+    <!-- 인증 토큰 / 쿠키 — 백업 제외 (기기 분실 시 토큰 탈취 방지) -->
+    <exclude domain="sharedpref" path="qrguard_secure_prefs.xml" />
+    <exclude domain="database"   path="qguarder.db" />
+    <exclude domain="database"   path="qguarder.db-shm" />
+    <exclude domain="database"   path="qguarder.db-wal" />
+</full-backup-content>

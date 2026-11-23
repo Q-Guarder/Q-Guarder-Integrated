@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+    <!-- ── 공유 Q-Guard 헤더 ── -->
+    <LinearLayout
+        android:id="@+id/app_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/header_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|bottom"
+        android:paddingHorizontal="@dimen/space_lg"
+        android:paddingBottom="12dp"
+        android:background="@color/color_surface"
+        android:elevation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/icon_md"
+            android:layout_height="@dimen/icon_md"
+            android:src="@drawable/ic_shield"
+            android:contentDescription="Q-Guard"
+            app:tint="@color/color_primary"
+            android:layout_marginEnd="@dimen/space_sm" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Q-Guard"
+            android:textAppearance="@style/TextAppearance.QGuard.TitleMedium"
+            android:textColor="@color/color_text_primary" />
+
+        <!-- 보호 상태 인디케이터 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_header_status_pill"
+            android:paddingHorizontal="@dimen/space_md"
+            android:paddingVertical="@dimen/space_xs">
+
+            <View
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dot_green"
+                android:layout_marginEnd="@dimen/space_xs" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보호 중"
+                android:textAppearance="@style/TextAppearance.QGuard.LabelMedium"
+                android:textColor="@color/color_status_online" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 헤더 하단 구분선 -->
+    <View
+        android:id="@+id/header_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_divider"
+        app:layout_constraintTop_toBottomOf="@id/app_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── 오프라인 배너 ── -->
+    <TextView
+        android:id="@+id/tv_offline_banner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="오프라인 — 저장된 데이터를 표시합니다"
+        android:textSize="11sp"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:background="#E53935"
+        android:paddingVertical="6dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/header_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── 화면 컨테이너 ── -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        app:layout_constraintTop_toBottomOf="@id/tv_offline_banner"
+        app:layout_constraintBottom_toTopOf="@id/custom_bottom_nav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── 커스텀 하단 탭바 (4탭) ── -->
+    <LinearLayout
+        android:id="@+id/custom_bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bottom_nav_height"
+        android:orientation="horizontal"
+        android:background="@color/color_surface"
+        android:elevation="8dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 보안 로그 탭 -->
+        <LinearLayout
+            android:id="@+id/tab_logs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:id="@+id/iv_tab_logs"
+                android:layout_width="@dimen/icon_md"
+                android:layout_height="@dimen/icon_md"
+                android:src="@drawable/ic_activity"
+                android:contentDescription="보안 로그"
+                app:tint="@color/color_tab_inactive" />
+
+            <TextView
+                android:id="@+id/tv_tab_logs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보안 로그"
+                android:textAppearance="@style/TextAppearance.QGuard.LabelSmall"
+                android:textColor="@color/color_tab_inactive"
+                android:layout_marginTop="@dimen/space_xxs" />
+
+        </LinearLayout>
+
+        <!-- 스캔 FAB (위로 튀어나옴) -->
+        <FrameLayout
+            android:id="@+id/tab_scan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:contentDescription="QR 스캔">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal|top"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <FrameLayout
+                    android:layout_width="@dimen/fab_size"
+                    android:layout_height="@dimen/fab_size"
+                    android:background="@drawable/bg_scan_fab"
+                    android:elevation="@dimen/fab_elevation"
+                    android:translationY="@dimen/fab_translate_y">
+
+                    <ImageView
+                        android:layout_width="@dimen/fab_icon_size"
+                        android:layout_height="@dimen/fab_icon_size"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_scan"
+                        android:contentDescription="스캔"
+                        app:tint="@color/white" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="스캔"
+                    android:textAppearance="@style/TextAppearance.QGuard.LabelSmall"
+                    android:textColor="@color/color_primary"
+                    android:layout_marginTop="-10dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- 안심 URL 탭 -->
+        <LinearLayout
+            android:id="@+id/tab_favorites"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:id="@+id/iv_tab_favorites"
+                android:layout_width="@dimen/icon_md"
+                android:layout_height="@dimen/icon_md"
+                android:src="@drawable/ic_favorites"
+                android:contentDescription="안심 URL"
+                app:tint="@color/color_tab_inactive" />
+
+            <TextView
+                android:id="@+id/tv_tab_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="안심 URL"
+                android:textAppearance="@style/TextAppearance.QGuard.LabelSmall"
+                android:textColor="@color/color_tab_inactive"
+                android:layout_marginTop="@dimen/space_xxs" />
+
+        </LinearLayout>
+
+        <!-- 내 정보 탭 -->
+        <LinearLayout
+            android:id="@+id/tab_profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:id="@+id/iv_tab_profile"
+                android:layout_width="@dimen/icon_md"
+                android:layout_height="@dimen/icon_md"
+                android:src="@drawable/ic_profile"
+                android:contentDescription="내 정보"
+                app:tint="@color/color_tab_inactive" />
+
+            <TextView
+                android:id="@+id/tv_tab_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 정보"
+                android:textAppearance="@style/TextAppearance.QGuard.LabelSmall"
+                android:textColor="@color/color_tab_inactive"
+                android:layout_marginTop="@dimen/space_xxs" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

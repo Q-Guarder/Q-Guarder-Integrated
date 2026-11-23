@@ -1,0 +1,88 @@
+{
+  "model_file": "final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl",
+  "threshold": 0.41,
+  "n_rows": 23224,
+  "label_distribution": {
+    "0": 11992,
+    "1": 11232
+  },
+  "table3_reproduction": {
+    "paper": {
+      "Accuracy": 0.9351,
+      "Precision": 0.9225,
+      "Recall": 0.9452,
+      "F1-score": 0.9337
+    },
+    "reproduced": {
+      "Accuracy": 0.9350671718911471,
+      "Precision": 0.9224887035106013,
+      "Recall": 0.9451566951566952,
+      "F1-score": 0.9336851363236588
+    },
+    "confusion": {
+      "tp": 10616,
+      "tn": 11100,
+      "fp": 892,
+      "fn": 616
+    },
+    "max_abs_diff": 4.330484330483664e-05,
+    "verdict": "재현 성공"
+  },
+  "root_url_composition": {
+    "benign_root": 11,
+    "benign_total": 11992,
+    "phishing_root": 382,
+    "phishing_total": 11232,
+    "phishing_share_of_root": 97.20101781170484
+  },
+  "path_bands": {
+    "root (path = 0)": {
+      "n": 393,
+      "tp": 382,
+      "tn": 1,
+      "fp": 10,
+      "fn": 0,
+      "accuracy": 0.9745547073791349,
+      "precision": 0.9744897959183674,
+      "recall": 1.0,
+      "fpr": 0.9090909090909091,
+      "f1": 0.9870801033591732
+    },
+    "shallow (1–20)": {
+      "n": 13097,
+      "tp": 7727,
+      "tn": 4201,
+      "fp": 776,
+      "fn": 393,
+      "accuracy": 0.9107429182255479,
+      "precision": 0.9087380924379631,
+      "recall": 0.9516009852216749,
+      "fpr": 0.15591721920835844,
+      "f1": 0.9296757504662215
+    },
+    "deep (> 20)": {
+      "n": 9734,
+      "tp": 2507,
+      "tn": 6898,
+      "fp": 106,
+      "fn": 223,
+      "accuracy": 0.9662009451407438,
+      "precision": 0.959433601224646,
+      "recall": 0.9183150183150183,
+      "fpr": 0.01513420902341519,
+      "f1": 0.9384241063073179
+    },
+    "overall": {
+      "n": 23224,
+      "tp": 10616,
+      "tn": 11100,
+      "fp": 892,
+      "fn": 616,
+      "accuracy": 0.9350671718911471,
+      "precision": 0.9224887035106013,
+      "recall": 0.9451566951566952,
+      "fpr": 0.07438292194796531,
+      "f1": 0.9336851363236588
+    }
+  }
+}

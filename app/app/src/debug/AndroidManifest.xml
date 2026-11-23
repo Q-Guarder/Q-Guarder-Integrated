@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        network_security_config.xml은 리소스 머지로 자동 교체됨
+        debug/res/xml/network_security_config.xml 이 main 버전을 덮어씀
+    -->
+    <application>
+        <activity
+            android:name="com.qguarder.android.HiltTestActivity"
+            android:exported="false" />
+    </application>
+</manifest>

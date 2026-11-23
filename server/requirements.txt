@@ -1,0 +1,38 @@
+# ── Web Framework ──
+fastapi>=0.121.0
+uvicorn[standard]>=0.34.0
+mangum>=0.20.0
+
+# ── Database / ORM ──
+sqlalchemy[asyncio]>=2.0.0
+psycopg2-binary>=2.9.9
+asyncpg
+
+# ── Data Validation ──
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# ── Auth / Security ──
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+bcrypt==4.0.1
+email-validator
+
+
+# ── ML / Data ──
+# model.pkl이 numpy 2.x(`numpy._core`)로 직렬화되어 있어 numpy 1.x로는 역직렬화 불가
+numpy>=2.0.0
+pandas>=2.2.0
+scikit-learn>=1.4.2
+xgboost>=2.0.0
+lightgbm>=4.1.0
+
+# ── AWS SDK ──
+boto3>=1.35.0
+
+# ── HTTP Client ──
+httpx>=0.27.0
+
+# ── Testing ──
+pytest>=8.0.0
+pytest-asyncio>=0.24.0

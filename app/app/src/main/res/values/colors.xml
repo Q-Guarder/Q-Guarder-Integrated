@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- ══════════════════════════════════════════════
+         BRAND / PRIMARY
+         ══════════════════════════════════════════════ -->
+    <color name="color_primary">#3D5AFE</color>
+    <color name="color_primary_dark">#304FFE</color>
+    <color name="color_primary_light">#8C9EFF</color>
+    <color name="color_primary_container">#E8EAFF</color>
+    <color name="color_on_primary">#FFFFFF</color>
+    <color name="color_on_primary_container">#1A237E</color>
+
+    <!-- ══════════════════════════════════════════════
+         SEMANTIC / STATUS COLORS
+         ══════════════════════════════════════════════ -->
+    <color name="color_threat">#E53935</color>
+    <color name="color_threat_dark">#C62828</color>
+    <color name="color_threat_container">#FFF5F5</color>
+    <color name="color_on_threat">#FFFFFF</color>
+
+    <color name="color_warning">#FF8F00</color>
+    <color name="color_warning_dark">#E65100</color>
+    <color name="color_warning_container">#FFF8E1</color>
+    <color name="color_on_warning">#FFFFFF</color>
+
+    <color name="color_safe">#1D9E75</color>
+    <color name="color_safe_dark">#00796B</color>
+    <color name="color_safe_container">#E8F5E9</color>
+    <color name="color_on_safe">#FFFFFF</color>
+
+    <!-- ══════════════════════════════════════════════
+         SURFACE / BACKGROUND
+         ══════════════════════════════════════════════ -->
+    <color name="color_surface">#FFFFFF</color>
+    <color name="color_surface_variant">#F5F5F5</color>
+    <color name="color_surface_elevated">#FAFAFA</color>
+    <color name="color_background">#FFFFFF</color>
+    <color name="color_bg_scan">#0A1628</color>
+    <color name="color_bg_scan_overlay">#CC0A1628</color>
+    <color name="color_bg_card_safe">#F5F7FF</color>
+    <color name="color_bg_card_threat">#FFF5F5</color>
+    <color name="color_bg_card_warning">#FFF8E1</color>
+
+    <!-- ══════════════════════════════════════════════
+         TEXT
+         ══════════════════════════════════════════════ -->
+    <color name="color_text_primary">#1A1A2E</color>
+    <color name="color_text_secondary">#555555</color>
+    <color name="color_text_tertiary">#9E9E9E</color>
+    <color name="color_text_hint">#AAAAAA</color>
+    <color name="color_text_disabled">#BDBDBD</color>
+    <color name="color_text_on_dark">#FFFFFF</color>
+    <color name="color_text_on_dark_secondary">#88AABB</color>
+
+    <!-- ══════════════════════════════════════════════
+         UI ELEMENTS
+         ══════════════════════════════════════════════ -->
+    <color name="color_outline">#E0E0E0</color>
+    <color name="color_outline_variant">#EEEEEE</color>
+    <color name="color_divider">#F0F0F0</color>
+    <color name="color_tab_active">#3D5AFE</color>
+    <color name="color_tab_inactive">#9E9E9E</color>
+    <color name="color_ripple">#1A3D5AFE</color>
+    <color name="color_scrim">#52000000</color>
+
+    <!-- ══════════════════════════════════════════════
+         SPLASH / BRAND
+         ══════════════════════════════════════════════ -->
+    <color name="color_splash_bg">#1A2EDB</color>
+    <color name="color_splash_subtitle">#7788DD</color>
+    <color name="color_splash_version">#3344AA</color>
+
+    <!-- Status indicators -->
+    <color name="color_status_online">#4CAF50</color>
+    <color name="color_status_offline">#9E9E9E</color>
+
+    <!-- Legacy compatibility -->
+    <color name="color_safe_green">#1D9E75</color>
+    <color name="color_text_title_dark">#1A1A2E</color>
+    <color name="color_bg_loss_list">#FFF5F5</color>
+</resources>

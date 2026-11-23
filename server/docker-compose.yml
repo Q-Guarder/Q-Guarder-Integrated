@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: localdev123
+      POSTGRES_DB: qguarder
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Hot Reload: 로컬 소스 변경 → 컨테이너 즉시 반영
+      - ./app:/app/app
+      - ./background:/app/background
+      # ML 모델 로컬 로드 (S3_MODEL_BUCKET 비어있을 때 사용)
+      - ./local_models:/app/local_models
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+      [
+        "uvicorn",
+        "app.main:app",
+        "--host", "0.0.0.0",
+        "--port", "8000",
+        "--reload",
+        "--reload-dir", "/app/app",
+      ]
+
+volumes:
+  pgdata:

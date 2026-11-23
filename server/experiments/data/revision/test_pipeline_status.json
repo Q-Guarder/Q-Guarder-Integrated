@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-20T17:45:08",
+  "test_rows": 500,
+  "vt_done": 500,
+  "vt_missing": 0,
+  "vt_bad_status": 0,
+  "by_status": {
+    "ok": 432,
+    "not_found": 68
+  },
+  "test_benign": 250,
+  "test_phishing": 250,
+  "complete": true
+}

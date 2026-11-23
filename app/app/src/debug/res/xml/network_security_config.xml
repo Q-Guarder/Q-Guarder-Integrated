@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    debug 빌드 전용 NSC — main의 network_security_config.xml을 덮어씀 (리소스 머지)
+    사용자 CA 인증서를 신뢰하여 Charles Proxy / Postman 등으로 트래픽 디버깅 가능
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!--
+        [통합본 추가] 로컬 개발 서버(server/ 의 docker compose, http://<PC>:8000) 접속용.
+        에뮬레이터에서 PC는 10.0.2.2 로 보인다. debug 빌드에만 적용되며,
+        release 빌드는 main 의 설정대로 HTTPS 만 허용한다.
+        실기기로 같은 Wi-Fi 의 PC 에 붙을 때는 PC 의 IP 를 <domain> 으로 한 줄 추가할 것.
+    -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">10.0.2.2</domain>
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>

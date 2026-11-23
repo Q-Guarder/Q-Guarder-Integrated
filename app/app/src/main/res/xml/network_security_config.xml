@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--
+        프로덕션 기본 설정 — HTTPS만 허용 (Android 9+ 기본값과 동일)
+        실서버 도메인 확정 후 아래 주석 해제하여 인증서 고정(Certificate Pinning) 적용
+        핀값 추출: openssl s_client -connect api.qguarder.com:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64
+    -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!--
+    TODO: 실서버 도메인 확정 후 아래 블록 활성화
+
+    주의사항:
+    1. expiration 생략 — 날짜 고정 시 해당 일자 이후 Pinning 자동 해제됨
+    2. 백업 핀(<pin> 2개) 필수 — 인증서 교체 시 백업 핀 없으면 앱 전체 연결 불가
+    3. 핀값 추출:
+       openssl s_client -connect api.qguarder.com:443 </dev/null \
+         | openssl x509 -pubkey -noout \
+         | openssl pkey -pubin -outform der \
+         | openssl dgst -sha256 -binary | base64
+
+    <domain-config>
+        <domain includeSubdomains="true">api.qguarder.com</domain>
+        <pin-set>
+            <pin digest="SHA-256">현재_인증서_핀값=</pin>
+            <pin digest="SHA-256">백업_인증서_핀값=</pin>
+        </pin-set>
+    </domain-config>
+    -->
+</network-security-config>

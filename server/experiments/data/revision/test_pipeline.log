@@ -1,0 +1,1140 @@
+2026-10-19 09:29:07 | ==== run_test_pipeline --stage all (python 3.13.14, cwd C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server)
+2026-10-19 09:29:07 | 테스트 집합 0건 < 500 → prepare_testset.py 실행 (새 피드 수집·중복 제거·split 열)
+2026-10-19 09:29:07 | $ experiments/prepare_testset.py --total 500
+2026-10-19 09:29:10,785 [INFO] 검증 집합 백업: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\evalset_validation_only.csv
+2026-10-19 09:29:10,785 [WARNING] 오프라인 URL 목록 없음 (C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\raw\offline_urls.csv) — 오프라인 데이터와의 중복 제거는 생략됨. Drive Q-Guard/dataset/preprocessed_dataset.csv 를 이 경로에 두면 자동 적용
+2026-10-19 09:29:10,791 [INFO] OpenPhish 피드 다운로드 중...
+2026-10-19 09:29:12,185 [INFO] HTTP Request: GET https://openphish.com/feed.txt "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:29:12,279 [INFO] HTTP Request: GET https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt "HTTP/1.1 200 OK"
+2026-10-19 09:29:12,282 [INFO] OpenPhish 원본 저장: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\raw_test\openphish_feed.txt
+2026-10-19 09:29:12,283 [INFO] OpenPhish 원본 300건
+2026-10-19 09:29:12,287 [INFO] 피싱 풀 292건 (검증 집합·오프라인 중복 제외 후)
+2026-10-19 09:29:12,287 [WARNING] 층화 목표 미달 — 41건을 잔여 풀에서 보충
+2026-10-19 09:29:12,288 [INFO] Tranco Top-1M 다운로드 중 (약 10MB)...
+2026-10-19 09:29:13,893 [INFO] HTTP Request: GET https://tranco-list.eu/top-1m.csv.zip "HTTP/1.1 307 Temporary Redirect"
+2026-10-19 09:29:14,479 [INFO] HTTP Request: GET https://tranco-list.eu/download/daily/top-1m.csv.zip "HTTP/1.1 200 OK"
+2026-10-19 09:29:17,717 [INFO] Tranco 상위 6000개 저장: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\raw_test\tranco_top.csv
+2026-10-19 09:29:17,719 [INFO] Tranco 도메인 6000개
+2026-10-19 09:29:17,727 [INFO] 정상 후보 도메인 5772개 (인프라·공유호스팅·라벨충돌·검증집합 도메인 제외 후)
+2026-10-19 09:29:18,356 [INFO] HTTP Request: GET https://wikipedia.org "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:18,382 [INFO] HTTP Request: GET https://tiktokv.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:29:18,449 [INFO] HTTP Request: GET https://endpoints.news "HTTP/1.1 200 OK"
+2026-10-19 09:29:18,514 [INFO] HTTP Request: GET https://yuga.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:18,552 [INFO] HTTP Request: GET https://triplinkintl.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:18,565 [INFO] HTTP Request: GET https://chatgpt.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:18,648 [INFO] HTTP Request: GET https://amazon.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:18,799 [INFO] HTTP Request: GET https://openai.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:18,941 [INFO] HTTP Request: GET https://yahoo.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:19,133 [INFO] HTTP Request: GET https://www.amazon.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:19,220 [INFO] HTTP Request: GET https://epicgames.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:19,300 [INFO] HTTP Request: GET https://www.epicgames.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:19,334 [INFO] HTTP Request: GET https://www.yahoo.com/ "HTTP/1.1 429 Too Many Requests"
+2026-10-19 09:29:19,338 [INFO] HTTP Request: GET https://aliyuncs.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:29:19,350 [INFO] HTTP Request: GET https://www.triplinkintl.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:19,484 [INFO] HTTP Request: GET https://goo.gl "HTTP/1.1 400 Bad Request"
+2026-10-19 09:29:19,505 [INFO] HTTP Request: GET https://ipify.org "HTTP/1.1 302 Found"
+2026-10-19 09:29:19,568 [INFO] HTTP Request: GET https://office365.com "HTTP/1.1 403 Ip Forbidden"
+2026-10-19 09:29:19,801 [INFO] HTTP Request: GET https://okcdn.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:19,846 [INFO] HTTP Request: GET https://www.ipify.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:20,853 [INFO] HTTP Request: GET https://st.okcdn.ru/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:30,755 [INFO] 정상 루트 생존 확인: 5/125 (도메인 48개 검사)
+2026-10-19 09:29:30,965 [INFO] HTTP Request: GET https://godaddy.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:31,169 [INFO] HTTP Request: GET https://forms.gle "HTTP/1.1 400 Bad Request"
+2026-10-19 09:29:31,179 [INFO] HTTP Request: GET https://crashlytics.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:31,217 [INFO] HTTP Request: GET https://www.godaddy.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:31,285 [INFO] HTTP Request: GET https://app-measurement.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:29:31,420 [INFO] HTTP Request: GET https://criteo.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:31,753 [INFO] HTTP Request: GET https://flickr.com "HTTP/1.1 502 Bad Gateway"
+2026-10-19 09:29:31,829 [INFO] HTTP Request: GET https://samsungcloud.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:31,831 [INFO] HTTP Request: GET https://firebase.google.com/products/crashlytics/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:31,963 [INFO] HTTP Request: GET https://scorecardresearch.com "HTTP/1.1 302 Found"
+2026-10-19 09:29:32,015 [INFO] HTTP Request: GET https://nih.gov "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:29:32,018 [INFO] HTTP Request: GET https://medium.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:32,052 [INFO] HTTP Request: GET https://duckdns.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:32,318 [INFO] HTTP Request: GET https://skybridge.click "HTTP/1.1 200 OK"
+2026-10-19 09:29:32,354 [INFO] HTTP Request: GET https://vkuserphoto.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:32,428 [INFO] HTTP Request: GET https://ebay.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:32,436 [INFO] HTTP Request: GET https://www.samsungcloud.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:32,638 [INFO] HTTP Request: GET https://app-analytics-services.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:29:32,689 [INFO] HTTP Request: GET https://www.scorecardresearch.com/default.aspx "HTTP/1.1 302 Found"
+2026-10-19 09:29:32,697 [INFO] HTTP Request: GET https://www.ebay.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:32,786 [INFO] HTTP Request: GET https://www.nih.gov/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:32,939 [INFO] HTTP Request: GET https://www.scorecardresearch.com/Home.aspx "HTTP/1.1 200 OK"
+2026-10-19 09:29:32,947 [INFO] HTTP Request: GET https://oracle.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:32,967 [INFO] HTTP Request: GET https://sciencedirect.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:32,970 [INFO] HTTP Request: GET https://researchgate.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:33,107 [INFO] HTTP Request: GET https://googleadservices.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:29:33,142 [INFO] HTTP Request: GET https://www.duckdns.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:33,223 [INFO] HTTP Request: GET https://www.researchgate.net/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:33,289 [INFO] HTTP Request: GET https://www.sciencedirect.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:33,298 [INFO] HTTP Request: GET https://meraki.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:33,400 [INFO] HTTP Request: GET https://www.oracle.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:33,558 [INFO] HTTP Request: GET https://ps.userapi.com/ "HTTP/1.1 418 "
+2026-10-19 09:29:34,076 [INFO] HTTP Request: GET https://meraki.cisco.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:34,274 [INFO] HTTP Request: GET https://www.cisco.com/site/us/en/about/corporate-strategy-office/acquisitions/meraki/index.html "HTTP/1.1 200 OK"
+2026-10-19 09:29:44,778 [INFO] 정상 루트 생존 확인: 11/125 (도메인 96개 검사)
+2026-10-19 09:29:44,914 [INFO] HTTP Request: GET https://namecheap.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:44,989 [INFO] HTTP Request: GET https://www.namecheap.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:45,026 [INFO] HTTP Request: GET https://canva.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:45,057 [INFO] HTTP Request: GET https://roku.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:45,076 [INFO] HTTP Request: GET https://forter.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:45,085 [INFO] HTTP Request: GET https://hcaptcha.com "HTTP/1.1 302 Found"
+2026-10-19 09:29:45,170 [INFO] HTTP Request: GET https://www.canva.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:45,198 [INFO] HTTP Request: GET https://wikimedia.org "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:45,245 [INFO] HTTP Request: GET https://www.hcaptcha.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:45,274 [INFO] HTTP Request: GET https://publicnode.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:45,282 [INFO] HTTP Request: GET https://linktr.ee "HTTP/1.1 200 OK"
+2026-10-19 09:29:45,363 [INFO] HTTP Request: GET https://alidns.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:45,737 [INFO] HTTP Request: GET https://ozon.ru "HTTP/1.1 307 Temporary Redirect"
+2026-10-19 09:29:45,791 [INFO] HTTP Request: GET https://ibm.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:45,860 [INFO] HTTP Request: GET https://who.int "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:45,901 [INFO] HTTP Request: GET https://www.ibm.com/ "HTTP/1.1 303 See Other"
+2026-10-19 09:29:45,984 [INFO] HTTP Request: GET https://ozon.ru/?__rr=1 "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:46,011 [INFO] HTTP Request: GET https://imdb.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:29:46,065 [INFO] HTTP Request: GET https://www.ibm.com/kr-en "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:46,072 [INFO] HTTP Request: GET https://amplitude.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,154 [INFO] HTTP Request: GET https://www.ibm.com/kr-ko "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,156 [INFO] HTTP Request: GET https://dnsmadeeasy.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,170 [INFO] HTTP Request: GET https://googleblog.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:29:46,260 [INFO] HTTP Request: GET https://ip-api.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,299 [INFO] HTTP Request: GET https://www.imdb.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:29:46,312 [INFO] HTTP Request: GET https://www.who.int/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,363 [INFO] HTTP Request: GET https://www.roku.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:29:46,421 [INFO] HTTP Request: GET https://vungle.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:46,532 [INFO] HTTP Request: GET https://rubiconproject.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:46,561 [INFO] HTTP Request: GET https://icanhazip.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,782 [INFO] HTTP Request: GET https://tinyurl.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,833 [INFO] HTTP Request: GET https://launchpad.net "HTTP/1.1 200 OK"
+2026-10-19 09:29:46,881 [INFO] HTTP Request: GET https://www.blog.google "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:46,999 [INFO] HTTP Request: GET https://www.rubiconproject.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:47,036 [INFO] HTTP Request: GET https://reuters.com "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:29:47,171 [INFO] HTTP Request: GET https://www.reuters.com/ "HTTP/1.1 401 HTTP Forbidden"
+2026-10-19 09:29:47,177 [INFO] HTTP Request: GET https://www.roku.com/intl?next=/&source=www.roku.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:47,440 [INFO] HTTP Request: GET https://blog.google/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:47,564 [INFO] HTTP Request: GET https://booking.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:48,189 [INFO] HTTP Request: GET https://www.booking.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:29:55,704 [INFO] 정상 루트 생존 확인: 25/125 (도메인 144개 검사)
+2026-10-19 09:29:56,652 [INFO] HTTP Request: GET https://brave.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:56,656 [INFO] HTTP Request: GET https://casalemedia.com "HTTP/1.1 302 Found"
+2026-10-19 09:29:56,771 [INFO] HTTP Request: GET https://smartadserver.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:56,795 [INFO] HTTP Request: GET https://aliyun.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:56,852 [INFO] HTTP Request: GET https://slack.com "HTTP/1.1 200 OK"
+2026-10-19 09:29:56,905 [INFO] HTTP Request: GET https://myshopify.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:29:57,135 [INFO] HTTP Request: GET https://onelink.me "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,245 [INFO] HTTP Request: GET https://php.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,346 [INFO] HTTP Request: GET https://indexexchange.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,360 [INFO] HTTP Request: GET https://inmobi.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,367 [INFO] HTTP Request: GET https://skyhigh.cloud "HTTP/1.1 302 Found"
+2026-10-19 09:29:57,381 [INFO] HTTP Request: GET https://equativ.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,473 [INFO] HTTP Request: GET https://www.aliyun.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:29:57,544 [INFO] HTTP Request: GET https://www.equativ.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:57,596 [INFO] HTTP Request: GET https://datadoghq.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,683 [INFO] HTTP Request: GET https://www.php.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:57,690 [INFO] HTTP Request: GET https://gnu.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,775 [INFO] HTTP Request: GET https://www.skyhighsecurity.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:29:57,840 [INFO] HTTP Request: GET https://www.appsflyer.com/products/customer-experience-deep-linking/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:29:57,935 [INFO] HTTP Request: GET https://www.appsflyer.com/products/deep-linking/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:58,121 [INFO] HTTP Request: GET https://www.datadoghq.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:58,229 [INFO] HTTP Request: GET https://www.alibabacloud.com/en?_p_lc=1&f-8DC992C756BA= "HTTP/1.1 200 OK"
+2026-10-19 09:29:58,262 [INFO] HTTP Request: GET https://www.indexexchange.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:58,304 [INFO] HTTP Request: GET https://www.inmobi.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:29:58,622 [INFO] HTTP Request: GET https://www.gnu.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:08,120 [INFO] 정상 루트 생존 확인: 35/125 (도메인 192개 검사)
+2026-10-19 09:30:08,330 [INFO] HTTP Request: GET https://naver.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:08,386 [INFO] HTTP Request: GET https://ea.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:08,413 [INFO] HTTP Request: GET https://cdc.gov "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:08,459 [INFO] HTTP Request: GET https://nasa.gov "HTTP/1.1 302 Found"
+2026-10-19 09:30:08,535 [INFO] HTTP Request: GET https://tp-link.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:08,554 [INFO] HTTP Request: GET https://www.naver.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:08,607 [INFO] HTTP Request: GET https://bilibili.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:08,617 [INFO] HTTP Request: GET https://www.ea.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:08,738 [INFO] HTTP Request: GET https://www.nasa.gov/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:08,766 [INFO] HTTP Request: GET https://mzstatic.com "HTTP/1.1 301 Redirect"
+2026-10-19 09:30:08,834 [INFO] HTTP Request: GET https://tradingview.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:08,951 [INFO] HTTP Request: GET https://www.bilibili.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:08,975 [INFO] HTTP Request: GET https://www.tradingview.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:08,997 [INFO] HTTP Request: GET https://zendesk.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,033 [INFO] HTTP Request: GET https://www.cdc.gov/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:09,042 [INFO] HTTP Request: GET https://www.apple.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:09,080 [INFO] HTTP Request: GET https://www.tp-link.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,243 [INFO] HTTP Request: GET https://trustpilot.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,274 [INFO] HTTP Request: GET https://gitlab.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,329 [INFO] HTTP Request: GET https://www.zendesk.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:30:09,379 [INFO] HTTP Request: GET https://name.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,434 [INFO] HTTP Request: GET https://www.trustpilot.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:09,449 [INFO] HTTP Request: GET https://www.tp-link.com/kr/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:09,466 [INFO] HTTP Request: GET https://about.gitlab.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:09,512 [INFO] HTTP Request: GET https://www.zendesk.kr/#georedirect "HTTP/1.1 200 OK"
+2026-10-19 09:30:09,527 [INFO] HTTP Request: GET https://dell.com "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:30:09,562 [INFO] HTTP Request: GET https://www.name.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:09,798 [INFO] HTTP Request: GET https://www.dell.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:09,811 [INFO] HTTP Request: GET https://drom.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,875 [INFO] HTTP Request: GET https://checkpoint.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:09,931 [INFO] HTTP Request: GET https://cookiedatabase.org "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:09,993 [INFO] HTTP Request: GET https://opendns.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,028 [INFO] HTTP Request: GET https://www.dell.com/ko-kr "HTTP/1.1 200 OK"
+2026-10-19 09:30:10,133 [INFO] HTTP Request: GET https://google.cn "HTTP/1.1 302 Found"
+2026-10-19 09:30:10,168 [INFO] HTTP Request: GET https://cm.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,344 [INFO] HTTP Request: GET https://nvidia.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,484 [INFO] HTTP Request: GET https://plesk.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,496 [INFO] HTTP Request: GET http://www.opendns.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,530 [INFO] HTTP Request: GET http://www.google.cn/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:10,540 [INFO] HTTP Request: GET https://washingtonpost.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,547 [INFO] HTTP Request: GET https://www.nvidia.com/ "HTTP/1.1 307 Temporary Redirect"
+2026-10-19 09:30:10,579 [INFO] HTTP Request: GET https://un.org "HTTP/1.1 302 Found : Moved Temporarily"
+2026-10-19 09:30:10,621 [INFO] HTTP Request: GET https://www.nvidia.com/ko-kr/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:10,694 [INFO] HTTP Request: GET https://hostgator.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:10,765 [INFO] HTTP Request: GET https://www.washingtonpost.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:10,857 [INFO] HTTP Request: GET https://www.hostgator.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:11,014 [INFO] HTTP Request: GET https://appsflyer.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:11,050 [INFO] HTTP Request: GET https://www.cm.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,196 [INFO] HTTP Request: GET https://www.appsflyer.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,241 [INFO] HTTP Request: GET https://www.opendns.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,433 [INFO] HTTP Request: GET https://issuu.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,464 [INFO] HTTP Request: GET https://www.un.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,467 [INFO] HTTP Request: GET https://www.drom.ru/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,469 [INFO] HTTP Request: GET https://www.plesk.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,483 [INFO] HTTP Request: GET https://www.checkpoint.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,808 [INFO] HTTP Request: GET https://live-video.net "HTTP/1.1 200 OK"
+2026-10-19 09:30:11,814 [INFO] HTTP Request: GET https://tagomi.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:11,889 [INFO] HTTP Request: GET https://espn.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:11,898 [INFO] HTTP Request: GET https://bloomberg.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:11,905 [INFO] HTTP Request: GET https://wsj.com "HTTP/1.1 301 Found"
+2026-10-19 09:30:11,916 [INFO] HTTP Request: GET https://statsigapi.net "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:11,983 [INFO] HTTP Request: GET https://www.coinbase.com/prime/analytics "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:12,060 [INFO] HTTP Request: GET https://launchdarkly.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:12,072 [INFO] HTTP Request: GET https://stanford.edu "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:12,130 [INFO] HTTP Request: GET https://www.bloomberg.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:12,165 [INFO] HTTP Request: GET https://www.wsj.com/ "HTTP/1.1 401 HTTP Forbidden"
+2026-10-19 09:30:12,247 [INFO] HTTP Request: GET https://www.espn.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:12,367 [INFO] HTTP Request: GET https://www.stanford.edu/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:12,921 [INFO] HTTP Request: GET https://netangels.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:13,060 [INFO] HTTP Request: GET https://crpt.ru "HTTP/1.1 200 OK"
+2026-10-19 09:30:13,587 [INFO] HTTP Request: GET https://globo.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:14,191 [INFO] HTTP Request: GET https://www.bloomberg.com/asia "HTTP/1.1 200 OK"
+2026-10-19 09:30:14,691 [INFO] HTTP Request: GET https://www.netangels.ru/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:16,470 [INFO] HTTP Request: GET https://www.globo.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:21,440 [INFO] 정상 루트 생존 확인: 65/125 (도메인 240개 검사)
+2026-10-19 09:30:21,651 [INFO] HTTP Request: GET https://cloudflareinsights.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:21,653 [INFO] HTTP Request: GET https://amazontrust.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:21,754 [INFO] HTTP Request: GET https://expireddomains.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:21,769 [INFO] HTTP Request: GET https://mobile.de "HTTP/1.1 301 OK"
+2026-10-19 09:30:21,802 [INFO] HTTP Request: GET https://branch.io "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:21,987 [INFO] HTTP Request: GET https://unsplash.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:22,080 [INFO] HTTP Request: GET https://www.branch.io/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:22,106 [INFO] HTTP Request: GET https://claude.ai "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:22,118 [INFO] HTTP Request: GET https://grammarly.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:22,299 [INFO] HTTP Request: GET https://calendly.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,370 [INFO] HTTP Request: GET https://bsky.app "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,394 [INFO] HTTP Request: GET https://dropcatch.com "HTTP/1.1 308 Permanent Redirect"
+2026-10-19 09:30:22,432 [INFO] HTTP Request: GET https://amazon.de "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:22,454 [INFO] HTTP Request: GET https://duckduckgo.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,562 [INFO] HTTP Request: GET https://yandex.com "HTTP/1.1 200 Ok"
+2026-10-19 09:30:22,563 [INFO] HTTP Request: GET https://www.grammarly.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,646 [INFO] HTTP Request: GET https://www.amazon.de/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:30:22,670 [INFO] HTTP Request: GET https://www.dropcatch.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,676 [INFO] HTTP Request: GET https://line.me "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:22,743 [INFO] HTTP Request: GET https://go.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:22,824 [INFO] HTTP Request: GET https://www.amazontrust.com/index.html "HTTP/1.1 308 Permanent Redirect"
+2026-10-19 09:30:22,834 [INFO] HTTP Request: GET https://www.mobile.de/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,862 [INFO] HTTP Request: GET https://163.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:22,884 [INFO] HTTP Request: GET https://www.amazontrust.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:22,887 [INFO] HTTP Request: GET https://indeed.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:22,992 [INFO] HTTP Request: GET https://ampproject.org "HTTP/1.1 302 Found"
+2026-10-19 09:30:23,079 [INFO] HTTP Request: GET https://www.go.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:23,080 [INFO] HTTP Request: GET https://bluehost.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:23,083 [INFO] HTTP Request: GET https://www.line.me/en/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:23,089 [INFO] HTTP Request: GET https://paloaltonetworks.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:23,185 [INFO] HTTP Request: GET http://www.163.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:23,258 [INFO] HTTP Request: GET https://steamcommunity.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:23,408 [INFO] HTTP Request: GET https://www.ampproject.org/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:23,600 [INFO] HTTP Request: GET https://www.paloaltonetworks.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:23,620 [INFO] HTTP Request: GET https://www.bluehost.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:23,807 [INFO] HTTP Request: GET https://temu.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:23,814 [INFO] HTTP Request: GET https://aol.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:23,834 [INFO] HTTP Request: GET https://selectel.ru "HTTP/1.1 200 OK"
+2026-10-19 09:30:24,144 [INFO] HTTP Request: GET https://shalltry.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:24,146 [INFO] HTTP Request: GET https://www.temu.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:24,227 [INFO] HTTP Request: GET https://amp.dev/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:24,385 [INFO] HTTP Request: GET https://substack.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:24,567 [INFO] HTTP Request: GET https://intel.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:24,845 [INFO] HTTP Request: GET https://www.intel.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:25,398 [INFO] HTTP Request: GET https://dailymotion.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:25,402 [INFO] HTTP Request: GET https://www.aol.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:25,543 [INFO] HTTP Request: GET https://www.intel.co.kr "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:25,616 [INFO] HTTP Request: GET https://www.intel.co.kr/content/www/kr/ko/homepage.html "HTTP/1.1 200 OK"
+2026-10-19 09:30:25,795 [INFO] HTTP Request: GET https://www.dailymotion.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:35,311 [INFO] 정상 루트 생존 확인: 86/125 (도메인 288개 검사)
+2026-10-19 09:30:35,527 [INFO] HTTP Request: GET https://fandom.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:35,531 [INFO] HTTP Request: GET https://anthropic.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:35,621 [INFO] HTTP Request: GET https://taobao.com "HTTP/1.1 302 Found"
+2026-10-19 09:30:35,678 [INFO] HTTP Request: GET https://www.fandom.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:35,708 [INFO] HTTP Request: GET https://www.anthropic.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:35,763 [INFO] HTTP Request: GET https://doubleverify.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:35,813 [INFO] HTTP Request: GET https://www.taobao.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:35,834 [INFO] HTTP Request: GET https://pixabay.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:35,896 [INFO] HTTP Request: GET https://okta.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:35,936 [INFO] HTTP Request: GET https://g.page "HTTP/1.1 302 Found"
+2026-10-19 09:30:35,946 [INFO] HTTP Request: GET https://arxiv.org "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,061 [INFO] HTTP Request: GET https://businessinsider.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:36,093 [INFO] HTTP Request: GET https://yahoo.co.jp "HTTP/1.1 301 Redirect"
+2026-10-19 09:30:36,268 [INFO] HTTP Request: GET https://www.okta.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,348 [INFO] HTTP Request: GET https://mozilla.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:36,355 [INFO] HTTP Request: GET https://www.businessinsider.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,386 [INFO] HTTP Request: GET https://duolingo.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:36,417 [INFO] HTTP Request: GET https://speedtest.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:36,436 [INFO] HTTP Request: GET https://www.yahoo.co.jp/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,461 [INFO] HTTP Request: GET https://business.google.com "HTTP/1.1 302 Found"
+2026-10-19 09:30:36,472 [INFO] HTTP Request: GET https://www.mozilla.org/firefox "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:36,506 [INFO] HTTP Request: GET https://eye4.cn "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,578 [INFO] HTTP Request: GET https://prodregistryv2.org "HTTP/1.1 404 Not Found"
+2026-10-19 09:30:36,644 [INFO] HTTP Request: GET https://www.firefox.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,651 [INFO] HTTP Request: GET https://supercell.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,712 [INFO] HTTP Request: GET https://www.duolingo.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,813 [INFO] HTTP Request: GET https://www.speedtest.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:36,915 [INFO] HTTP Request: GET https://walmart.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:36,926 [INFO] HTTP Request: GET https://atlassian.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:36,991 [INFO] HTTP Request: GET https://dynatrace.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,020 [INFO] HTTP Request: GET https://wp.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,072 [INFO] HTTP Request: GET https://ietf.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,192 [INFO] HTTP Request: GET https://www.ietf.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:37,212 [INFO] HTTP Request: GET https://www.dynatrace.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:37,227 [INFO] HTTP Request: GET https://cnbc.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,255 [INFO] HTTP Request: GET https://www.walmart.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:37,336 [INFO] HTTP Request: GET https://timeweb.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,411 [INFO] HTTP Request: GET https://wordpress.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:37,421 [INFO] HTTP Request: GET https://support.google.com/business?p=browser_support "HTTP/1.1 302 Found"
+2026-10-19 09:30:37,456 [INFO] HTTP Request: GET https://goodreads.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,569 [INFO] HTTP Request: GET https://www.atlassian.com/software "HTTP/1.1 200 OK"
+2026-10-19 09:30:37,658 [INFO] HTTP Request: GET https://statista.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:37,752 [INFO] HTTP Request: GET https://support.google.com/business/answer/3420286?visit_id=639279666373103527-3790544054&p=browser_support&rd=1 "HTTP/1.1 200 OK"
+2026-10-19 09:30:37,920 [INFO] HTTP Request: GET https://mcafee.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:38,121 [INFO] HTTP Request: GET https://www.goodreads.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:38,123 [INFO] HTTP Request: GET https://www.cnbc.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:38,136 [INFO] HTTP Request: GET https://www.mcafee.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:38,169 [INFO] HTTP Request: GET https://www.statista.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:38,271 [INFO] HTTP Request: GET https://shein.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:38,333 [INFO] HTTP Request: GET https://quora.com "HTTP/1.1 308 Permanent Redirect"
+2026-10-19 09:30:38,400 [INFO] HTTP Request: GET https://www.cnbc.com/world/?region=world "HTTP/1.1 200 OK"
+2026-10-19 09:30:38,453 [INFO] HTTP Request: GET https://www.shein.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:38,499 [INFO] HTTP Request: GET https://www.quora.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:38,764 [INFO] HTTP Request: GET https://timeweb.com/ru/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:39,047 [INFO] HTTP Request: GET https://kr.shein.com/?cdn_rsite=ak&ref=www&rep=dir&ret=kr "HTTP/1.1 200 OK"
+2026-10-19 09:30:39,125 [INFO] HTTP Request: GET https://timeweb.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,145 [INFO] 정상 루트 생존 확인: 110/125 (도메인 336개 검사)
+2026-10-19 09:30:50,299 [INFO] HTTP Request: GET https://npr.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,385 [INFO] HTTP Request: GET https://addtoany.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,410 [INFO] HTTP Request: GET https://newrelic.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,503 [INFO] HTTP Request: GET https://sina.com.cn "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,509 [INFO] HTTP Request: GET https://run.app "HTTP/1.1 404 Not Found"
+2026-10-19 09:30:50,536 [INFO] HTTP Request: GET https://scribd.com "HTTP/1.1 302 Found"
+2026-10-19 09:30:50,549 [INFO] HTTP Request: GET https://www.npr.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,604 [INFO] HTTP Request: GET https://www.addtoany.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,641 [INFO] HTTP Request: GET https://www.sina.com.cn/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,650 [INFO] HTTP Request: GET https://www.scribd.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,665 [INFO] HTTP Request: GET https://aliexpress.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,673 [INFO] HTTP Request: GET https://amazon.co.jp "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,686 [INFO] HTTP Request: GET https://markmonitor.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:50,788 [INFO] HTTP Request: GET https://eventbrite.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,798 [INFO] HTTP Request: GET https://www.amazon.co.jp/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:30:50,808 [INFO] HTTP Request: GET https://indiatimes.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,913 [INFO] HTTP Request: GET https://media.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,918 [INFO] HTTP Request: GET https://foxnews.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:50,952 [INFO] HTTP Request: GET https://www.eventbrite.com "HTTP/1.1 200 OK"
+2026-10-19 09:30:50,977 [INFO] HTTP Request: GET https://google.de "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,050 [INFO] HTTP Request: GET https://cloudns.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,060 [INFO] HTTP Request: GET https://amzn.to "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,075 [INFO] HTTP Request: GET https://www.foxnews.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:51,087 [INFO] HTTP Request: GET https://www.indiatimes.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:51,184 [INFO] HTTP Request: GET https://google.com.hk "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,203 [INFO] HTTP Request: GET https://www.media.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:51,224 [INFO] HTTP Request: GET http://www.amazon.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,243 [INFO] HTTP Request: GET https://behance.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,319 [INFO] HTTP Request: GET https://www.amazon.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:30:51,321 [INFO] HTTP Request: GET https://docker.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:51,389 [INFO] HTTP Request: GET https://www.google.de/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,411 [INFO] HTTP Request: GET https://stackoverflow.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:51,515 [INFO] HTTP Request: GET https://www.behance.net/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:30:51,517 [INFO] HTTP Request: GET https://www.google.com.hk/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:51,532 [INFO] HTTP Request: GET https://blogger.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,536 [INFO] HTTP Request: GET https://noaa.gov "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,581 [INFO] HTTP Request: GET https://dotomi.com "HTTP/1.1 302 Found"
+2026-10-19 09:30:51,689 [INFO] HTTP Request: GET https://wps.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:51,726 [INFO] HTTP Request: GET https://www.google.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:51,804 [INFO] HTTP Request: GET https://share.google "HTTP/1.1 200 OK"
+2026-10-19 09:30:52,016 [INFO] HTTP Request: GET https://www.cloudns.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:52,064 [INFO] HTTP Request: GET https://www.epsilon.com/us?redirect=dotomi "HTTP/1.1 200 OK"
+2026-10-19 09:30:52,089 [INFO] HTTP Request: GET https://sohu.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:30:52,121 [INFO] HTTP Request: GET https://www.wps.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:52,168 [INFO] HTTP Request: GET https://www.noaa.gov/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:52,436 [INFO] HTTP Request: GET https://www.blogger.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:30:52,536 [INFO] HTTP Request: GET https://www.sohu.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:52,583 [INFO] HTTP Request: GET https://ivi.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:52,624 [INFO] HTTP Request: GET https://tplinkcloud.com "HTTP/1.1 302 Found"
+2026-10-19 09:30:52,669 [INFO] HTTP Request: GET https://mysql.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:52,787 [INFO] HTTP Request: GET https://accounts.google.com/ServiceLogin?passive=true&go=true&service=blogger&continue=https://www.blogger.com/?bpli%3D1 "HTTP/1.1 302 Found"
+2026-10-19 09:30:52,893 [INFO] HTTP Request: GET http://www.tplinkcloud.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:30:52,974 [INFO] HTTP Request: GET https://www.blogger.com/?bpli=1 "HTTP/1.1 302 Found"
+2026-10-19 09:30:53,122 [INFO] HTTP Request: GET https://trendmicro.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:53,127 [INFO] HTTP Request: GET https://adriver.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:53,130 [INFO] HTTP Request: GET https://mediatek.com "HTTP/1.0 302 Moved Temporarily"
+2026-10-19 09:30:53,163 [INFO] HTTP Request: GET https://www.blogger.com/about?bpli=1 "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:53,270 [INFO] HTTP Request: GET https://www.blogger.com/about/?bpli=1 "HTTP/1.1 200 OK"
+2026-10-19 09:30:53,312 [INFO] HTTP Request: GET https://www.trendmicro.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:53,361 [INFO] HTTP Request: GET https://www.mediatek.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:53,501 [INFO] HTTP Request: GET https://www.tplinkcloud.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:53,511 [INFO] HTTP Request: GET https://ezvizlife.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:53,549 [INFO] HTTP Request: GET https://uol.com.br "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:30:53,640 [INFO] HTTP Request: GET https://www.mysql.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:53,670 [INFO] HTTP Request: GET https://www.trendmicro.com/ko_kr/business.html "HTTP/1.1 200 OK"
+2026-10-19 09:30:53,688 [INFO] HTTP Request: GET https://openstreetmap.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:30:53,919 [INFO] HTTP Request: GET https://www.ivi.ru/ "HTTP/1.1 302 Found"
+2026-10-19 09:30:54,125 [INFO] HTTP Request: GET https://www.ezviz.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:30:54,522 [INFO] HTTP Request: GET https://www.ezviz.com/kr/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:54,618 [INFO] HTTP Request: GET https://www.openstreetmap.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:54,930 [INFO] HTTP Request: GET https://gosuslugi.ru "HTTP/1.1 200 OK"
+2026-10-19 09:30:54,954 [INFO] HTTP Request: GET https://www.uol.com.br/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:55,019 [INFO] HTTP Request: GET https://www.adriver.ru/ "HTTP/1.1 200 OK"
+2026-10-19 09:30:56,589 [INFO] HTTP Request: GET https://www.ivi.tv/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:03,983 [INFO] 정상 루트 생존 확인: 139/125 (도메인 384개 검사)
+2026-10-19 09:31:04,761 [INFO] HTTP Request: GET https://wikipedia.org "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:04,850 [INFO] HTTP Request: GET https://goo.gl "HTTP/1.1 400 Bad Request"
+2026-10-19 09:31:04,891 [INFO] HTTP Request: GET https://yuga.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:04,892 [INFO] HTTP Request: GET https://triplinkintl.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:04,908 [INFO] HTTP Request: GET https://tiktokv.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:04,920 [INFO] HTTP Request: GET https://endpoints.news "HTTP/1.1 200 OK"
+2026-10-19 09:31:05,014 [INFO] HTTP Request: GET https://chatgpt.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:05,061 [INFO] HTTP Request: GET https://amazon.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:05,103 [INFO] HTTP Request: GET https://openai.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:05,138 [INFO] HTTP Request: GET https://yahoo.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:05,147 [INFO] HTTP Request: GET https://www.amazon.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:31:05,386 [INFO] HTTP Request: GET https://aliyuncs.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:05,387 [INFO] HTTP Request: GET https://epicgames.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:05,560 [INFO] HTTP Request: GET https://www.epicgames.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:05,568 [INFO] HTTP Request: GET https://www.yahoo.com/ "HTTP/1.1 429 Too Many Requests"
+2026-10-19 09:31:05,662 [INFO] HTTP Request: GET https://office365.com "HTTP/1.1 403 Ip Forbidden"
+2026-10-19 09:31:05,741 [INFO] HTTP Request: GET https://www.triplinkintl.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:05,872 [INFO] HTTP Request: GET https://ipify.org "HTTP/1.1 302 Found"
+2026-10-19 09:31:06,094 [INFO] HTTP Request: GET https://www.ipify.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:06,589 [INFO] HTTP Request: GET https://okcdn.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:08,754 [INFO] HTTP Request: GET https://st.okcdn.ru/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:20,602 [INFO] deep URL 수집 진행: 8/250 (도메인 48개 처리)
+2026-10-19 09:31:20,869 [INFO] HTTP Request: GET https://godaddy.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:20,894 [INFO] HTTP Request: GET https://crashlytics.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:20,986 [INFO] HTTP Request: GET https://app-measurement.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:21,049 [INFO] HTTP Request: GET https://www.godaddy.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:21,280 [INFO] HTTP Request: GET https://forms.gle "HTTP/1.1 400 Bad Request"
+2026-10-19 09:31:21,502 [INFO] HTTP Request: GET https://samsungcloud.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:21,517 [INFO] HTTP Request: GET https://flickr.com "HTTP/1.1 502 Bad Gateway"
+2026-10-19 09:31:21,519 [INFO] HTTP Request: GET https://criteo.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:21,644 [INFO] HTTP Request: GET https://firebase.google.com/products/crashlytics/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:21,647 [INFO] HTTP Request: GET https://medium.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:21,652 [INFO] HTTP Request: GET https://scorecardresearch.com "HTTP/1.1 302 Found"
+2026-10-19 09:31:21,897 [INFO] HTTP Request: GET https://nih.gov "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:31:21,931 [INFO] HTTP Request: GET https://duckdns.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,031 [INFO] HTTP Request: GET https://www.samsungcloud.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:22,052 [INFO] HTTP Request: GET https://ebay.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,227 [INFO] HTTP Request: GET https://app-analytics-services.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:22,378 [INFO] HTTP Request: GET https://skybridge.click "HTTP/1.1 200 OK"
+2026-10-19 09:31:22,380 [INFO] HTTP Request: GET https://www.scorecardresearch.com/default.aspx "HTTP/1.1 302 Found"
+2026-10-19 09:31:22,382 [INFO] HTTP Request: GET https://www.ebay.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:22,495 [INFO] HTTP Request: GET https://sciencedirect.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,573 [INFO] HTTP Request: GET https://oracle.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,654 [INFO] HTTP Request: GET https://www.nih.gov/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:22,691 [INFO] HTTP Request: GET https://googleadservices.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:22,741 [INFO] HTTP Request: GET https://www.scorecardresearch.com/Home.aspx "HTTP/1.1 200 OK"
+2026-10-19 09:31:22,770 [INFO] HTTP Request: GET https://researchgate.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,792 [INFO] HTTP Request: GET https://www.oracle.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:22,796 [INFO] HTTP Request: GET https://meraki.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,807 [INFO] HTTP Request: GET https://www.sciencedirect.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:22,896 [INFO] HTTP Request: GET https://vkuserphoto.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:22,900 [INFO] HTTP Request: GET https://www.researchgate.net/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:23,036 [INFO] HTTP Request: GET https://www.duckdns.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:23,185 [INFO] HTTP Request: GET https://meraki.cisco.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:23,519 [INFO] HTTP Request: GET https://www.cisco.com/site/us/en/about/corporate-strategy-office/acquisitions/meraki/index.html "HTTP/1.1 200 OK"
+2026-10-19 09:31:24,152 [INFO] HTTP Request: GET https://ps.userapi.com/ "HTTP/1.1 418 "
+2026-10-19 09:31:37,456 [INFO] deep URL 수집 진행: 19/250 (도메인 96개 처리)
+2026-10-19 09:31:37,656 [INFO] HTTP Request: GET https://namecheap.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:37,704 [INFO] HTTP Request: GET https://canva.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:37,715 [INFO] HTTP Request: GET https://roku.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:37,747 [INFO] HTTP Request: GET https://hcaptcha.com "HTTP/1.1 302 Found"
+2026-10-19 09:31:37,761 [INFO] HTTP Request: GET https://forter.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:37,797 [INFO] HTTP Request: GET https://www.namecheap.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:37,867 [INFO] HTTP Request: GET https://www.canva.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:37,882 [INFO] HTTP Request: GET https://wikimedia.org "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:37,919 [INFO] HTTP Request: GET https://www.hcaptcha.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:37,965 [INFO] HTTP Request: GET https://linktr.ee "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,053 [INFO] HTTP Request: GET https://publicnode.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,134 [INFO] HTTP Request: GET https://alidns.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,408 [INFO] HTTP Request: GET https://ibm.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:38,413 [INFO] HTTP Request: GET https://googleblog.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:31:38,579 [INFO] HTTP Request: GET https://www.ibm.com/ "HTTP/1.1 303 See Other"
+2026-10-19 09:31:38,583 [INFO] HTTP Request: GET https://imdb.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:31:38,699 [INFO] HTTP Request: GET https://ip-api.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,700 [INFO] HTTP Request: GET https://www.ibm.com/kr-en "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:38,715 [INFO] HTTP Request: GET https://www.roku.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:31:38,811 [INFO] HTTP Request: GET https://www.ibm.com/kr-ko "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,864 [INFO] HTTP Request: GET https://dnsmadeeasy.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,890 [INFO] HTTP Request: GET https://www.imdb.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:31:38,912 [INFO] HTTP Request: GET https://amplitude.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:38,939 [INFO] HTTP Request: GET https://ozon.ru "HTTP/1.1 307 Temporary Redirect"
+2026-10-19 09:31:38,961 [INFO] HTTP Request: GET https://www.blog.google "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:39,031 [INFO] HTTP Request: GET https://who.int "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:39,134 [INFO] HTTP Request: GET https://vungle.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:39,204 [INFO] HTTP Request: GET https://rubiconproject.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:39,379 [INFO] HTTP Request: GET https://icanhazip.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:39,430 [INFO] HTTP Request: GET https://tinyurl.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:39,448 [INFO] HTTP Request: GET https://www.rubiconproject.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:39,488 [INFO] HTTP Request: GET https://www.roku.com/intl?next=/&source=www.roku.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:39,499 [INFO] HTTP Request: GET https://blog.google/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:39,657 [INFO] HTTP Request: GET https://www.who.int/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:39,721 [INFO] HTTP Request: GET https://launchpad.net "HTTP/1.1 200 OK"
+2026-10-19 09:31:39,869 [INFO] HTTP Request: GET https://ozon.ru/?__rr=1 "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:39,921 [INFO] HTTP Request: GET https://reuters.com "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:31:40,069 [INFO] HTTP Request: GET https://www.reuters.com/ "HTTP/1.1 401 HTTP Forbidden"
+2026-10-19 09:31:40,546 [INFO] HTTP Request: GET https://booking.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:41,003 [INFO] HTTP Request: GET https://www.booking.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:31:54,323 [INFO] deep URL 수집 진행: 43/250 (도메인 144개 처리)
+2026-10-19 09:31:54,496 [INFO] HTTP Request: GET https://firefox-portal-detection.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:54,578 [INFO] HTTP Request: GET https://nature.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:54,646 [INFO] HTTP Request: GET https://springer.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:54,651 [INFO] HTTP Request: GET https://steampowered.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:54,748 [INFO] HTTP Request: GET https://hp.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:31:54,797 [INFO] HTTP Request: GET https://www.springer.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:54,988 [INFO] HTTP Request: GET https://link.springer.com/brands/springer "HTTP/1.1 200 OK"
+2026-10-19 09:31:54,990 [INFO] HTTP Request: GET https://autodesk.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,017 [INFO] HTTP Request: GET https://weibo.com "HTTP/1.1 302 Found"
+2026-10-19 09:31:55,037 [INFO] HTTP Request: GET https://www.nature.com/ "HTTP/1.1 303 See Other"
+2026-10-19 09:31:55,090 [INFO] HTTP Request: GET https://store.steampowered.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,101 [INFO] HTTP Request: GET https://salesforce.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,192 [INFO] HTTP Request: GET https://www.hp.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,246 [INFO] HTTP Request: GET https://www.salesforce.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:31:55,271 [INFO] HTTP Request: GET https://telegram.me "HTTP/1.1 302 Found"
+2026-10-19 09:31:55,275 [INFO] HTTP Request: GET https://adnxs.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:55,338 [INFO] HTTP Request: GET https://alibaba.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,357 [INFO] HTTP Request: GET https://harvard.edu "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,382 [INFO] HTTP Request: GET https://www-redirect.ext.hp.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,480 [INFO] HTTP Request: GET https://idp.nature.com/authorize?response_type=cookie&client_id=grover&redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature "HTTP/1.1 302 Found"
+2026-10-19 09:31:55,547 [INFO] HTTP Request: GET https://www.autodesk.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,549 [INFO] HTTP Request: GET https://www8.hp.com/kr/ko/home.html "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:55,609 [INFO] HTTP Request: GET https://www.salesforce.com/kr/?ir=1 "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,637 [INFO] HTTP Request: GET https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2F&domain=weibo.com&ua=Mozilla%2F5.0%20%28compatible%3B%20Q-Guarder-Research%2F1.0%3B%20academic%20phishing-detection%20study%29&_rand=1792369915014&sudaref= "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,644 [INFO] HTTP Request: GET https://www.harvard.edu/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,765 [INFO] HTTP Request: GET https://www.hp.com/kr-ko/home.html "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,828 [INFO] HTTP Request: GET https://www.alibaba.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:55,833 [INFO] HTTP Request: GET https://debian.org "HTTP/1.1 302 Found"
+2026-10-19 09:31:55,864 [INFO] HTTP Request: GET https://idp.nature.com/transit?redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature&code=211ae938-df2c-4318-b09f-fee020587f63 "HTTP/1.1 302 Found"
+2026-10-19 09:31:56,073 [INFO] HTTP Request: GET https://www.nature.com/nature "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:56,133 [INFO] HTTP Request: GET https://ok.ru "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,177 [INFO] HTTP Request: GET https://etsy.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:56,287 [INFO] HTTP Request: GET https://www.etsy.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:56,314 [INFO] HTTP Request: GET https://www.gov.uk "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,347 [INFO] HTTP Request: GET https://telegram.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,401 [INFO] HTTP Request: GET https://brave.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,422 [INFO] HTTP Request: GET https://avast.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:56,473 [INFO] HTTP Request: GET https://browser-intake-datadoghq.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:56,477 [INFO] HTTP Request: GET https://quickconnect.to "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,531 [INFO] HTTP Request: GET https://www.nature.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,626 [INFO] HTTP Request: GET https://www.avast.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:31:56,709 [INFO] HTTP Request: GET https://www.avast.com/ko-kr/index "HTTP/1.1 200 OK"
+2026-10-19 09:31:56,736 [INFO] HTTP Request: GET https://casalemedia.com "HTTP/1.1 302 Found"
+2026-10-19 09:31:56,836 [INFO] HTTP Request: GET https://myshopify.com "HTTP/1.1 404 Not Found"
+2026-10-19 09:31:56,994 [INFO] HTTP Request: GET https://datadoghq.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,175 [INFO] HTTP Request: GET https://smartadserver.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,180 [INFO] HTTP Request: GET https://aliyun.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,213 [INFO] HTTP Request: GET https://www.debian.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:57,238 [INFO] HTTP Request: GET https://wiley.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,255 [INFO] HTTP Request: GET https://slack.com "HTTP/1.1 200 OK"
+2026-10-19 09:31:57,381 [INFO] HTTP Request: GET https://onelink.me "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,412 [INFO] HTTP Request: GET https://indexexchange.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,437 [INFO] HTTP Request: GET https://php.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,506 [INFO] HTTP Request: GET https://www.datadoghq.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:57,564 [INFO] HTTP Request: GET https://skyhigh.cloud "HTTP/1.1 302 Found"
+2026-10-19 09:31:57,611 [INFO] HTTP Request: GET https://www.wiley.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:31:57,661 [INFO] HTTP Request: GET https://equativ.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,664 [INFO] HTTP Request: GET https://www.wiley.com/en-kr/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,701 [INFO] HTTP Request: GET https://inmobi.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:57,740 [INFO] HTTP Request: GET https://www.wiley.com/en-kr "HTTP/1.1 200 OK"
+2026-10-19 09:31:57,847 [INFO] HTTP Request: GET https://www.php.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:57,868 [INFO] HTTP Request: GET https://www.equativ.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:57,875 [INFO] HTTP Request: GET https://gnu.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:58,009 [INFO] HTTP Request: GET https://www.skyhighsecurity.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:31:58,086 [INFO] HTTP Request: GET https://www.appsflyer.com/products/customer-experience-deep-linking/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:31:58,089 [INFO] HTTP Request: GET https://www.aliyun.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:31:58,166 [INFO] HTTP Request: GET https://www.appsflyer.com/products/deep-linking/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:58,324 [INFO] HTTP Request: GET https://www.indexexchange.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:58,585 [INFO] HTTP Request: GET https://www.gnu.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:58,725 [INFO] HTTP Request: GET https://www.inmobi.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:31:59,303 [INFO] HTTP Request: GET https://www.alibabacloud.com/en?_p_lc=1&f-8DC992C756BA= "HTTP/1.1 200 OK"
+2026-10-19 09:32:11,352 [INFO] deep URL 수집 진행: 92/250 (도메인 192개 처리)
+2026-10-19 09:32:11,556 [INFO] HTTP Request: GET https://naver.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:11,617 [INFO] HTTP Request: GET https://nasa.gov "HTTP/1.1 302 Found"
+2026-10-19 09:32:11,626 [INFO] HTTP Request: GET https://ea.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:11,658 [INFO] HTTP Request: GET https://cdc.gov "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:11,797 [INFO] HTTP Request: GET https://bilibili.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:11,801 [INFO] HTTP Request: GET https://tp-link.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:11,838 [INFO] HTTP Request: GET https://www.naver.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:11,891 [INFO] HTTP Request: GET https://www.ea.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:11,989 [INFO] HTTP Request: GET https://www.nasa.gov/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,000 [INFO] HTTP Request: GET https://mzstatic.com "HTTP/1.1 301 Redirect"
+2026-10-19 09:32:12,052 [INFO] HTTP Request: GET https://checkpoint.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,117 [INFO] HTTP Request: GET https://zendesk.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,173 [INFO] HTTP Request: GET https://www.tp-link.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,176 [INFO] HTTP Request: GET https://tradingview.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,181 [INFO] HTTP Request: GET https://www.bilibili.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,213 [INFO] HTTP Request: GET https://www.apple.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,233 [INFO] HTTP Request: GET https://dell.com "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:32:12,277 [INFO] HTTP Request: GET https://www.zendesk.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:32:12,292 [INFO] HTTP Request: GET https://www.cdc.gov/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,325 [INFO] HTTP Request: GET https://trustpilot.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,423 [INFO] HTTP Request: GET https://www.tradingview.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,447 [INFO] HTTP Request: GET https://www.tp-link.com/kr/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,497 [INFO] HTTP Request: GET https://www.zendesk.kr/#georedirect "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,501 [INFO] HTTP Request: GET https://gitlab.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,503 [INFO] HTTP Request: GET https://name.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:12,549 [INFO] HTTP Request: GET https://un.org "HTTP/1.1 302 Found : Moved Temporarily"
+2026-10-19 09:32:12,571 [INFO] HTTP Request: GET https://www.trustpilot.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:12,582 [INFO] HTTP Request: GET https://www.cdc.gov/index.html "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,585 [INFO] HTTP Request: GET https://www.dell.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:12,684 [INFO] HTTP Request: GET https://about.gitlab.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,697 [INFO] HTTP Request: GET https://www.name.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,806 [INFO] HTTP Request: GET https://www.dell.com/ko-kr "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,892 [INFO] HTTP Request: GET https://www.checkpoint.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:12,896 [INFO] HTTP Request: GET https://drom.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,110 [INFO] HTTP Request: GET https://cookiedatabase.org "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:13,136 [INFO] HTTP Request: GET https://washingtonpost.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,218 [INFO] HTTP Request: GET https://cm.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,252 [INFO] HTTP Request: GET https://google.cn "HTTP/1.1 302 Found"
+2026-10-19 09:32:13,306 [INFO] HTTP Request: GET https://hostgator.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,331 [INFO] HTTP Request: GET https://www.washingtonpost.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:13,502 [INFO] HTTP Request: GET https://www.hostgator.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:13,552 [INFO] HTTP Request: GET https://opendns.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,555 [INFO] HTTP Request: GET https://nvidia.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,705 [INFO] HTTP Request: GET https://plesk.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:13,708 [INFO] HTTP Request: GET http://www.google.cn/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:13,750 [INFO] HTTP Request: GET https://www.nvidia.com/ "HTTP/1.1 307 Temporary Redirect"
+2026-10-19 09:32:13,835 [INFO] HTTP Request: GET https://appsflyer.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:13,953 [INFO] HTTP Request: GET https://www.appsflyer.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:13,960 [INFO] HTTP Request: GET https://issuu.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:13,962 [INFO] HTTP Request: GET http://www.opendns.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:14,258 [INFO] HTTP Request: GET https://www.cm.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:14,318 [INFO] HTTP Request: GET https://www.nvidia.com/ko-kr/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:14,321 [INFO] HTTP Request: GET https://www.un.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:14,421 [INFO] HTTP Request: GET https://www.drom.ru/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:14,471 [INFO] HTTP Request: GET https://tagomi.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:14,508 [INFO] HTTP Request: GET https://live-video.net "HTTP/1.1 200 OK"
+2026-10-19 09:32:14,576 [INFO] HTTP Request: GET https://www.coinbase.com/prime/analytics "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:14,639 [INFO] HTTP Request: GET https://www.plesk.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:14,666 [INFO] HTTP Request: GET https://statsigapi.net "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:14,680 [INFO] HTTP Request: GET https://stanford.edu "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:14,742 [INFO] HTTP Request: GET https://bloomberg.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:14,745 [INFO] HTTP Request: GET https://wsj.com "HTTP/1.1 301 Found"
+2026-10-19 09:32:14,788 [INFO] HTTP Request: GET https://espn.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:14,932 [INFO] HTTP Request: GET https://www.opendns.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:15,044 [INFO] HTTP Request: GET https://www.wsj.com/ "HTTP/1.1 401 HTTP Forbidden"
+2026-10-19 09:32:15,046 [INFO] HTTP Request: GET https://www.bloomberg.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:15,083 [INFO] HTTP Request: GET https://launchdarkly.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:15,113 [INFO] HTTP Request: GET https://www.stanford.edu/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:15,167 [INFO] HTTP Request: GET https://www.bloomberg.com/asia "HTTP/1.1 200 OK"
+2026-10-19 09:32:15,451 [INFO] HTTP Request: GET https://www.espn.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:15,712 [INFO] HTTP Request: GET https://crpt.ru "HTTP/1.1 200 OK"
+2026-10-19 09:32:15,714 [INFO] HTTP Request: GET https://netangels.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:15,972 [INFO] HTTP Request: GET https://globo.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:15,978 [INFO] HTTP Request: GET https://www.netangels.ru/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:18,135 [INFO] HTTP Request: GET https://www.globo.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:27,578 [INFO] deep URL 수집 진행: 143/250 (도메인 240개 처리)
+2026-10-19 09:32:27,799 [INFO] HTTP Request: GET https://amazontrust.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:27,804 [INFO] HTTP Request: GET https://cloudflareinsights.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:27,834 [INFO] HTTP Request: GET https://expireddomains.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:27,885 [INFO] HTTP Request: GET https://mobile.de "HTTP/1.1 301 OK"
+2026-10-19 09:32:27,947 [INFO] HTTP Request: GET https://branch.io "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:27,984 [INFO] HTTP Request: GET https://unsplash.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:28,130 [INFO] HTTP Request: GET https://claude.ai "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:28,144 [INFO] HTTP Request: GET https://www.branch.io/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:28,278 [INFO] HTTP Request: GET https://grammarly.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:28,352 [INFO] HTTP Request: GET https://calendly.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,384 [INFO] HTTP Request: GET https://dropcatch.com "HTTP/1.1 308 Permanent Redirect"
+2026-10-19 09:32:28,550 [INFO] HTTP Request: GET https://bsky.app "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,565 [INFO] HTTP Request: GET https://amazon.de "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:28,605 [INFO] HTTP Request: GET https://duckduckgo.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,688 [INFO] HTTP Request: GET https://www.mobile.de/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,704 [INFO] HTTP Request: GET https://www.dropcatch.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,718 [INFO] HTTP Request: GET https://yandex.com "HTTP/1.1 200 Ok"
+2026-10-19 09:32:28,745 [INFO] HTTP Request: GET https://www.amazontrust.com/index.html "HTTP/1.1 308 Permanent Redirect"
+2026-10-19 09:32:28,775 [INFO] HTTP Request: GET https://www.amazon.de/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:32:28,776 [INFO] HTTP Request: GET https://go.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:28,787 [INFO] HTTP Request: GET https://www.grammarly.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,807 [INFO] HTTP Request: GET https://www.amazontrust.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:28,935 [INFO] HTTP Request: GET https://line.me "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:28,996 [INFO] HTTP Request: GET https://indeed.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:29,024 [INFO] HTTP Request: GET https://www.go.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,065 [INFO] HTTP Request: GET https://bluehost.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:29,068 [INFO] HTTP Request: GET https://ampproject.org "HTTP/1.1 302 Found"
+2026-10-19 09:32:29,094 [INFO] HTTP Request: GET https://163.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:29,222 [INFO] HTTP Request: GET https://paloaltonetworks.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:29,225 [INFO] HTTP Request: GET https://www.line.me/en/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,271 [INFO] HTTP Request: GET http://www.163.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,298 [INFO] HTTP Request: GET https://www.ampproject.org/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:29,347 [INFO] HTTP Request: GET https://steamcommunity.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,364 [INFO] HTTP Request: GET https://temu.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:29,508 [INFO] HTTP Request: GET https://www.bluehost.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:29,622 [INFO] HTTP Request: GET https://amp.dev/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,732 [INFO] HTTP Request: GET https://selectel.ru "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,745 [INFO] HTTP Request: GET https://www.paloaltonetworks.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,799 [INFO] HTTP Request: GET https://www.temu.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:29,839 [INFO] HTTP Request: GET https://aol.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:30,234 [INFO] HTTP Request: GET https://intel.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:30,359 [INFO] HTTP Request: GET https://dailymotion.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:30,420 [INFO] HTTP Request: GET https://www.intel.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:30,436 [INFO] HTTP Request: GET https://substack.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:30,575 [INFO] HTTP Request: GET https://shalltry.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:30,765 [INFO] HTTP Request: GET https://www.intel.co.kr "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:30,785 [INFO] HTTP Request: GET https://www.aol.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:30,796 [INFO] HTTP Request: GET https://www.dailymotion.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:30,872 [INFO] HTTP Request: GET https://www.intel.co.kr/content/www/kr/ko/homepage.html "HTTP/1.1 200 OK"
+2026-10-19 09:32:44,614 [INFO] deep URL 수집 진행: 175/250 (도메인 288개 처리)
+2026-10-19 09:32:44,739 [INFO] HTTP Request: GET https://anthropic.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:44,753 [INFO] HTTP Request: GET https://fandom.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:44,815 [INFO] HTTP Request: GET https://okta.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:44,869 [INFO] HTTP Request: GET https://www.fandom.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:44,876 [INFO] HTTP Request: GET https://doubleverify.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:44,880 [INFO] HTTP Request: GET https://www.anthropic.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:44,892 [INFO] HTTP Request: GET https://taobao.com "HTTP/1.1 302 Found"
+2026-10-19 09:32:44,923 [INFO] HTTP Request: GET https://g.page "HTTP/1.1 302 Found"
+2026-10-19 09:32:44,985 [INFO] HTTP Request: GET https://arxiv.org "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,002 [INFO] HTTP Request: GET https://pixabay.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:45,044 [INFO] HTTP Request: GET https://www.taobao.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,150 [INFO] HTTP Request: GET https://yahoo.co.jp "HTTP/1.1 301 Redirect"
+2026-10-19 09:32:45,182 [INFO] HTTP Request: GET https://businessinsider.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:45,327 [INFO] HTTP Request: GET https://www.businessinsider.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,334 [INFO] HTTP Request: GET https://business.google.com "HTTP/1.1 302 Found"
+2026-10-19 09:32:45,382 [INFO] HTTP Request: GET https://mozilla.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:45,394 [INFO] HTTP Request: GET https://www.okta.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,400 [INFO] HTTP Request: GET https://www.yahoo.co.jp/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,449 [INFO] HTTP Request: GET https://speedtest.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:45,518 [INFO] HTTP Request: GET https://www.mozilla.org/firefox "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:45,577 [INFO] HTTP Request: GET https://eye4.cn "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,628 [INFO] HTTP Request: GET https://prodregistryv2.org "HTTP/1.1 404 Not Found"
+2026-10-19 09:32:45,713 [INFO] HTTP Request: GET https://duolingo.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:45,798 [INFO] HTTP Request: GET https://supercell.com "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,801 [INFO] HTTP Request: GET https://walmart.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:45,818 [INFO] HTTP Request: GET https://support.google.com/business?p=browser_support "HTTP/1.1 302 Found"
+2026-10-19 09:32:45,850 [INFO] HTTP Request: GET https://www.speedtest.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:45,865 [INFO] HTTP Request: GET https://www.firefox.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,045 [INFO] HTTP Request: GET https://atlassian.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,054 [INFO] HTTP Request: GET https://www.duolingo.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,055 [INFO] HTTP Request: GET https://wp.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,100 [INFO] HTTP Request: GET https://timeweb.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,136 [INFO] HTTP Request: GET https://dynatrace.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,164 [INFO] HTTP Request: GET https://www.walmart.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,286 [INFO] HTTP Request: GET https://ietf.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,354 [INFO] HTTP Request: GET https://www.dynatrace.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,396 [INFO] HTTP Request: GET https://support.google.com/business/answer/3420286?visit_id=639279667657379827-3633629710&p=browser_support&rd=1 "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,399 [INFO] HTTP Request: GET https://cnbc.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,416 [INFO] HTTP Request: GET https://www.ietf.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,485 [INFO] HTTP Request: GET https://wordpress.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:46,578 [INFO] HTTP Request: GET https://goodreads.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,763 [INFO] HTTP Request: GET https://www.cnbc.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:46,858 [INFO] HTTP Request: GET https://statista.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,863 [INFO] HTTP Request: GET https://mcafee.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:46,894 [INFO] HTTP Request: GET https://www.atlassian.com/software "HTTP/1.1 200 OK"
+2026-10-19 09:32:47,183 [INFO] HTTP Request: GET https://www.mcafee.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:47,273 [INFO] HTTP Request: GET https://www.statista.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:47,390 [INFO] HTTP Request: GET https://timeweb.com/ru/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:47,421 [INFO] HTTP Request: GET https://quora.com "HTTP/1.1 308 Permanent Redirect"
+2026-10-19 09:32:47,429 [INFO] HTTP Request: GET https://www.cnbc.com/world/?region=world "HTTP/1.1 200 OK"
+2026-10-19 09:32:47,548 [INFO] HTTP Request: GET https://shein.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:32:47,582 [INFO] HTTP Request: GET https://www.quora.com/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:32:47,728 [INFO] HTTP Request: GET https://www.shein.com/ "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:32:47,767 [INFO] HTTP Request: GET https://www.goodreads.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:47,861 [INFO] HTTP Request: GET https://timeweb.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:32:48,473 [INFO] HTTP Request: GET https://kr.shein.com/?cdn_rsite=ak&ref=www&rep=dir&ret=kr "HTTP/1.1 200 OK"
+2026-10-19 09:33:02,212 [INFO] deep URL 수집 진행: 211/250 (도메인 336개 처리)
+2026-10-19 09:33:02,419 [INFO] HTTP Request: GET https://npr.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:02,428 [INFO] HTTP Request: GET https://newrelic.com "HTTP/1.1 200 OK"
+2026-10-19 09:33:02,456 [INFO] HTTP Request: GET https://addtoany.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:02,561 [INFO] HTTP Request: GET https://run.app "HTTP/1.1 404 Not Found"
+2026-10-19 09:33:02,605 [INFO] HTTP Request: GET https://scribd.com "HTTP/1.1 302 Found"
+2026-10-19 09:33:02,610 [INFO] HTTP Request: GET https://sina.com.cn "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:02,671 [INFO] HTTP Request: GET https://www.addtoany.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:02,697 [INFO] HTTP Request: GET https://www.npr.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:02,721 [INFO] HTTP Request: GET https://amazon.co.jp "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:02,741 [INFO] HTTP Request: GET https://markmonitor.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:33:02,755 [INFO] HTTP Request: GET https://aliexpress.com "HTTP/1.1 200 OK"
+2026-10-19 09:33:02,771 [INFO] HTTP Request: GET https://www.scribd.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:02,867 [INFO] HTTP Request: GET https://www.amazon.co.jp/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:33:02,942 [INFO] HTTP Request: GET https://indiatimes.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,170 [INFO] HTTP Request: GET https://foxnews.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,182 [INFO] HTTP Request: GET https://cloudns.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,188 [INFO] HTTP Request: GET https://media.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,192 [INFO] HTTP Request: GET https://amzn.to "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,264 [INFO] HTTP Request: GET https://eventbrite.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,299 [INFO] HTTP Request: GET http://www.amazon.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,310 [INFO] HTTP Request: GET https://google.de "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,357 [INFO] HTTP Request: GET https://www.indiatimes.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:03,455 [INFO] HTTP Request: GET https://www.foxnews.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:03,456 [INFO] HTTP Request: GET https://noaa.gov "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,497 [INFO] HTTP Request: GET https://www.media.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:03,498 [INFO] HTTP Request: GET https://www.amazon.com/ "HTTP/1.1 202 Accepted"
+2026-10-19 09:33:03,559 [INFO] HTTP Request: GET https://www.eventbrite.com "HTTP/1.1 200 OK"
+2026-10-19 09:33:03,593 [INFO] HTTP Request: GET https://www.google.de/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,648 [INFO] HTTP Request: GET https://docker.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:33:03,649 [INFO] HTTP Request: GET https://behance.net "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,696 [INFO] HTTP Request: GET https://google.com.hk "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,754 [INFO] HTTP Request: GET https://www.behance.net/ "HTTP/1.1 403 Forbidden"
+2026-10-19 09:33:03,781 [INFO] HTTP Request: GET https://blogger.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:03,786 [INFO] HTTP Request: GET https://stackoverflow.com "HTTP/1.1 403 Forbidden"
+2026-10-19 09:33:03,805 [INFO] HTTP Request: GET https://dotomi.com "HTTP/1.1 302 Found"
+2026-10-19 09:33:03,811 [INFO] HTTP Request: GET https://www.sina.com.cn/?sourcefrom=kd&sourceurl=https%3A%2F%2Fkandian.sina.com.cn%2Farticle_2458873097_928f6d09040013c2z.html%3Ffrom%3Dfashion "HTTP/1.1 200 OK"
+2026-10-19 09:33:03,935 [INFO] HTTP Request: GET https://www.google.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,028 [INFO] HTTP Request: GET https://www.google.com.hk/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,030 [INFO] HTTP Request: GET https://ivi.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:04,052 [INFO] HTTP Request: GET https://www.cloudns.net/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,066 [INFO] HTTP Request: GET https://wps.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:04,115 [INFO] HTTP Request: GET https://www.noaa.gov/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,166 [INFO] HTTP Request: GET https://www.blogger.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:33:04,230 [INFO] HTTP Request: GET https://www.wps.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,245 [INFO] HTTP Request: GET https://share.google "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,310 [INFO] HTTP Request: GET https://www.epsilon.com/us?redirect=dotomi "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,438 [INFO] HTTP Request: GET https://accounts.google.com/ServiceLogin?passive=true&go=true&service=blogger&continue=https://www.blogger.com/?bpli%3D1 "HTTP/1.1 302 Found"
+2026-10-19 09:33:04,534 [INFO] HTTP Request: GET https://sohu.com "HTTP/1.1 302 Moved Temporarily"
+2026-10-19 09:33:04,741 [INFO] HTTP Request: GET https://www.blogger.com/?bpli=1 "HTTP/1.1 302 Found"
+2026-10-19 09:33:04,773 [INFO] HTTP Request: GET https://tplinkcloud.com "HTTP/1.1 302 Found"
+2026-10-19 09:33:04,822 [INFO] HTTP Request: GET https://www.blogger.com/about?bpli=1 "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:04,950 [INFO] HTTP Request: GET https://www.blogger.com/about/?bpli=1 "HTTP/1.1 200 OK"
+2026-10-19 09:33:04,992 [INFO] HTTP Request: GET https://adriver.ru "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:05,022 [INFO] HTTP Request: GET http://www.tplinkcloud.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:33:05,082 [INFO] HTTP Request: GET https://mysql.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:05,316 [INFO] HTTP Request: GET https://www.sohu.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:05,485 [INFO] HTTP Request: GET https://www.mysql.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:05,596 [INFO] HTTP Request: GET https://www.ivi.ru/ "HTTP/1.1 302 Found"
+2026-10-19 09:33:05,619 [INFO] HTTP Request: GET https://mediatek.com "HTTP/1.0 302 Moved Temporarily"
+2026-10-19 09:33:05,683 [INFO] HTTP Request: GET https://trendmicro.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:05,700 [INFO] HTTP Request: GET https://www.tplinkcloud.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:05,704 [INFO] HTTP Request: GET https://uol.com.br "HTTP/1.0 301 Moved Permanently"
+2026-10-19 09:33:05,801 [INFO] HTTP Request: GET https://ezvizlife.com "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:05,871 [INFO] HTTP Request: GET https://www.trendmicro.com/ "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:05,878 [INFO] HTTP Request: GET https://www.mediatek.com/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:05,883 [INFO] HTTP Request: GET https://openstreetmap.org "HTTP/1.1 301 Moved Permanently"
+2026-10-19 09:33:06,131 [INFO] HTTP Request: GET https://www.trendmicro.com/ko_kr/business.html "HTTP/1.1 200 OK"
+2026-10-19 09:33:06,498 [INFO] HTTP Request: GET https://www.ezviz.com/ "HTTP/1.1 302 Found"
+2026-10-19 09:33:06,550 [INFO] HTTP Request: GET https://gosuslugi.ru "HTTP/1.1 200 OK"
+2026-10-19 09:33:06,818 [INFO] HTTP Request: GET https://www.openstreetmap.org/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:06,820 [INFO] HTTP Request: GET https://www.adriver.ru/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:06,911 [INFO] HTTP Request: GET https://www.ezviz.com/kr/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:07,152 [INFO] HTTP Request: GET https://www.uol.com.br/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:07,575 [INFO] HTTP Request: GET https://www.ivi.tv/ "HTTP/1.1 200 OK"
+2026-10-19 09:33:19,264 [INFO] deep URL 수집 진행: 263/250 (도메인 384개 처리)
+
+검증 집합 (split=validation)
+구분            root    deep      합계
+정상             125     125     250
+피싱             141     109     250
+합계                             500
+
+테스트 집합 (split=test)
+구분            root    deep      합계
+정상             125     125     250
+피싱             166      84     250
+합계                             500
+
+검증↔테스트 URL 중복: 0건 · 정상 등록가능 도메인 중복: 2건 · 오프라인 URL 중복: 검사 안 함(목록 없음)
+
+저장: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\evalset.csv (1000건). 다음: python experiments/collect_vt.py  (신규 500건만 VT 조회)
+2026-10-19 09:33:19 | → 종료 코드 0
+2026-10-19 09:33:19 | 테스트 집합 500건 준비됨
+2026-10-19 09:33:19 | VT 조회 시작 — 남은 500건 (무료 API 15.5초 간격, 약 129분). POST 없음, GET 만.
+2026-10-19 09:33:19 | $ experiments/collect_vt.py
+2026-10-19 09:33:21,047 [INFO] 사전 점검: 루트 URL 조회가 정상 동작하는지 확인 (https://example.com)
+2026-10-19 09:33:23,272 [INFO] 사전 점검 통과 — d=0 n=93
+2026-10-19 09:33:38,776 [INFO] 수집 대상 500건 · 요청 간격 15.5s · 예상 소요 129분
+2026-10-19 09:34:41,873 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.checkpoint.com/googletagmanager.com
+2026-10-19 09:35:59,280 [INFO] 진행 10/500 (2.0%) · 남은 예상 127분
+2026-10-19 09:36:30,730 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://about.gitlab.com/_nuxt/entry.BXEf-ZSx.css
+2026-10-19 09:40:25,420 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://link.springer.com/_fs-ch-1T1wmsGaOgGaSxcX/assets/inter-var.woff2
+2026-10-19 09:40:25,423 [INFO] 진행 20/500 (4.0%) · 남은 예상 124분
+2026-10-19 10:25:32,129 [ERROR] VirusTotal API 연결 실패 (네트워크 오류): http://www.surl.li/nfybwp
+2026-10-19 10:25:32,130 [WARNING] [26/500] 조회 실패(http=None) — 재시도 1/3
+2026-10-19 10:27:44,520 [INFO] VirusTotal 미등재 URL (제로데이 후보): http://www.surl.li/nfybwp
+2026-10-19 10:28:00,563 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://wells-bez.pages.dev/checking
+2026-10-19 10:28:46,844 [INFO] 진행 30/500 (6.0%) · 남은 예상 121분
+2026-10-19 10:31:21,893 [INFO] 진행 40/500 (8.0%) · 남은 예상 119분
+2026-10-19 10:34:10,925 [ERROR] VirusTotal API 타임아웃 (30초 초과): https://taobao.com
+2026-10-19 10:34:10,927 [WARNING] [49/500] 조회 실패(http=None) — 재시도 1/3
+2026-10-19 10:35:12,358 [ERROR] VirusTotal API 타임아웃 (30초 초과): https://itali3354tdfdsss.pages.dev/
+2026-10-19 10:35:12,362 [WARNING] [50/500] 조회 실패(http=None) — 재시도 1/3
+2026-10-19 10:35:29,077 [INFO] 진행 50/500 (10.0%) · 남은 예상 116분
+2026-10-19 10:37:46,829 [ERROR] VirusTotal API 타임아웃 (30초 초과): https://www.appsflyer.com/wp-content/themes/AF2020/assets/css/fonts/Inter-VariableFont_opsz,wght.woff2
+2026-10-19 10:37:46,830 [WARNING] [57/500] 조회 실패(http=None) — 재시도 1/3
+2026-10-19 10:38:03,375 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.appsflyer.com/wp-content/themes/AF2020/assets/css/fonts/Inter-VariableFont_opsz,wght.woff2
+2026-10-19 10:38:50,216 [INFO] 진행 60/500 (12.0%) · 남은 예상 114분
+2026-10-19 10:39:51,658 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://skybridge.click/webman/safari_pin_icon.svg
+2026-10-19 10:41:24,750 [INFO] 진행 70/500 (14.0%) · 남은 예상 111분
+2026-10-19 10:42:42,255 [INFO] VirusTotal 미등재 URL (제로데이 후보): http://www.imtouken.com/english
+2026-10-19 10:43:59,967 [INFO] 진행 80/500 (16.0%) · 남은 예상 108분
+2026-10-19 10:44:15,635 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.name.com/_nuxt/DWj9Gx5-.js
+2026-10-19 10:44:30,991 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.cisco.com/etc.clientlibs/cisco-cdc/clientlibs/clientlib-dependencies.lc-2be5daf0f0285b651461f9ebc9d0033e-lc.min.css
+2026-10-19 10:45:01,927 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.duckdns.org/img/ducky_icon.png
+2026-10-19 10:45:17,412 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://linktr.ee/_marketing/images/icons/google-play-badge-light-d78dfabf.svg
+2026-10-19 10:46:35,187 [INFO] 진행 90/500 (18.0%) · 남은 예상 106분
+2026-10-19 10:47:21,655 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://skybridge.click/webman/resources/images/icon_dsm_96.png?v=40438
+2026-10-19 10:48:23,597 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.autodesk.com/_next/static/chunks/webpack-6055ddafc9c7fff8.js
+2026-10-19 10:49:10,646 [INFO] 진행 100/500 (20.0%) · 남은 예상 103분
+2026-10-19 10:49:25,782 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.indexexchange.com/de
+2026-10-19 10:49:41,203 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://yuga.com/_nuxt/entry.CSazGiZc.css
+2026-10-19 10:51:45,159 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.gov.uk/assets/frontend/application-720f6ec115de1ae5c67657aa30a0a54aa21b50890a40ce14ffc2f62c342c8c49.css
+2026-10-19 10:51:45,161 [INFO] 진행 110/500 (22.0%) · 남은 예상 101분
+2026-10-19 10:53:49,470 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.datadoghq.com/css/styles.min.eaae95fea6f9b9fe6572f6698c8f42ba2f7342c9b0b81a925267086df065aa35.css
+2026-10-19 10:54:20,325 [INFO] 진행 120/500 (24.0%) · 남은 예상 98분
+2026-10-19 10:54:51,267 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://endpoints.news/wp-content/themes/endpoints-rakia/assets/css/style.min.css?ver=67422318
+2026-10-19 10:56:24,230 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.autodesk.com/_next/static/css/0b4df387cc360064.css
+2026-10-19 10:56:55,745 [INFO] 진행 130/500 (26.0%) · 남은 예상 96분
+2026-10-19 10:57:26,218 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.plesk.com/comments/feed
+2026-10-19 10:59:30,359 [INFO] 진행 140/500 (28.0%) · 남은 예상 93분
+2026-10-19 11:00:47,955 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.inmobi.com/_next/static/css/6a732c5274a276e7.css
+2026-10-19 11:01:03,322 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.hcaptcha.com/images/64da82f6bf67de1b1278926d_favicon-at-3x.png
+2026-10-19 11:02:19,519 [ERROR] VirusTotal API 타임아웃 (30초 초과): https://www.gov.uk/assets/frontend/favicon-24f9fbe064118d58937932e73edafd1d50cb60f7bd84f52308382a309bc2d655.ico
+2026-10-19 11:02:19,520 [WARNING] [149/500] 조회 실패(http=None) — 재시도 1/3
+2026-10-19 11:02:35,867 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.gov.uk/assets/frontend/favicon-24f9fbe064118d58937932e73edafd1d50cb60f7bd84f52308382a309bc2d655.ico
+2026-10-19 11:02:51,524 [INFO] 진행 150/500 (30.0%) · 남은 예상 90분
+2026-10-19 11:05:26,516 [INFO] 진행 160/500 (32.0%) · 남은 예상 88분
+2026-10-19 11:06:12,897 [INFO] VirusTotal 미등재 URL (제로데이 후보): http://www.portalinmobiliario.com/venta/parcela
+2026-10-19 11:07:30,263 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.nature.com/static/css/grade-c-dfe7db1fb5.css
+2026-10-19 11:07:45,893 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.ibm.com/content/dam/adobe-cms/default-images/icon-32x32.png
+2026-10-19 11:08:33,202 [INFO] 진행 170/500 (34.0%) · 남은 예상 85분
+2026-10-19 11:10:06,382 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://endpoints.news/wp-content/themes/endpoints-rakia/assets/css/bootstrap/bootstrap-grid-modal.min.css?ver=4.6.2
+2026-10-19 11:11:08,503 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://store.steampowered.com/login?redir=&redir_ssl=1&snr=1_4_4__global-header
+2026-10-19 11:11:08,504 [INFO] 진행 180/500 (36.0%) · 남은 예상 83분
+2026-10-19 11:12:10,902 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.ipify.org/static/dist/css/styles_v2.css?v=10
+2026-10-19 11:13:27,758 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://alidns.com/assets/index-ad5d7f3a.css
+2026-10-19 11:13:43,474 [INFO] 진행 190/500 (38.0%) · 남은 예상 80분
+2026-10-19 11:14:14,603 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.cm.com/apple-touch-icon.png
+2026-10-19 11:14:45,322 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://publicnode.com/favicon.ico
+2026-10-19 11:15:00,888 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.datadoghq.com/styles/tw-iconfont.min.9faef8d795a8904d49a6e689317b2970de73b9fa4fa2b73068ae3a83f78264cf.css
+2026-10-19 11:16:18,509 [INFO] 진행 200/500 (40.0%) · 남은 예상 78분
+2026-10-19 11:17:51,337 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://amplitude.com/_next/static/immutable/media/83afe278b6a6bb3c-s.p.45535valc9rzk.woff2
+2026-10-19 11:18:06,944 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://about.gitlab.com/_nuxt/Banner.C6Wg9ZK1.css
+2026-10-19 11:18:53,423 [INFO] 진행 210/500 (42.0%) · 남은 예상 75분
+2026-10-19 11:20:10,958 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://blog.google/static/blogv2/images/favicon.ico?version=pr20261009-1701
+2026-10-19 11:21:28,676 [INFO] 진행 220/500 (44.0%) · 남은 예상 72분
+2026-10-19 11:23:48,049 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://alidns.com/assets/favicon-29bc214a.png
+2026-10-19 11:24:03,848 [INFO] 진행 230/500 (46.0%) · 남은 예상 70분
+2026-10-19 11:25:52,157 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://link.springer.com/_fs-ch-1T1wmsGaOgGaSxcX/assets/styles.css
+2026-10-19 11:26:38,860 [INFO] 진행 240/500 (48.0%) · 남은 예상 67분
+2026-10-19 11:28:11,792 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.hcaptcha.com/css/fd415b8c979d8ab6fb0ceb809f9502aa0d144107d20988bc69ab3860714b0d39.css
+2026-10-19 11:29:14,013 [INFO] 진행 250/500 (50.0%) · 남은 예상 65분
+2026-10-19 11:31:48,879 [INFO] 진행 260/500 (52.0%) · 남은 예상 62분
+2026-10-19 11:32:19,815 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://amplitude.com/_next/static/immutable/media/8e451580e5e95631-s.p.0ic9f6t6i9npx.woff2
+2026-10-19 11:33:21,973 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.dell.com/cdn/assets/csb/md/homepage/bundles/1.0.1.5060/css/sitedellglobalhomebanner.min.css
+2026-10-19 11:34:08,603 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.cm.com/manifest.json
+2026-10-19 11:34:24,005 [INFO] 진행 270/500 (54.0%) · 남은 예상 59분
+2026-10-19 12:45:29,766 [INFO] 진행 280/500 (56.0%) · 남은 예상 57분
+2026-10-19 12:48:05,140 [INFO] 진행 290/500 (58.0%) · 남은 예상 54분
+2026-10-19 12:50:09,087 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.inmobi.com/_next/static/css/b4f4e40c13ab1dd5.css
+2026-10-19 12:50:40,080 [INFO] 진행 300/500 (60.0%) · 남은 예상 52분
+2026-10-19 12:53:14,907 [INFO] 진행 310/500 (62.0%) · 남은 예상 49분
+2026-10-19 12:55:49,943 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://rigzone.github.io/wells
+2026-10-19 12:55:49,947 [INFO] 진행 320/500 (64.0%) · 남은 예상 46분
+2026-10-19 12:56:21,071 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.zendesk.kr/platform
+2026-10-19 12:58:25,390 [INFO] 진행 330/500 (66.0%) · 남은 예상 44분
+2026-10-19 12:59:27,243 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.checkpoint.com/wp-content/themes/checkpoint-theme-v2/images/fav/apple-touch-icon.png
+2026-10-19 12:59:59,234 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.plesk.com/feed
+2026-10-19 13:00:44,743 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://linktr.ee/_marketing/images/icons/app-store-badge-light-218d0cee.svg
+2026-10-19 13:01:00,223 [INFO] 진행 340/500 (68.0%) · 남은 예상 41분
+2026-10-19 13:01:15,628 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://publicnode.com/_next/static/css/9580a2a05cda35cf.css
+2026-10-19 13:01:31,093 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.harvard.edu/_static??-eJyVjEkKgDAMAD9kG9tL6UF8S6kRA11CE/D79qAP8DYwzMDNJvem2BT0wooCuQ+EJII6WQQOktdBYjbae1FiW6nZqRf4dTipKA756r1uLsTVBe+jewCKqTMT
+2026-10-19 13:01:46,914 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.zendesk.kr/demo
+2026-10-19 13:03:35,461 [INFO] 진행 350/500 (70.0%) · 남은 예상 39분
+2026-10-19 13:06:10,289 [INFO] 진행 360/500 (72.0%) · 남은 예상 36분
+2026-10-19 13:08:29,859 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.name.com/_nuxt/BPP7zKmg.js
+2026-10-19 13:08:45,334 [INFO] 진행 370/500 (74.0%) · 남은 예상 34분
+2026-10-19 13:10:34,278 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://ip-api.com/docs/static/dosis-v8-latin-500.woff2
+2026-10-19 13:11:20,524 [INFO] 진행 380/500 (76.0%) · 남은 예상 31분
+2026-10-19 13:11:35,950 [INFO] VirusTotal 미등재 URL (제로데이 후보): http://www.rasaenclavepalwal.com/blogs/log/Ziggo
+2026-10-19 13:13:55,806 [INFO] 진행 390/500 (78.0%) · 남은 예상 28분
+2026-10-19 13:16:30,731 [INFO] 진행 400/500 (80.0%) · 남은 예상 26분
+2026-10-19 13:19:05,823 [INFO] 진행 410/500 (82.0%) · 남은 예상 23분
+2026-10-19 13:21:40,912 [INFO] 진행 420/500 (84.0%) · 남은 예상 21분
+2026-10-19 13:24:15,887 [INFO] 진행 430/500 (86.0%) · 남은 예상 18분
+2026-10-19 13:24:47,000 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.ibm.com/content/dam/adobe-cms/default-images/icon-16x16.png
+2026-10-19 13:25:17,949 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://dnsmadeeasy.com/etc.clientlibs/digicert/clientlibs/clientlib-dependencies.lc-d41d8cd98f00b204e9800998ecf8427e-lc.min.css
+2026-10-19 13:25:33,427 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://quickconnect.to/homepage.9b631651.bundle.css
+2026-10-19 13:26:20,091 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.nasa.gov/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.nasa.gov%2F
+2026-10-19 13:26:50,984 [INFO] 진행 440/500 (88.0%) · 남은 예상 16분
+2026-10-19 13:29:25,915 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://blog.google/static/keyword/css/blog/index.min.css?version=pr20261009-1701
+2026-10-19 13:29:25,918 [INFO] 진행 450/500 (90.0%) · 남은 예상 13분
+2026-10-19 13:29:41,378 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.dell.com/cdn/assets/csb/md/homepage/bundles/1.0.1.5060/css/sitedellglobalhomemd.min.css
+2026-10-19 13:32:01,762 [INFO] 진행 460/500 (92.0%) · 남은 예상 10분
+2026-10-19 13:32:16,533 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.alibabacloud.com/pt-BR?_p_lc=1
+2026-10-19 13:34:36,296 [INFO] 진행 470/500 (94.0%) · 남은 예상 8분
+2026-10-19 13:34:51,633 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://signer.docusign.maccesshub.com/2d8bef1b-e939-49cd-8b59-cdbe9be72a90
+2026-10-19 13:35:53,572 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.php.net/cached.php?t=&amp;f=/fonts/Fira/fira.css
+2026-10-19 13:37:11,196 [INFO] 진행 480/500 (96.0%) · 남은 예상 5분
+2026-10-19 13:37:26,714 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://dnsmadeeasy.com/etc.clientlibs/digicert/clientlibs/clientlib-commerce.lc-d41d8cd98f00b204e9800998ecf8427e-lc.min.css
+2026-10-19 13:38:44,104 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.debian.org/News/weekly/dwn
+2026-10-19 13:39:46,324 [INFO] 진행 490/500 (98.0%) · 남은 예상 3분
+2026-10-19 13:41:19,184 [WARNING] VirusTotal API 요청 한도 초과 (Rate Limit): https://crashlytics.com
+2026-10-19 13:41:19,184 [WARNING] [496/500] 429 쿼터 초과 — 31s 후 재시도 (1/3)
+2026-10-19 13:41:51,089 [WARNING] VirusTotal API 요청 한도 초과 (Rate Limit): https://crashlytics.com
+2026-10-19 13:41:51,089 [WARNING] [496/500] 429 쿼터 초과 — 62s 후 재시도 (2/3)
+2026-10-19 13:42:53,961 [WARNING] VirusTotal API 요청 한도 초과 (Rate Limit): https://crashlytics.com
+2026-10-19 13:42:53,962 [WARNING] [496/500] 429 쿼터 초과 — 124s 후 재시도 (3/3)
+2026-10-19 13:44:57,965 [ERROR] 쿼터 소진 또는 지속적 조회 실패로 중단합니다. 이번 실행 수집: 495건 · 남은 대상: 5건. 한도가 회복되면 같은 명령으로 이어받으세요.
+2026-10-19 13:44:57,966 [INFO] 이번 실행 수집 완료: 495건 (누적 995건)
+
+평가셋 1000건 중 수집 완료 995건 (99.5%)
+
+VT 응답 상태              건수   의미
+--------------------------------------------------------------
+not_found            122   미등재 → 제로데이 후보
+ok                   873   등재됨 · 분석 결과 존재
+
+구분               ok   not_found      합계
+----------------------------------------
+정상              395         100     495
+피싱              478          22     500
+
+★ 제로데이 후보(미등재): 122건
+   그중 피싱 라벨: 22건 / 루트 URL: 0건
+
+VT 조회 지연 — 평균 938ms · p50 858ms · p95 1454ms
+
+VT 탐지 있음(d>0): 516건
+2026-10-19 13:44:58 | → 종료 코드 0
+2026-10-19 13:44:58 | $ experiments/collect_vt.py --stats
+
+평가셋 1000건 중 수집 완료 995건 (99.5%)
+
+VT 응답 상태              건수   의미
+--------------------------------------------------------------
+not_found            122   미등재 → 제로데이 후보
+ok                   873   등재됨 · 분석 결과 존재
+
+구분               ok   not_found      합계
+----------------------------------------
+정상              395         100     495
+피싱              478          22     500
+
+★ 제로데이 후보(미등재): 122건
+   그중 피싱 라벨: 22건 / 루트 URL: 0건
+
+VT 조회 지연 — 평균 938ms · p50 858ms · p95 1454ms
+
+VT 탐지 있음(d>0): 516건
+2026-10-19 13:45:02 | → 종료 코드 0
+2026-10-19 13:45:02 | VT 조회 미완료 — 남은 5건 (상태 이상 0건). 429(일일 한도)면 다음 날 같은 명령으로 이어받기. 평가는 하지 않음.
+2026-10-19 13:45:02 | ==== 미완료 — 위 메시지 확인 후 같은 명령으로 재실행
+2026-10-20 17:43:43 | ==== run_test_pipeline --stage all (python 3.13.14, cwd C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server)
+2026-10-20 17:43:43 | 테스트 집합 500건 이미 준비됨 — 수집 생략
+2026-10-20 17:43:43 | VT 조회 시작 — 남은 5건 (무료 API 15.5초 간격, 약 1분). POST 없음, GET 만.
+2026-10-20 17:43:43 | $ experiments/collect_vt.py
+2026-10-20 17:43:46,526 [INFO] 사전 점검: 루트 URL 조회가 정상 동작하는지 확인 (https://example.com)
+2026-10-20 17:43:47,629 [INFO] 사전 점검 통과 — d=0 n=93
+2026-10-20 17:44:03,134 [INFO] 수집 대상 5건 · 요청 간격 15.5s · 예상 소요 1분
+2026-10-20 17:44:19,731 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://yuga.com/_nuxt/Footer.B-KQqXLz.css
+2026-10-20 17:44:35,099 [INFO] VirusTotal 미등재 URL (제로데이 후보): https://www.triplinkintl.com/home
+2026-10-20 17:45:06,544 [INFO] 진행 5/5 (100.0%) · 남은 예상 0분
+2026-10-20 17:45:06,544 [INFO] 이번 실행 수집 완료: 5건 (누적 1000건)
+
+평가셋 1000건 중 수집 완료 1000건 (100.0%)
+
+VT 응답 상태              건수   의미
+--------------------------------------------------------------
+not_found            124   미등재 → 제로데이 후보
+ok                   876   등재됨 · 분석 결과 존재
+
+구분               ok   not_found      합계
+----------------------------------------
+정상              398         102     500
+피싱              478          22     500
+
+★ 제로데이 후보(미등재): 124건
+   그중 피싱 라벨: 22건 / 루트 URL: 0건
+
+VT 조회 지연 — 평균 939ms · p50 859ms · p95 1454ms
+
+VT 탐지 있음(d>0): 516건
+2026-10-20 17:45:07 | → 종료 코드 0
+2026-10-20 17:45:07 | $ experiments/collect_vt.py --stats
+
+평가셋 1000건 중 수집 완료 1000건 (100.0%)
+
+VT 응답 상태              건수   의미
+--------------------------------------------------------------
+not_found            124   미등재 → 제로데이 후보
+ok                   876   등재됨 · 분석 결과 존재
+
+구분               ok   not_found      합계
+----------------------------------------
+정상              398         102     500
+피싱              478          22     500
+
+★ 제로데이 후보(미등재): 124건
+   그중 피싱 라벨: 22건 / 루트 URL: 0건
+
+VT 조회 지연 — 평균 939ms · p50 859ms · p95 1454ms
+
+VT 탐지 있음(d>0): 516건
+2026-10-20 17:45:08 | → 종료 코드 0
+2026-10-20 17:45:08 | VT 조회 완료 — ok 432 / not_found 68 (종료 코드 0)
+2026-10-20 17:45:08 | 고정 파라미터 (검증 집합에서 2026-10-18T02:05:49.695016+00:00 확정): {'alpha': 18.4, 'd_high': 5, 'tau_s': 0.45, 'tau_b': 0.65, 'w_a_high': 0.25, 'w_a_low': 0.5, 'w_b': 0.3, 'w_b_deep': 0.5, 'w_c': 0.8, 'theta': 0.05}
+2026-10-20 17:45:08 | $ experiments/revision_experiment.py --evaluate
+2026-10-20 17:45:09,471 [INFO] VT 캐시에서 1000건 로드 (평가셋 1000건 중)
+2026-10-20 17:45:09,471 [INFO] ML 추론 시작 (1000건)
+C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\app\services\s3_loader.py:73: UserWarning: [17:45:24] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\gbm\../common/error_msg.h:83: If you are loading a serialized model (like pickle in Python, RDS in R) or
+configuration generated by an older version of XGBoost, please export the model by calling
+`Booster.save_model` from that version first, then load it back in current version. See:
+
+    https://xgboost.readthedocs.io/en/stable/tutorials/saving_model.html
+
+for more details about differences between saving model and serializing.
+
+  model = _EnsembleUnpickler(f).load()
+C:\Users\user\AppData\Local\Programs\Python\Python313\Lib\site-packages\sklearn\base.py:525: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.6.1 when using version 1.9.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+2026-10-20 17:45:24,677 [INFO] ML 모델 로컬 로드 완료: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\local_models\final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl
+2026-10-20 17:45:24,677 [INFO] 모델 검증 통과 — 서브모델 2개 (피처 수: 17, 17 / 추출기 26개)
+2026-10-20 17:45:48,457 [INFO] ML 추론 완료 (1000건)
+
+══════════════════════════════════════════════════════════════════════════════
+ [evaluate] 테스트 집합 n=500  (파라미터 고정: 2026-10-18T02:05:49.695016+00:00)
+══════════════════════════════════════════════════════════════════════════════
+| 방법 | TP | FP | TN | FN | Accuracy | Precision | Recall [95% CI] | F1 | FPR | BLOCKED Recall | BLOCKED FPR |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ML only (threshold 0.41) | 211 | 171 | 79 | 39 | 58.00 | 55.24 | 84.40 [79.4, 88.4] | 66.77 | 68.40 | 84.40 | 68.40 |
+| VT only (d≥1) — 참고 | 243 | 16 | 234 | 7 | 95.40 | 93.82 | 97.20 [94.3, 98.6] | 95.48 | 6.40 | 97.20 | 6.40 |
+| VT only (d≥5) — 참고 | 225 | 0 | 250 | 25 | 95.00 | 100.00 | 90.00 [85.7, 93.1] | 94.74 | 0.00 | 90.00 | 0.00 |
+| Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0) | 210 | 128 | 122 | 40 | 66.40 | 62.13 | 84.00 [78.9, 88.0] | 71.43 | 51.20 | 24.80 | 0.00 |
+| Fixed 0.5:0.5 — 수정 α·τ 적용 | 242 | 93 | 157 | 8 | 79.80 | 72.24 | 96.80 [93.8, 98.4] | 82.74 | 37.20 | 84.80 | 1.60 |
+| Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6) | 241 | 11 | 239 | 9 | 96.00 | 95.63 | 96.40 [93.3, 98.1] | 96.02 | 4.40 | 88.80 | 1.60 |
+| Adaptive — 1차 심사본 파라미터 | 209 | 26 | 224 | 41 | 86.60 | 88.94 | 83.60 [78.5, 87.7] | 86.19 | 10.40 | 11.60 | 2.00 |
+| Adaptive — 수정 파라미터, Override 없음 | 245 | 22 | 228 | 5 | 94.60 | 91.76 | 98.00 [95.4, 99.1] | 94.78 | 8.80 | 96.00 | 3.60 |
+| Adaptive — 수정 파라미터 + Override | 245 | 22 | 228 | 5 | 94.60 | 91.76 | 98.00 [95.4, 99.1] | 94.78 | 8.80 | 96.00 | 3.60 |
+
+산출물: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\revision
+2026-10-20 17:45:50 | → 종료 코드 0
+2026-10-20 17:45:50 | $ experiments/recheck_from_csv.py --split test
+전략                                                           TP   FP   TN   FN  일치
+ML only (threshold 0.41)                                    211  171   79   39  ✓
+VT only (d≥1) — 참고                                          243   16  234    7  ✓
+VT only (d≥5) — 참고                                          225    0  250   25  ✓
+Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0)                            210  128  122   40  ✓
+Fixed 0.5:0.5 — 수정 α·τ 적용                                   242   93  157    8  ✓
+Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6)                 241   11  239    9  ✓
+Adaptive — 1차 심사본 파라미터                                      209   26  224   41  ✓
+Adaptive — 수정 파라미터, Override 없음                             245   22  228    5  ✓
+Adaptive — 수정 파라미터 + Override                               245   22  228    5  ✓
+
+케이스별 — 제안 방법
+  CASE_A_HIGH  n=225 TP 225 FN 0 FP 0 TN 0  ✓
+  CASE_A_LOW   n= 34 TP 16 FN 2 FP 11 TN 5  ✓
+  CASE_B       n=173 TP 0 FN 0 FP 0 TN 173  ✓
+  CASE_C       n= 68 TP 4 FN 3 FP 11 TN 50  ✓
+
+VT 미등재 피싱: 4/7 탐지  ✓
+
+결과: 모두 일치 — CSV 한 장으로 재현됨
+2026-10-20 17:45:50 | → 종료 코드 0
+2026-10-20 17:45:50 | 산출물: C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\revision\tables_test.md, C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\revision\per_url_test.csv, C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\revision\zero_day_test.csv, C:\Users\user\Desktop\프로젝트 모음집\Q-Guarder-Server\Q-Guarder-Server\experiments\data\revision\revision_results_test.json
+2026-10-20 17:45:50 | ==== 완료

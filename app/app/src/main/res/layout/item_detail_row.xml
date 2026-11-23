@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 로그 상세 바텀시트 내부 — 스캔/방문 각 행 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="10dp">
+
+    <!-- 위험도 색상 점 (코드에서 GradientDrawable oval로 설정) -->
+    <View
+        android:id="@+id/view_dot"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_marginEnd="10dp" />
+
+    <!-- 레이블 (SECURED / BLOCKED / SUSPICIOUS / 방문) -->
+    <TextView
+        android:id="@+id/tv_row_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- 위험도 점수 배지 -->
+    <TextView
+        android:id="@+id/tv_row_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="1dp"
+        android:layout_marginStart="6dp"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 날짜 + 시간 -->
+    <TextView
+        android:id="@+id/tv_row_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:textColor="?attr/colorOnSurfaceVariant" />
+
+</LinearLayout>

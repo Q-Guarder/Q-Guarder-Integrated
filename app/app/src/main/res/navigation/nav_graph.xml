@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <!--- 스플래시 -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.qguarder.android.ui.splash.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/fragment_splash">
+
+        <!-- 토큰 없음 -> 로그인 -->
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+
+        <!-- 자동 로그인 성공 -> 스캔 메인 -->
+        <action
+            android:id="@+id/action_splash_to_scan"
+            app:destination="@id/scanFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- 로그인 -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.qguarder.android.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
+        <argument
+            android:name="toastMessage"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <!-- 로그인 성공 -> 스캔 메인-->
+        <action
+            android:id="@+id/action_login_to_scan"
+            app:destination="@id/scanFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+
+        <!-- 회원가입으로 이동 -->
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- 회원가입 -->
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.qguarder.android.ui.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+
+        <!-- 가입 완료 -> 로그인으로 돌아가기 -->
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+
+        <!-- 개인정보처리방침 보기 -->
+        <action
+            android:id="@+id/action_register_to_privacyPolicy"
+            app:destination="@id/privacyPolicyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- 스캔 메인 (바텀 네비게이션 탭) -->
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="com.qguarder.android.ui.scan.ScanFragment"
+        android:label="Scan"
+        tools:layout="@layout/fragment_scan">
+
+        <!-- QR 인식 -> 분석 중 -->
+        <action
+            android:id="@+id/action_scan_to_scanning"
+            app:destination="@id/scanningFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+        <!-- 화이트리스트/즐겨찾기 캐시 히트 -> 바로 안심 결과 -->
+        <action
+            android:id="@+id/action_scan_to_result_whitelist"
+            app:destination="@id/resultWhitelistFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- 보안 엔진 검사 중 (로딩) -->
+    <fragment
+        android:id="@+id/scanningFragment"
+        android:name="com.qguarder.android.ui.scanning.ScanningFragment"
+        android:label="Scanning"
+        tools:layout="@layout/fragment_scanning">
+
+        <!-- Scanning Fragment -->
+        <argument
+            android:name="url"
+            app:argType="string" />
+
+        <!-- 분석 완료 -> SECURED -->
+        <action
+            android:id="@+id/action_scanning_to_result_secured"
+            app:destination="@id/resultSecuredFragment"
+            app:popUpTo="@id/scanningFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out" />
+
+        <!-- 분석 완료 -> BLOCKED 위험 차단 -->
+        <action
+            android:id="@+id/action_scanning_to_result_blocked"
+            app:destination="@id/resultBlockedFragment"
+            app:popUpTo="@id/scanningFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out" />
+
+        <!-- 분석 완료 -> SUSPICIOUS 악성 의심 -->
+        <action
+            android:id="@+id/action_scanning_to_result_suspicious"
+            app:destination="@id/resultSuspiciousFragment"
+            app:popUpTo="@id/scanningFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- 결과: 화이트리스트 / 즐겨찾기 히트 -->
+    <fragment
+        android:id="@+id/resultWhitelistFragment"
+        android:name="com.qguarder.android.ui.result.ResultWhitelistFragment"
+        android:label="ResultWhitelist"
+        tools:layout="@layout/fragment_result_whitelist">
+
+        <argument
+            android:name="url"
+            app:argType="string" />
+
+        <argument
+            android:name="reason"
+            app:argType="string"
+            android:defaultValue="WHITELIST" />
+
+        <!-- 다시 스캔 -->
+        <action
+            android:id="@+id/action_result_whitelist_to_scan"
+            app:destination="@id/scanFragment"
+            app:popUpTo="@id/scanFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- 결과: 안전한 연결 (ML 분석) -->
+    <fragment
+        android:id="@+id/resultSecuredFragment"
+        android:name="com.qguarder.android.ui.result.ResultSecuredFragment"
+        android:label="ResultSecured"
+        tools:layout="@layout/fragment_result_secured">
+
+        <argument
+            android:name="scanId"
+            app:argType="string" />
+
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <action
+            android:id="@+id/action_result_secured_to_scan"
+            app:destination="@id/scanFragment"
+            app:popUpTo="@id/scanFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- 결과: BLOCKED 위험 차단 -->
+    <fragment
+        android:id="@+id/resultBlockedFragment"
+        android:name="com.qguarder.android.ui.result.ResultBlockedFragment"
+        android:label="ResultBlocked"
+        tools:layout="@layout/fragment_result_blocked" >
+
+        <argument
+            android:name="scanId"
+            app:argType="string" />
+
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <action
+            android:id="@+id/action_result_blocked_to_scan"
+            app:destination="@id/scanFragment"
+            app:popUpTo="@id/scanFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- 결과: SUSPICIOUS 악성 의심 -->
+    <fragment
+        android:id="@+id/resultSuspiciousFragment"
+        android:name="com.qguarder.android.ui.result.ResultSuspiciousFragment"
+        android:label="ResultSuspicious"
+        tools:layout="@layout/fragment_result_suspicious">
+
+        <argument
+            android:name="scanId"
+            app:argType="string" />
+
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <action
+            android:id="@+id/action_result_suspicious_to_scan"
+            app:destination="@id/scanFragment"
+            app:popUpTo="@id/scanFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- 보안 로그 대시보드 (바텀 넵 탭) -->
+    <fragment
+        android:id="@+id/logsFragment"
+        android:name="com.qguarder.android.ui.logs.LogsFragment"
+        android:label="Logs"
+        tools:layout="@layout/fragment_logs" />
+
+    <!-- 즐겨찾는 URL 목록 (바텀) -->
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.qguarder.android.ui.favorites.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+
+    <!-- 내 정보 (바텀 탭) -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.qguarder.android.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profile_to_privacyPolicy"
+            app:destination="@id/privacyPolicyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_profile_to_terms"
+            app:destination="@id/termsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- 개인정보 처리방침 -->
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.qguarder.android.ui.profile.PrivacyPolicyFragment"
+        android:label="PrivacyPolicy"
+        tools:layout="@layout/fragment_privacy_policy" />
+
+    <!-- 이용약관 -->
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.qguarder.android.ui.profile.TermsFragment"
+        android:label="Terms"
+        tools:layout="@layout/fragment_terms" />
+
+</navigation>

@@ -1,0 +1,8 @@
+url,path_type,p_ml,ML only (threshold 0.41) | S_final,ML only (threshold 0.41) | detected,Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0) | S_final,Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0) | detected,Fixed 0.5:0.5 — 수정 α·τ 적용 | S_final,Fixed 0.5:0.5 — 수정 α·τ 적용 | detected,"Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6) | S_final","Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6) | detected",Adaptive — 1차 심사본 파라미터 | S_final,Adaptive — 1차 심사본 파라미터 | detected,"Adaptive — 수정 파라미터, Override 없음 | S_final","Adaptive — 수정 파라미터, Override 없음 | detected",Adaptive — 수정 파라미터 + Override | S_final,Adaptive — 수정 파라미터 + Override | detected
+http://www.surl.li/nfybwp,deep,0.6286,0.6286,1,0.3143,0,0.3143,0,0.3143,0,0.5029,1,0.5029,1,0.5029,1
+https://wells-bez.pages.dev/checking,deep,0.9395,0.9395,1,0.4697,1,0.4697,1,0.4697,0,0.7516,1,0.7516,1,0.7516,1
+http://www.imtouken.com/english,deep,0.4871,0.4871,1,0.2435,0,0.2435,0,0.2435,0,0.3896,1,0.3896,0,0.3896,0
+http://www.portalinmobiliario.com/venta/parcela,deep,0.3921,0.3921,0,0.1961,0,0.1961,0,0.1961,0,0.3137,0,0.3137,0,0.3137,0
+https://rigzone.github.io/wells,deep,0.5653,0.5653,1,0.2827,0,0.2827,0,0.2827,0,0.4522,1,0.4522,1,0.4522,1
+http://www.rasaenclavepalwal.com/blogs/log/Ziggo,deep,0.2216,0.2216,0,0.1108,0,0.1108,0,0.1108,0,0.1773,0,0.1773,0,0.1773,0
+https://signer.docusign.maccesshub.com/2d8bef1b-e939-49cd-8b59-cdbe9be72a90,deep,0.5645,0.5645,1,0.2822,0,0.2822,0,0.2822,0,0.4516,1,0.4516,1,0.4516,1

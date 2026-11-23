@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- 파란 둥근 사각형 -->
+    <path
+        android:fillColor="@color/color_primary"
+        android:pathData="M5,3 L19,3 C20.1,3 21,3.9 21,5 L21,19 C21,20.1 20.1,21 19,21 L5,21 C3.9,21 3,20.1 3,19 L3,5 C3,3.9 3.9,3 5,3 Z"/>
+    <!-- 흰색 체크 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10,17 L5,12 L6.41,10.59 L10,14.17 L17.59,6.58 L19,8 L10,17 Z"/>
+</vector>

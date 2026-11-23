@@ -1,0 +1,1107 @@
+{
+  "meta": {
+    "generated_at": "2026-10-17T22:54:33.503761+00:00",
+    "model_file": "final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl",
+    "ml_threshold": 0.41,
+    "fusion_params_default": {
+      "alpha": 3.0,
+      "d_high": 5,
+      "tau_suspicious": 0.35,
+      "tau_blocked": 0.65,
+      "w_ml": {
+        "CASE_A_HIGH": 0.25,
+        "CASE_A_LOW": 0.5,
+        "CASE_B": 0.3,
+        "CASE_C": 0.8
+      },
+      "override_ratio_theta": 0.3
+    },
+    "split_column_present": false,
+    "final_split": null,
+    "note": "혼동행렬·지표는 fusion_experiment.py와 동일한 fuse()로 계산 (VT 재호출 0건)"
+  },
+  "sets": {
+    "all (split 미분리)": {
+      "is_final_report_set": false,
+      "label_distribution": {
+        "n": 500,
+        "by_label": {
+          "benign(0)": 250,
+          "phishing(1)": 250
+        },
+        "by_label_path": {
+          "benign/root": 125,
+          "benign/deep": 125,
+          "phishing/root": 141,
+          "phishing/deep": 109
+        },
+        "by_source": {
+          "tranco-crawl (label=0)": 125,
+          "openphish (label=1)": 250,
+          "tranco (label=0)": 125
+        },
+        "by_vt_band": {
+          "ok · d≥5": {
+            "benign": 0,
+            "phishing": 234,
+            "total": 234
+          },
+          "ok · 1≤d<5": {
+            "benign": 22,
+            "phishing": 1,
+            "total": 23
+          },
+          "ok · d=0": {
+            "benign": 187,
+            "phishing": 0,
+            "total": 187
+          },
+          "not_found (미등재)": {
+            "benign": 41,
+            "phishing": 15,
+            "total": 56
+          }
+        }
+      },
+      "baselines_reference": {
+        "(0a) VT only (d>=1)": {
+          "n": 500,
+          "tp": 235,
+          "tn": 228,
+          "fp": 22,
+          "fn": 15,
+          "accuracy": 0.926,
+          "precision": 0.914396887159533,
+          "recall": 0.94,
+          "fpr": 0.088,
+          "f1": 0.9270216962524656,
+          "recall_ci": [
+            0.9033762972146848,
+            0.9633059172056464
+          ],
+          "precision_ci": [
+            0.8737964799662181,
+            0.9427910582178751
+          ],
+          "fpr_ci": [
+            0.058830921041025906,
+            0.12963936909266374
+          ],
+          "accuracy_pct": 92.6,
+          "precision_pct": 91.44,
+          "recall_pct": 94.0,
+          "fpr_pct": 8.8,
+          "f1_pct": 92.7,
+          "recall_ci_pct": [
+            90.3,
+            96.3
+          ],
+          "precision_ci_pct": [
+            87.4,
+            94.3
+          ],
+          "fpr_ci_pct": [
+            5.9,
+            13.0
+          ]
+        },
+        "(0b) VT only (d>=5)": {
+          "n": 500,
+          "tp": 234,
+          "tn": 250,
+          "fp": 0,
+          "fn": 16,
+          "accuracy": 0.968,
+          "precision": 1.0,
+          "recall": 0.936,
+          "fpr": 0.0,
+          "f1": 0.9669421487603307,
+          "recall_ci": [
+            0.8985776859091057,
+            0.9602255992892228
+          ],
+          "precision_ci": [
+            0.9838480736759255,
+            1.0
+          ],
+          "fpr_ci": [
+            0.0,
+            0.015133847249623387
+          ],
+          "accuracy_pct": 96.8,
+          "precision_pct": 100.0,
+          "recall_pct": 93.6,
+          "fpr_pct": 0.0,
+          "f1_pct": 96.69,
+          "recall_ci_pct": [
+            89.9,
+            96.0
+          ],
+          "precision_ci_pct": [
+            98.4,
+            100.0
+          ],
+          "fpr_ci_pct": [
+            0.0,
+            1.5
+          ]
+        }
+      },
+      "strategies": {
+        "(1) ML Only": {
+          "n": 500,
+          "tp": 207,
+          "tn": 87,
+          "fp": 163,
+          "fn": 43,
+          "accuracy": 0.588,
+          "precision": 0.5594594594594594,
+          "recall": 0.828,
+          "fpr": 0.652,
+          "f1": 0.6677419354838708,
+          "recall_ci": [
+            0.7763462457575925,
+            0.8697259504466546
+          ],
+          "precision_ci": [
+            0.5085190810381272,
+            0.6091778258871586
+          ],
+          "fpr_ci": [
+            0.5910558065068211,
+            0.7083435039292935
+          ],
+          "accuracy_pct": 58.8,
+          "precision_pct": 55.95,
+          "recall_pct": 82.8,
+          "fpr_pct": 65.2,
+          "f1_pct": 66.77,
+          "recall_ci_pct": [
+            77.6,
+            87.0
+          ],
+          "precision_ci_pct": [
+            50.9,
+            60.9
+          ],
+          "fpr_ci_pct": [
+            59.1,
+            70.8
+          ],
+          "by_case": {},
+          "fn_urls": [
+            "http://social-statements.com/esign.social-statements.com",
+            "https://big.as/Mail",
+            "http://dhlvarese.it/index.html",
+            "https://wvwv-roblox.co/users/909139181/profile)",
+            "http://www.kukcon-xlognx.godaddysites.com/",
+            "https://71698.xyz/",
+            "https://m.tyc643.com/",
+            "http://mjsihsxi.us.cc/5g/home.html",
+            "https://mackeyins.com/xn/link/dd/Alibaba/index.php",
+            "http://whatsapp-tools.lateinos.com.br/",
+            "http://face-book-book.blogspot.com/2014/04/function-envflushafunction-bcforvar-d.html",
+            "https://paribcardsegr.bond/",
+            "http://www.fix.allwalletdapp.com/",
+            "https://yahya-masood.github.io/Netflix-clone-Project-frontend",
+            "https://new-set-3.searchsst.info/Y2gtZmVkZXgtMjAyNg?u=163C1655&e=h.p.vonsiebenthal%40bluewin.ch&s3=&s4=&s5=&s6=&s7=&s8=",
+            "https://1-on-sign-sync-online.com/inline/app-find/app-end",
+            "http://virtualnextpartner.com/",
+            "http://www.y99s.xyz/",
+            "http://www.anoopsamazon.vercel.app/",
+            "https://snifferip.com/2oV3e.gif",
+            "https://social-statements.com/esign.social-statements.com",
+            "https://u.to/roblox-com-users-1081301329-profile/ocSkIg",
+            "https://www.instagram-instagram.blogspot.com/",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/app.php",
+            "https://rbcode.net/v/6780d346df48e6fb4db3cfe1ef9f9092",
+            "https://onbit.pro/Nikepro.link",
+            "https://facebooktrade.com/instagram.html",
+            "http://salleryonlnejbhomesiiite.net/",
+            "http://mehrazhowlader.github.io/project_test",
+            "https://s.team-p.my/p/quei-odxi/lrjzqohi",
+            "https://rngkuqoo.elementor.cloud/EN34FJHG7ND53/EN33UY645/M0002X1/info.html",
+            "https://wvwv-roblox.co/users/1191536658/profile",
+            "http://a3b9c102.com/register.html",
+            "http://yt2mp3api.ofismall.az/ProcessValidation/view-pr-do/plugin-read-mail/d20xODcybTU3MA**/attach-viewer-main",
+            "https://sin1.contabostorage.com/d96fc17aeb3741e493b2e5b3a72a669f:truyoioit/billsslogin.html",
+            "http://shekashish.github.io/netflix_clone",
+            "http://yt2mp3api.ofismall.az/ProcessValidation/view-pr-do/plugin-read-mail/d20xODcybTU3MA**/attach-viewer-main/aW5mb0BncnVlbmF1ZXJob2YuYXQ",
+            "http://galyabet.app/",
+            "https://neopixellightsaber.co/wp-includes/wps/soge",
+            "http://performance-door.net/rakuten/signjp",
+            "https://seu-delivery.food/agostopromo",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/loading.php",
+            "http://azalmandhai03-ctrl.github.io/NETFLIX-.-CLONE-ASSIGNMENT"
+          ],
+          "fp_urls": [
+            "https://afternic.com",
+            "https://nic.ru",
+            "https://discord.gg",
+            "https://gmail.com",
+            "https://android.com",
+            "https://example.com",
+            "https://office.com",
+            "https://www.one.com//webapps.group-cdn.one/cdn-one/images/global/one_48x48.png",
+            "https://www.opera.com/de",
+            "https://open.spotify.com/intl-id",
+            "https://creativecommons.org",
+            "https://x.com",
+            "https://ntp.org",
+            "https://tiktok.com",
+            "https://www.mozilla.org/media/img/favicons/mozilla/apple-touch-icon.05aa000f6748.png",
+            "https://discord.com",
+            "https://www.fastly.com/styles.2c2823cd013b82c0e74b.css",
+            "https://zoom.us",
+            "https://msn.com",
+            "https://live.com",
+            "https://nist.gov",
+            "https://yandex.net",
+            "https://roblox.com",
+            "https://www.reg.ru/esia",
+            "https://dzen.ru",
+            "https://qq.com",
+            "https://cisco.com",
+            "https://www.opera.com/webmanifest",
+            "https://sentry.io/welcome",
+            "https://taboola.com",
+            "https://linkedin.com",
+            "https://samsung.com",
+            "https://mozilla.org",
+            "https://www.reg.ru/domain/new/RU",
+            "https://www.google.com/advanced_search?hl=ko&amp;authuser=0",
+            "https://xiaomi.com",
+            "https://bbc.co.uk",
+            "https://vk.ru",
+            "https://paypal.com",
+            "https://wordpress.com/ar",
+            "https://cloud.microsoft",
+            "https://archive.org",
+            "https://icloud.com",
+            "https://www.shopify.com/au",
+            "https://whatsapp.com",
+            "https://youtube.com",
+            "https://forbes.com",
+            "https://netflix.com",
+            "https://bing.com",
+            "https://amazonvideo.com",
+            "https://reg.ru",
+            "https://www.shopify.com/ar",
+            "https://opera.com",
+            "https://mail.ru",
+            "https://googledomains.com",
+            "https://windows.com",
+            "https://miui.com",
+            "https://twitter.com",
+            "https://lencr.org",
+            "https://x.com/apple-touch-icon.png",
+            "https://www.nytimes.com/ca",
+            "https://telekom.net",
+            "https://www.whatsapp.com/calling",
+            "https://instagram.com",
+            "https://whatsapp.net",
+            "https://www.google.com/ads/adtrafficquality/static/css/index.min.css?cache=389b663",
+            "https://pubmatic.com",
+            "https://mts.ru",
+            "https://adsafeprotected.com",
+            "https://fastly.net",
+            "https://www.zoom.com/de",
+            "https://nginx.org",
+            "https://vimeo.com/es",
+            "https://m365.cloud.microsoft/create",
+            "https://adobe.io",
+            "https://dropbox.com",
+            "https://b-cdn.net",
+            "https://gravatar.com",
+            "https://europa.eu",
+            "https://kaspersky.com",
+            "https://www.mozilla.org/media/img/favicons/mozilla/favicon-196x196.e143075360ea.png",
+            "https://one.one.one.one/dns-aa686e0e9e4d122550f8.css",
+            "https://vimeo.com",
+            "https://www.google.com/ads/adtrafficquality",
+            "https://www.microsoft.com/ko-kr/microsoft-365/sharepoint/collaboration",
+            "https://stripe.com",
+            "https://spotify.com",
+            "https://outlook.com",
+            "https://www.mi.com/kr",
+            "https://comcast.net",
+            "https://microsoft.com",
+            "https://hubspot.com",
+            "https://cpanel.net",
+            "https://european-union.europa.eu/index_en",
+            "https://gandi.net",
+            "https://userapi.com",
+            "https://oxylabs.io",
+            "https://weather.com",
+            "https://baidu.com",
+            "https://soundcloud.com",
+            "https://www.paypal.com/kr/home",
+            "https://www.nytimes.com/international",
+            "https://webex.com",
+            "https://open.spotify.com/intl-de",
+            "https://snapchat.com",
+            "https://bbc.com",
+            "https://google.com",
+            "https://www.microsoft.com/ko-kr",
+            "https://pki.goog",
+            "https://nginx.org/ru",
+            "https://github.com",
+            "https://doi.org",
+            "https://ubuntu.com",
+            "https://adsrvr.org",
+            "https://www.gandi.net/static/fonts/Fraunces72ptSoft-SemiBold.35ff98584f74.woff2",
+            "https://www.zoom.com/es",
+            "https://t-online.de",
+            "https://sourceforge.net",
+            "https://www.one.com//webapps.group-cdn.one/cdn-one/images/global/favicon.ico",
+            "https://sharepoint.com",
+            "https://reddit.com",
+            "https://adtrafficquality.google",
+            "https://bitly.com/pages/de",
+            "https://theguardian.com",
+            "https://azure.com",
+            "https://bunny.net/styles.9d98b6973b91d3291e58.css",
+            "https://cnn.com",
+            "https://shopify.com",
+            "https://telegram.org",
+            "https://yandex.ru",
+            "https://www.facebook.com/recover/initiate?privacy_mutation_token=eyJ0eXBlIjo1LCJjcmVhdGlvbl90aW1lIjoxNzg2MjA2NzYxfQ%3D%3D&amp;ars=facebook_login",
+            "https://skype.com",
+            "https://ya.ru/tune/geo?retpath=https%3A%2F%2Fya.ru%2F%3Fnr%3D1%26redirect_ts%3D1786206766.00000&amp;nosync=1",
+            "https://digicert.com",
+            "https://apache.org",
+            "https://nytimes.com",
+            "https://wordpress.org",
+            "https://one.one",
+            "https://myfritz.net",
+            "https://t.me",
+            "https://www.dropbox.com/da_DK",
+            "https://applovin.com",
+            "https://www.apple.com/ae",
+            "https://unity3d.com",
+            "https://www.ntp.org/scss/nwtime.min.ae1d5c07cd13e892cfcd5091bb2030d2.css",
+            "https://facebook.com",
+            "https://youtu.be",
+            "https://cloudflare-dns.com",
+            "https://pinterest.com",
+            "https://twitch.tv",
+            "https://mit.edu",
+            "https://m365.cloud.microsoft/ai-image-generator",
+            "https://sentry.io",
+            "https://intuit.com",
+            "https://wordpress.com",
+            "https://netflix.net",
+            "https://adobe.com",
+            "https://vimeo.com/de",
+            "https://dns.google",
+            "https://t.co",
+            "https://wa.me",
+            "https://nginx.com",
+            "https://apple.com"
+          ]
+        },
+        "(2) Fixed 0.5:0.5": {
+          "n": 500,
+          "tp": 223,
+          "tn": 118,
+          "fp": 132,
+          "fn": 27,
+          "accuracy": 0.682,
+          "precision": 0.6281690140845071,
+          "recall": 0.892,
+          "fpr": 0.528,
+          "f1": 0.7371900826446283,
+          "recall_ci": [
+            0.8474265111015622,
+            0.9247085526547332
+          ],
+          "precision_ci": [
+            0.5767728076213351,
+            0.6768209786063487
+          ],
+          "fpr_ci": [
+            0.4661614622155369,
+            0.5889910423384842
+          ],
+          "accuracy_pct": 68.2,
+          "precision_pct": 62.82,
+          "recall_pct": 89.2,
+          "fpr_pct": 52.8,
+          "f1_pct": 73.72,
+          "recall_ci_pct": [
+            84.7,
+            92.5
+          ],
+          "precision_ci_pct": [
+            57.7,
+            67.7
+          ],
+          "fpr_ci_pct": [
+            46.6,
+            58.9
+          ],
+          "by_case": {},
+          "fn_urls": [
+            "http://social-statements.com/esign.social-statements.com",
+            "https://big.as/Mail",
+            "http://dhlvarese.it/index.html",
+            "https://wvwv-roblox.co/users/909139181/profile)",
+            "https://71698.xyz/",
+            "http://whatsapp-tools.lateinos.com.br/",
+            "http://face-book-book.blogspot.com/2014/04/function-envflushafunction-bcforvar-d.html",
+            "https://paribcardsegr.bond/",
+            "https://yahya-masood.github.io/Netflix-clone-Project-frontend",
+            "https://new-set-3.searchsst.info/Y2gtZmVkZXgtMjAyNg?u=163C1655&e=h.p.vonsiebenthal%40bluewin.ch&s3=&s4=&s5=&s6=&s7=&s8=",
+            "https://1-on-sign-sync-online.com/inline/app-find/app-end",
+            "http://virtualnextpartner.com/",
+            "https://paypalcredit.github.io/redeem",
+            "https://social-statements.com/esign.social-statements.com",
+            "https://u.to/roblox-com-users-1081301329-profile/ocSkIg",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/app.php",
+            "https://facebooktrade.com/instagram.html",
+            "https://rngkuqoo.elementor.cloud/EN34FJHG7ND53/EN33UY645/M0002X1/info.html",
+            "https://wvwv-roblox.co/users/1191536658/profile",
+            "https://aishwaryaugowda.github.io/netflix-clone",
+            "http://a3b9c102.com/register.html",
+            "http://yt2mp3api.ofismall.az/ProcessValidation/view-pr-do/plugin-read-mail/d20xODcybTU3MA**/attach-viewer-main",
+            "https://sin1.contabostorage.com/d96fc17aeb3741e493b2e5b3a72a669f:truyoioit/billsslogin.html",
+            "http://yt2mp3api.ofismall.az/ProcessValidation/view-pr-do/plugin-read-mail/d20xODcybTU3MA**/attach-viewer-main/aW5mb0BncnVlbmF1ZXJob2YuYXQ",
+            "https://neopixellightsaber.co/wp-includes/wps/soge",
+            "https://seu-delivery.food/agostopromo",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/loading.php"
+          ],
+          "fp_urls": [
+            "https://afternic.com",
+            "https://discord.gg",
+            "https://gmail.com",
+            "https://android.com",
+            "https://example.com",
+            "https://office.com",
+            "https://creativecommons.org",
+            "https://x.com",
+            "https://ntp.org",
+            "https://tiktok.com",
+            "https://discord.com",
+            "https://msn.com",
+            "https://live.com",
+            "https://nist.gov",
+            "https://yandex.net",
+            "https://roblox.com",
+            "https://www.reg.ru/esia",
+            "https://dzen.ru",
+            "https://cisco.com",
+            "https://sentry.io/welcome",
+            "https://taboola.com",
+            "https://linkedin.com",
+            "https://samsung.com",
+            "https://mozilla.org",
+            "https://www.reg.ru/domain/new/RU",
+            "https://xiaomi.com",
+            "https://bbc.co.uk",
+            "https://vk.ru",
+            "https://paypal.com",
+            "https://wordpress.com/ar",
+            "https://cloud.microsoft",
+            "https://archive.org",
+            "https://icloud.com",
+            "https://www.shopify.com/au",
+            "https://whatsapp.com",
+            "https://youtube.com",
+            "https://forbes.com",
+            "https://netflix.com",
+            "https://bing.com",
+            "https://amazonvideo.com",
+            "https://reg.ru",
+            "https://www.shopify.com/ar",
+            "https://opera.com",
+            "https://mail.ru",
+            "https://googledomains.com",
+            "https://windows.com",
+            "https://miui.com",
+            "https://twitter.com",
+            "https://lencr.org",
+            "https://www.nytimes.com/ca",
+            "https://telekom.net",
+            "https://www.whatsapp.com/calling",
+            "https://instagram.com",
+            "https://whatsapp.net",
+            "https://www.google.com/ads/adtrafficquality/static/css/index.min.css?cache=389b663",
+            "https://pubmatic.com",
+            "https://adsafeprotected.com",
+            "https://fastly.net",
+            "https://www.zoom.com/de",
+            "https://nginx.org",
+            "https://m365.cloud.microsoft/create",
+            "https://adobe.io",
+            "https://dropbox.com",
+            "https://b-cdn.net",
+            "https://gravatar.com",
+            "https://europa.eu",
+            "https://kaspersky.com",
+            "https://www.mozilla.org/media/img/favicons/mozilla/favicon-196x196.e143075360ea.png",
+            "https://one.one.one.one/dns-aa686e0e9e4d122550f8.css",
+            "https://vimeo.com",
+            "https://www.google.com/ads/adtrafficquality",
+            "https://stripe.com",
+            "https://spotify.com",
+            "https://outlook.com",
+            "https://comcast.net",
+            "https://microsoft.com",
+            "https://hubspot.com",
+            "https://cpanel.net",
+            "https://european-union.europa.eu/index_en",
+            "https://gandi.net",
+            "https://userapi.com",
+            "https://oxylabs.io",
+            "https://weather.com",
+            "https://baidu.com",
+            "https://soundcloud.com",
+            "https://webex.com",
+            "https://snapchat.com",
+            "https://google.com",
+            "https://pki.goog",
+            "https://github.com",
+            "https://doi.org",
+            "https://ubuntu.com",
+            "https://adsrvr.org",
+            "https://www.zoom.com/es",
+            "https://t-online.de",
+            "https://sourceforge.net",
+            "https://sharepoint.com",
+            "https://reddit.com",
+            "https://adtrafficquality.google",
+            "https://theguardian.com",
+            "https://azure.com",
+            "https://bunny.net/styles.9d98b6973b91d3291e58.css",
+            "https://shopify.com",
+            "https://telegram.org",
+            "https://yandex.ru",
+            "https://www.facebook.com/recover/initiate?privacy_mutation_token=eyJ0eXBlIjo1LCJjcmVhdGlvbl90aW1lIjoxNzg2MjA2NzYxfQ%3D%3D&amp;ars=facebook_login",
+            "https://skype.com",
+            "https://digicert.com",
+            "https://apache.org",
+            "https://nytimes.com",
+            "https://wordpress.org",
+            "https://one.one",
+            "https://myfritz.net",
+            "https://t.me",
+            "https://applovin.com",
+            "https://unity3d.com",
+            "https://facebook.com",
+            "https://youtu.be",
+            "https://cloudflare-dns.com",
+            "https://pinterest.com",
+            "https://twitch.tv",
+            "https://mit.edu",
+            "https://m365.cloud.microsoft/ai-image-generator",
+            "https://sentry.io",
+            "https://intuit.com",
+            "https://wordpress.com",
+            "https://netflix.net",
+            "https://adobe.com",
+            "https://dns.google",
+            "https://wa.me",
+            "https://nginx.com",
+            "https://apple.com"
+          ]
+        },
+        "(3) 4-Case Adaptive": {
+          "n": 500,
+          "tp": 235,
+          "tn": 230,
+          "fp": 20,
+          "fn": 15,
+          "accuracy": 0.93,
+          "precision": 0.9215686274509803,
+          "recall": 0.94,
+          "fpr": 0.08,
+          "f1": 0.9306930693069307,
+          "recall_ci": [
+            0.9033762972146848,
+            0.9633059172056464
+          ],
+          "precision_ci": [
+            0.8819669106042639,
+            0.9486569149322802
+          ],
+          "fpr_ci": [
+            0.052381922070894156,
+            0.1203305096187895
+          ],
+          "accuracy_pct": 93.0,
+          "precision_pct": 92.16,
+          "recall_pct": 94.0,
+          "fpr_pct": 8.0,
+          "f1_pct": 93.07,
+          "recall_ci_pct": [
+            90.3,
+            96.3
+          ],
+          "precision_ci_pct": [
+            88.2,
+            94.9
+          ],
+          "fpr_ci_pct": [
+            5.2,
+            12.0
+          ],
+          "by_case": {
+            "CASE_A_HIGH": {
+              "n": 234,
+              "tp": 223,
+              "fn": 11,
+              "fp": 0,
+              "tn": 0,
+              "benign": 0,
+              "phishing": 234
+            },
+            "CASE_A_LOW": {
+              "n": 23,
+              "tp": 0,
+              "fn": 1,
+              "fp": 9,
+              "tn": 13,
+              "benign": 22,
+              "phishing": 1
+            },
+            "CASE_B": {
+              "n": 187,
+              "tp": 0,
+              "fn": 0,
+              "fp": 0,
+              "tn": 187,
+              "benign": 187,
+              "phishing": 0
+            },
+            "CASE_C": {
+              "n": 56,
+              "tp": 12,
+              "fn": 3,
+              "fp": 11,
+              "tn": 30,
+              "benign": 41,
+              "phishing": 15
+            }
+          },
+          "fn_urls": [
+            "http://dhlvarese.it/index.html",
+            "https://optinfs.optimalinfos.com/pbfr",
+            "http://whatsapp-tools.lateinos.com.br/",
+            "https://yahya-masood.github.io/Netflix-clone-Project-frontend",
+            "https://new-set-3.searchsst.info/Y2gtZmVkZXgtMjAyNg?u=163C1655&e=h.p.vonsiebenthal%40bluewin.ch&s3=&s4=&s5=&s6=&s7=&s8=",
+            "https://1-on-sign-sync-online.com/inline/app-find/app-end",
+            "https://u.to/roblox-com-users-1081301329-profile/ocSkIg",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/app.php",
+            "https://azalmandhai03-ctrl.github.io/NETFLIX-.-CLONE-ASSIGNMENT",
+            "https://facebooktrade.com/instagram.html",
+            "https://instagram-demo.blogspot.com/",
+            "https://neopixellightsaber.co/wp-includes/wps/soge",
+            "https://alizamuhammadali010.github.io/Netflix.clone",
+            "https://seu-delivery.food/agostopromo",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/loading.php"
+          ],
+          "fp_urls": [
+            "https://android.com",
+            "https://www.one.com//webapps.group-cdn.one/cdn-one/images/global/one_48x48.png",
+            "https://creativecommons.org",
+            "https://www.mozilla.org/media/img/favicons/mozilla/apple-touch-icon.05aa000f6748.png",
+            "https://www.fastly.com/styles.2c2823cd013b82c0e74b.css",
+            "https://www.google.com/advanced_search?hl=ko&amp;authuser=0",
+            "https://vk.ru",
+            "https://archive.org",
+            "https://instagram.com",
+            "https://www.google.com/ads/adtrafficquality/static/css/index.min.css?cache=389b663",
+            "https://one.one.one.one/dns-aa686e0e9e4d122550f8.css",
+            "https://outlook.com",
+            "https://baidu.com",
+            "https://www.one.com//webapps.group-cdn.one/cdn-one/images/global/favicon.ico",
+            "https://bunny.net/styles.9d98b6973b91d3291e58.css",
+            "https://www.facebook.com/recover/initiate?privacy_mutation_token=eyJ0eXBlIjo1LCJjcmVhdGlvbl90aW1lIjoxNzg2MjA2NzYxfQ%3D%3D&amp;ars=facebook_login",
+            "https://www.dropbox.com/da_DK",
+            "https://www.ntp.org/scss/nwtime.min.ae1d5c07cd13e892cfcd5091bb2030d2.css",
+            "https://netflix.net",
+            "https://wa.me"
+          ]
+        },
+        "(4) 4-Case + Override": {
+          "n": 500,
+          "tp": 235,
+          "tn": 230,
+          "fp": 20,
+          "fn": 15,
+          "accuracy": 0.93,
+          "precision": 0.9215686274509803,
+          "recall": 0.94,
+          "fpr": 0.08,
+          "f1": 0.9306930693069307,
+          "recall_ci": [
+            0.9033762972146848,
+            0.9633059172056464
+          ],
+          "precision_ci": [
+            0.8819669106042639,
+            0.9486569149322802
+          ],
+          "fpr_ci": [
+            0.052381922070894156,
+            0.1203305096187895
+          ],
+          "accuracy_pct": 93.0,
+          "precision_pct": 92.16,
+          "recall_pct": 94.0,
+          "fpr_pct": 8.0,
+          "f1_pct": 93.07,
+          "recall_ci_pct": [
+            90.3,
+            96.3
+          ],
+          "precision_ci_pct": [
+            88.2,
+            94.9
+          ],
+          "fpr_ci_pct": [
+            5.2,
+            12.0
+          ],
+          "by_case": {
+            "CASE_A_HIGH": {
+              "n": 234,
+              "tp": 223,
+              "fn": 11,
+              "fp": 0,
+              "tn": 0,
+              "benign": 0,
+              "phishing": 234
+            },
+            "CASE_A_LOW": {
+              "n": 23,
+              "tp": 0,
+              "fn": 1,
+              "fp": 9,
+              "tn": 13,
+              "benign": 22,
+              "phishing": 1
+            },
+            "CASE_B": {
+              "n": 187,
+              "tp": 0,
+              "fn": 0,
+              "fp": 0,
+              "tn": 187,
+              "benign": 187,
+              "phishing": 0
+            },
+            "CASE_C": {
+              "n": 56,
+              "tp": 12,
+              "fn": 3,
+              "fp": 11,
+              "tn": 30,
+              "benign": 41,
+              "phishing": 15
+            }
+          },
+          "fn_urls": [
+            "http://dhlvarese.it/index.html",
+            "https://optinfs.optimalinfos.com/pbfr",
+            "http://whatsapp-tools.lateinos.com.br/",
+            "https://yahya-masood.github.io/Netflix-clone-Project-frontend",
+            "https://new-set-3.searchsst.info/Y2gtZmVkZXgtMjAyNg?u=163C1655&e=h.p.vonsiebenthal%40bluewin.ch&s3=&s4=&s5=&s6=&s7=&s8=",
+            "https://1-on-sign-sync-online.com/inline/app-find/app-end",
+            "https://u.to/roblox-com-users-1081301329-profile/ocSkIg",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/app.php",
+            "https://azalmandhai03-ctrl.github.io/NETFLIX-.-CLONE-ASSIGNMENT",
+            "https://facebooktrade.com/instagram.html",
+            "https://instagram-demo.blogspot.com/",
+            "https://neopixellightsaber.co/wp-includes/wps/soge",
+            "https://alizamuhammadali010.github.io/Netflix.clone",
+            "https://seu-delivery.food/agostopromo",
+            "https://www.vkr.sqs.mybluehost.me/EN/TD-ZE5KIzX0UW4&oauth_key_signature=eyJraWQOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1X3BiZXN/loading.php"
+          ],
+          "fp_urls": [
+            "https://android.com",
+            "https://www.one.com//webapps.group-cdn.one/cdn-one/images/global/one_48x48.png",
+            "https://creativecommons.org",
+            "https://www.mozilla.org/media/img/favicons/mozilla/apple-touch-icon.05aa000f6748.png",
+            "https://www.fastly.com/styles.2c2823cd013b82c0e74b.css",
+            "https://www.google.com/advanced_search?hl=ko&amp;authuser=0",
+            "https://vk.ru",
+            "https://archive.org",
+            "https://instagram.com",
+            "https://www.google.com/ads/adtrafficquality/static/css/index.min.css?cache=389b663",
+            "https://one.one.one.one/dns-aa686e0e9e4d122550f8.css",
+            "https://outlook.com",
+            "https://baidu.com",
+            "https://www.one.com//webapps.group-cdn.one/cdn-one/images/global/favicon.ico",
+            "https://bunny.net/styles.9d98b6973b91d3291e58.css",
+            "https://www.facebook.com/recover/initiate?privacy_mutation_token=eyJ0eXBlIjo1LCJjcmVhdGlvbl90aW1lIjoxNzg2MjA2NzYxfQ%3D%3D&amp;ars=facebook_login",
+            "https://www.dropbox.com/da_DK",
+            "https://www.ntp.org/scss/nwtime.min.ae1d5c07cd13e892cfcd5091bb2030d2.css",
+            "https://netflix.net",
+            "https://wa.me"
+          ]
+        }
+      },
+      "blocked_level": {
+        "(1) ML Only": {
+          "n": 500,
+          "tp": 207,
+          "tn": 87,
+          "fp": 163,
+          "fn": 43,
+          "accuracy": 0.588,
+          "precision": 0.5594594594594594,
+          "recall": 0.828,
+          "fpr": 0.652,
+          "f1": 0.6677419354838708,
+          "recall_ci": [
+            0.7763462457575925,
+            0.8697259504466546
+          ],
+          "precision_ci": [
+            0.5085190810381272,
+            0.6091778258871586
+          ],
+          "fpr_ci": [
+            0.5910558065068211,
+            0.7083435039292935
+          ],
+          "accuracy_pct": 58.8,
+          "precision_pct": 55.95,
+          "recall_pct": 82.8,
+          "fpr_pct": 65.2,
+          "f1_pct": 66.77,
+          "recall_ci_pct": [
+            77.6,
+            87.0
+          ],
+          "precision_ci_pct": [
+            50.9,
+            60.9
+          ],
+          "fpr_ci_pct": [
+            59.1,
+            70.8
+          ]
+        },
+        "(2) Fixed 0.5:0.5": {
+          "n": 500,
+          "tp": 126,
+          "tn": 250,
+          "fp": 0,
+          "fn": 124,
+          "accuracy": 0.752,
+          "precision": 1.0,
+          "recall": 0.504,
+          "fpr": 0.0,
+          "f1": 0.6702127659574468,
+          "recall_ci": [
+            0.44243155182424554,
+            0.5654473773977574
+          ],
+          "precision_ci": [
+            0.9704131803674632,
+            1.0
+          ],
+          "fpr_ci": [
+            0.0,
+            0.015133847249623387
+          ],
+          "accuracy_pct": 75.2,
+          "precision_pct": 100.0,
+          "recall_pct": 50.4,
+          "fpr_pct": 0.0,
+          "f1_pct": 67.02,
+          "recall_ci_pct": [
+            44.2,
+            56.5
+          ],
+          "precision_ci_pct": [
+            97.0,
+            100.0
+          ],
+          "fpr_ci_pct": [
+            0.0,
+            1.5
+          ]
+        },
+        "(3) 4-Case Adaptive": {
+          "n": 500,
+          "tp": 49,
+          "tn": 248,
+          "fp": 2,
+          "fn": 201,
+          "accuracy": 0.594,
+          "precision": 0.9607843137254902,
+          "recall": 0.196,
+          "fpr": 0.008,
+          "f1": 0.32558139534883723,
+          "recall_ci": [
+            0.15154950681109253,
+            0.2496518723166785
+          ],
+          "precision_ci": [
+            0.8678345101373474,
+            0.9891791437312488
+          ],
+          "fpr_ci": [
+            0.0021965911168378306,
+            0.028695114576791587
+          ],
+          "accuracy_pct": 59.4,
+          "precision_pct": 96.08,
+          "recall_pct": 19.6,
+          "fpr_pct": 0.8,
+          "f1_pct": 32.56,
+          "recall_ci_pct": [
+            15.2,
+            25.0
+          ],
+          "precision_ci_pct": [
+            86.8,
+            98.9
+          ],
+          "fpr_ci_pct": [
+            0.2,
+            2.9
+          ]
+        },
+        "(4) 4-Case + Override": {
+          "n": 500,
+          "tp": 49,
+          "tn": 248,
+          "fp": 2,
+          "fn": 201,
+          "accuracy": 0.594,
+          "precision": 0.9607843137254902,
+          "recall": 0.196,
+          "fpr": 0.008,
+          "f1": 0.32558139534883723,
+          "recall_ci": [
+            0.15154950681109253,
+            0.2496518723166785
+          ],
+          "precision_ci": [
+            0.8678345101373474,
+            0.9891791437312488
+          ],
+          "fpr_ci": [
+            0.0021965911168378306,
+            0.028695114576791587
+          ],
+          "accuracy_pct": 59.4,
+          "precision_pct": 96.08,
+          "recall_pct": 19.6,
+          "fpr_pct": 0.8,
+          "f1_pct": 32.56,
+          "recall_ci_pct": [
+            15.2,
+            25.0
+          ],
+          "precision_ci_pct": [
+            86.8,
+            98.9
+          ],
+          "fpr_ci_pct": [
+            0.2,
+            2.9
+          ]
+        }
+      },
+      "mcnemar_suspicious_level": {
+        "(2) Fixed 0.5:0.5 vs (4) 4-Case + Override": {
+          "b": 11,
+          "c": 135,
+          "p_value": 2.4468417240187597e-24,
+          "method": "chi2-continuity"
+        },
+        "(1) ML Only vs (4) 4-Case + Override": {
+          "b": 4,
+          "c": 175,
+          "p_value": 5.4487918137307516e-37,
+          "method": "chi2-continuity"
+        }
+      },
+      "paper_check": {
+        "(1) ML Only": {
+          "recall": {
+            "paper": 82.8,
+            "from_confusion": 82.8,
+            "match": true
+          },
+          "precision": {
+            "paper": 55.95,
+            "from_confusion": 55.95,
+            "match": true
+          },
+          "f1": {
+            "paper": 66.77,
+            "from_confusion": 66.77,
+            "match": true
+          },
+          "fpr": {
+            "paper": 65.2,
+            "from_confusion": 65.2,
+            "match": true
+          }
+        },
+        "(2) Fixed 0.5:0.5": {
+          "recall": {
+            "paper": 89.2,
+            "from_confusion": 89.2,
+            "match": true
+          },
+          "precision": {
+            "paper": 62.82,
+            "from_confusion": 62.82,
+            "match": true
+          },
+          "f1": {
+            "paper": 73.72,
+            "from_confusion": 73.72,
+            "match": true
+          },
+          "fpr": {
+            "paper": 52.8,
+            "from_confusion": 52.8,
+            "match": true
+          }
+        },
+        "(4) 4-Case + Override": {
+          "recall": {
+            "paper": 94.0,
+            "from_confusion": 94.0,
+            "match": true
+          },
+          "precision": {
+            "paper": 92.16,
+            "from_confusion": 92.16,
+            "match": true
+          },
+          "f1": {
+            "paper": 93.07,
+            "from_confusion": 93.07,
+            "match": true
+          },
+          "fpr": {
+            "paper": 8.0,
+            "from_confusion": 8.0,
+            "match": true
+          }
+        },
+        "text_FN_27_to_15": {
+          "paper": [
+            27,
+            15
+          ],
+          "from_confusion": [
+            27,
+            15
+          ],
+          "match": true
+        },
+        "ALL_MATCH": true
+      }
+    }
+  }
+}

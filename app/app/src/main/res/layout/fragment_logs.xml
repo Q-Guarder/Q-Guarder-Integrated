@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_lg">
+
+            <!-- 헤더 행: 타이틀 + 새로고침 버튼 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/space_xs">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="보안 통계"
+                        android:textAppearance="@style/TextAppearance.QGuard.HeadlineMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="실시간 위험 보호 현황"
+                        android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginTop="@dimen/space_xxs" />
+
+                </LinearLayout>
+
+                <!-- 새로고침 버튼 -->
+                <FrameLayout
+                    android:id="@+id/btn_refresh"
+                    android:layout_width="@dimen/button_height_sm"
+                    android:layout_height="@dimen/button_height_sm"
+                    android:background="@drawable/bg_rounded_rect_blue"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="새로고침">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_md"
+                        android:layout_height="@dimen/icon_md"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_activity"
+                        android:contentDescription="새로고침"
+                        app:tint="@color/color_on_primary" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!-- 통계 카드 (도넛 차트 + 텍스트) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorOutline">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
+
+                    <!-- 도넛 차트 + 퍼센트 텍스트 -->
+                    <FrameLayout
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="20dp">
+
+                        <com.qguarder.android.ui.widget.DonutChartView
+                            android:id="@+id/donut_chart"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp" />
+
+                        <TextView
+                            android:id="@+id/tv_safe_percent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="-- %"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface"
+                            android:gravity="center" />
+
+                    </FrameLayout>
+
+                    <!-- 통계 텍스트 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_stats_summary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="최근 --건의\n위협으로부터 차단됨"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorOnSurface"
+                            android:lineSpacingExtra="2dp" />
+
+                        <TextView
+                            android:id="@+id/tv_stats_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="● 안전 -- ● 위험 --"
+                            android:textSize="12sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 스캔 · 방문 로그 섹션 타이틀 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/space_sm">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="스캔 · 방문 기록"
+                    android:textAppearance="@style/TextAppearance.QGuard.TitleMedium"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <!-- 범례: 스캔 / 방문 구분 안내 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_xs"
+                        android:layout_height="@dimen/icon_xs"
+                        android:src="@drawable/ic_shield"
+                        app:tint="@color/color_primary"
+                        android:contentDescription="스캔"
+                        android:layout_marginEnd="3dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스캔"
+                        android:textAppearance="@style/TextAppearance.QGuard.Caption"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginEnd="@dimen/space_md" />
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_xs"
+                        android:layout_height="@dimen/icon_xs"
+                        android:src="@drawable/ic_activity"
+                        app:tint="@color/color_safe"
+                        android:contentDescription="방문"
+                        android:layout_marginEnd="3dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="방문"
+                        android:textAppearance="@style/TextAppearance.QGuard.Caption"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 필터 칩 그룹 -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_base"
+                app:singleSelection="true"
+                app:selectionRequired="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체"
+                    android:checked="true"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_safe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="안전"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_threat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="위험"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_suspicious"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="의심"
+                    style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- 로그 목록 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_logs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
+
+            <!-- 빈 상태 (개선) -->
+            <LinearLayout
+                android:id="@+id/layout_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingVertical="@dimen/space_4xl"
+                android:visibility="visible">
+
+                <!-- 일러스트 아이콘 -->
+                <FrameLayout
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginBottom="@dimen/space_lg">
+
+                    <View
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:background="@drawable/bg_circle_gray" />
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_shield"
+                        android:contentDescription="빈 상태"
+                        app:tint="@color/color_text_tertiary" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아직 스캔 기록이 없습니다"
+                    android:textAppearance="@style/TextAppearance.QGuard.TitleSmall"
+                    android:textColor="?attr/colorOnSurface"
+                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/space_sm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QR 코드를 스캔하면 여기에 기록됩니다"
+                    android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

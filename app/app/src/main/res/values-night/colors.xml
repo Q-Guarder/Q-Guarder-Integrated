@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ══════════════════════════════════════════════
+         SURFACE / BACKGROUND (Dark)
+         ══════════════════════════════════════════════ -->
+    <color name="color_surface">#121212</color>
+    <color name="color_surface_variant">#1E1E1E</color>
+    <color name="color_surface_elevated">#252525</color>
+    <color name="color_background">#121212</color>
+    <color name="color_bg_card_safe">#0A1F16</color>
+    <color name="color_bg_card_threat">#1F0A0A</color>
+    <color name="color_bg_card_warning">#1F1500</color>
+
+    <!-- ══════════════════════════════════════════════
+         TEXT (Dark)
+         ══════════════════════════════════════════════ -->
+    <color name="color_text_primary">#E8E8E8</color>
+    <color name="color_text_secondary">#B0B0B0</color>
+    <color name="color_text_tertiary">#888888</color>
+    <color name="color_text_hint">#666666</color>
+    <color name="color_text_disabled">#555555</color>
+
+    <!-- ══════════════════════════════════════════════
+         UI ELEMENTS (Dark)
+         ══════════════════════════════════════════════ -->
+    <color name="color_outline">#333333</color>
+    <color name="color_outline_variant">#262626</color>
+    <color name="color_divider">#2C2C2C</color>
+    <color name="color_ripple">#1A8C9EFF</color>
+
+    <!-- ══════════════════════════════════════════════
+         SEMANTIC CONTAINERS (Dark)
+         ══════════════════════════════════════════════ -->
+    <color name="color_primary_container">#1A237E</color>
+    <color name="color_on_primary_container">#8C9EFF</color>
+    <color name="color_threat_container">#3D1212</color>
+    <color name="color_safe_container">#0A2E1E</color>
+    <color name="color_warning_container">#2E1E00</color>
+</resources>

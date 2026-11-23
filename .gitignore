@@ -1,0 +1,44 @@
+# ── 비밀값 · 로컬 설정 (절대 커밋하지 않음) ──
+.env
+.env.*
+!.env.example
+local.properties
+*.jks
+*.keystore
+*.pem
+
+# ── Android / Gradle 빌드 산출물 ──
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.hprof
+output-metadata.json
+
+# ── IDE ──
+.idea/
+*.iml
+.vscode/
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# ── Terraform ──
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# ── OS · 도구 ──
+.DS_Store
+Thumbs.db
+*.log.tmp
+.claude/

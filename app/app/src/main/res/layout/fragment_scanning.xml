@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A1628">
+
+    <!-- 중앙 콘텐츠 -->
+    <LinearLayout
+        android:id="@+id/ll_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 아이콘 컨테이너 (pulse 애니메이션 대상) -->
+        <FrameLayout
+            android:id="@+id/icon_container"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/bg_scanning_icon_container"
+            android:layout_marginBottom="36dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_shield"
+                android:contentDescription="스캔 중"
+                app:tint="#3D5AFE" />
+
+        </FrameLayout>
+
+        <!-- 현재 페이즈 제목 -->
+        <TextView
+            android:id="@+id/tv_phase_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연결 중..."
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_marginBottom="10dp" />
+
+        <!-- 페이즈 설명 -->
+        <TextView
+            android:id="@+id/tv_phase_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서버에 연결하고 있어요"
+            android:textSize="13sp"
+            android:textColor="#88AABB"
+            android:gravity="center"
+            android:layout_marginBottom="40dp" />
+
+        <!-- 페이즈 점 인디케이터 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/dot_1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/bg_phase_dot"
+                android:layout_marginHorizontal="5dp" />
+
+            <View
+                android:id="@+id/dot_2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/bg_phase_dot"
+                android:layout_marginHorizontal="5dp" />
+
+            <View
+                android:id="@+id/dot_3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/bg_phase_dot"
+                android:layout_marginHorizontal="5dp" />
+
+            <View
+                android:id="@+id/dot_4"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/bg_phase_dot"
+                android:layout_marginHorizontal="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 에러 시 재시도/돌아가기 버튼 (기본 숨김) -->
+    <LinearLayout
+        android:id="@+id/layout_error_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="48dp"
+        android:layout_marginHorizontal="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_go_back"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="돌아가기"
+            android:textColor="#88AABB"
+            app:strokeColor="#88AABB" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_retry"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="다시 스캔"
+            android:backgroundTint="#3D5AFE" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

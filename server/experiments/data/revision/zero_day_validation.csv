@@ -1,0 +1,16 @@
+url,path_type,p_ml,ML only (threshold 0.41) | S_final,ML only (threshold 0.41) | detected,Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0) | S_final,Fixed 0.5:0.5 — 1차 심사본 설정(α=3.0) | detected,Fixed 0.5:0.5 — 수정 α·τ 적용 | S_final,Fixed 0.5:0.5 — 수정 α·τ 적용 | detected,"Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6) | S_final","Fixed 0.5:0.5 — 검증 집합 자체 τ (τL 0.5, τH 0.6) | detected",Adaptive — 1차 심사본 파라미터 | S_final,Adaptive — 1차 심사본 파라미터 | detected,"Adaptive — 수정 파라미터, Override 없음 | S_final","Adaptive — 수정 파라미터, Override 없음 | detected",Adaptive — 수정 파라미터 + Override | S_final,Adaptive — 수정 파라미터 + Override | detected
+https://pyush-777.github.io/Amazon-clone,deep,0.9918,0.9918,1,0.4959,1,0.4959,1,0.4959,0,0.7935,1,0.7935,1,0.7935,1
+https://mahananda-nova.github.io/amazon-clone,deep,0.971,0.971,1,0.4855,1,0.4855,1,0.4855,0,0.7768,1,0.7768,1,0.7768,1
+https://vanshiigurbani.github.io/spotify-clone,deep,0.8845,0.8845,1,0.4423,1,0.4423,0,0.4423,0,0.7076,1,0.7076,1,0.7076,1
+https://azalmandhai03-ctrl.github.io/netflix--clone-,deep,0.9306,0.9306,1,0.4653,1,0.4653,1,0.4653,0,0.7445,1,0.7445,1,0.7445,1
+https://affifamarwat-ship-it.github.io/counter,deep,0.9903,0.9903,1,0.4952,1,0.4952,1,0.4952,0,0.7922,1,0.7922,1,0.7922,1
+https://yahya-masood.github.io/Netflix-clone-Project-frontend,deep,0.173,0.173,0,0.0865,0,0.0865,0,0.0865,0,0.1384,0,0.1384,0,0.1384,0
+https://new-set-3.searchsst.info/Y2gtZmVkZXgtMjAyNg?u=163C1655&e=h.p.vonsiebenthal%40bluewin.ch&s3=&s4=&s5=&s6=&s7=&s8=,deep,0.2264,0.2264,0,0.1132,0,0.1132,0,0.1132,0,0.1811,0,0.1811,0,0.1811,0
+https://codedbyafzalari.github.io/netflix-ui-clone,deep,0.8131,0.8131,1,0.4066,1,0.4066,0,0.4066,0,0.6505,1,0.6505,1,0.6505,1
+https://paypalcredit.github.io/redeem,deep,0.4689,0.4689,1,0.2345,0,0.2345,0,0.2345,0,0.3752,1,0.3752,0,0.3752,0
+https://amielitosss.github.io/Netflix-Clone,deep,0.7196,0.7196,1,0.3598,1,0.3598,0,0.3598,0,0.5757,1,0.5757,1,0.5757,1
+https://destructor82.github.io/Leger,deep,0.7085,0.7085,1,0.3543,1,0.3543,0,0.3543,0,0.5668,1,0.5668,1,0.5668,1
+http://www.roblox.com.ml/users/357310723412/profile,deep,0.7231,0.7231,1,0.3615,1,0.3615,0,0.3615,0,0.5785,1,0.5785,1,0.5785,1
+https://tramkrishan783-web.github.io/amazon_wedisit,deep,0.9875,0.9875,1,0.4937,1,0.4937,1,0.4937,0,0.79,1,0.79,1,0.79,1
+https://aishwaryaugowda.github.io/netflix-clone,deep,0.6782,0.6782,1,0.3391,0,0.3391,0,0.3391,0,0.5425,1,0.5425,1,0.5425,1
+https://seu-delivery.food/agostopromo,deep,0.2278,0.2278,0,0.1139,0,0.1139,0,0.1139,0,0.1822,0,0.1822,0,0.1822,0

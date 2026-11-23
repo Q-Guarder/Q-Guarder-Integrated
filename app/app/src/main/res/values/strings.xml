@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Q-Guard</string>
+
+    <!-- 개인정보처리방침 -->
+    <string name="privacy_policy_title">개인정보 처리방침</string>
+    <string name="privacy_policy_version">v1.0</string>
+    <string name="privacy_policy_effective_date">시행일: 2025년 6월 1일</string>
+    <string name="privacy_policy_badge_required">필수</string>
+    <string name="privacy_policy_badge_optional">선택</string>
+    <string name="privacy_policy_badge_auto">자동수집</string>
+
+    <!-- 이용약관 -->
+    <string name="terms_title">서비스 이용약관</string>
+    <string name="terms_version">v1.0</string>
+    <string name="terms_effective_date">시행일: 2025년 6월 1일</string>
+    <string name="terms_badge_revised">법적 보완</string>
+    <string name="terms_badge_new">신설</string>
+</resources>

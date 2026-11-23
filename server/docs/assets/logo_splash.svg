@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" width="480" height="640">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0E27"/>
+      <stop offset="100%" stop-color="#0D1B3E"/>
+    </linearGradient>
+
+    <!-- Shield Main Gradient -->
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#00D2FF"/>
+      <stop offset="50%" stop-color="#0090FF"/>
+      <stop offset="100%" stop-color="#0055CC"/>
+    </linearGradient>
+
+    <!-- Shield Inner Gradient -->
+    <linearGradient id="shieldInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B1530"/>
+      <stop offset="100%" stop-color="#0A0E27"/>
+    </linearGradient>
+
+    <!-- Glow Effect -->
+    <radialGradient id="glowCenter" cx="0.5" cy="0.42" r="0.35">
+      <stop offset="0%" stop-color="#00D2FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00D2FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Checkmark Gradient -->
+    <linearGradient id="checkGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00E5A0"/>
+      <stop offset="100%" stop-color="#00C9FF"/>
+    </linearGradient>
+
+    <!-- Outer Glow Filter -->
+    <filter id="outerGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0
+                0 0.5 0 0 0.5
+                0 0 1 0 1
+                0 0 0 0.35 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle Shadow -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#0090FF" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Text Glow -->
+    <filter id="textGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0
+                0 0.6 0 0 0
+                0 0 1 0 0
+                0 0 0 0.4 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Shield Clip Path -->
+    <clipPath id="shieldClip">
+      <path d="M240,95 L340,135 C345,137 348,142 348,148 L348,260 C348,310 305,358 240,385 C175,358 132,310 132,260 L132,148 C132,142 135,137 140,135 Z"/>
+    </clipPath>
+
+    <!-- Scan Line Animation Gradient -->
+    <linearGradient id="scanLine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00D2FF" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#00D2FF" stop-opacity="0.06"/>
+      <stop offset="50%" stop-color="#00E5FF" stop-opacity="0.15"/>
+      <stop offset="55%" stop-color="#00D2FF" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#00D2FF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Circuit Pattern -->
+    <pattern id="circuit" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <rect width="60" height="60" fill="none"/>
+      <path d="M30,0 L30,15 M30,45 L30,60 M0,30 L15,30 M45,30 L60,30" stroke="#0090FF" stroke-opacity="0.06" stroke-width="0.5" fill="none"/>
+      <circle cx="30" cy="30" r="1.5" fill="#0090FF" fill-opacity="0.08"/>
+      <circle cx="30" cy="0" r="1" fill="#0090FF" fill-opacity="0.05"/>
+      <circle cx="0" cy="30" r="1" fill="#0090FF" fill-opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="480" height="640" fill="url(#bgGrad)"/>
+
+  <!-- Circuit Pattern Overlay -->
+  <rect width="480" height="640" fill="url(#circuit)" opacity="0.5"/>
+
+  <!-- Central Ambient Glow -->
+  <rect width="480" height="640" fill="url(#glowCenter)"/>
+
+  <!-- === SHIELD GROUP === -->
+  <g transform="translate(240, 240)" filter="url(#dropShadow)">
+
+    <!-- Shield Outer Border (Stroke) -->
+    <path d="M0,-145 L108,-105 C113,-103 116,-98 116,-92 L116,20 C116,70 63,118 0,143 C-63,118 -116,70 -116,20 L-116,-92 C-116,-98 -113,-103 -108,-105 Z"
+      fill="none" stroke="url(#shieldGrad)" stroke-width="2.5" opacity="0.6"/>
+
+    <!-- Shield Main Fill -->
+    <path d="M0,-140 L104,-101 C109,-99 112,-94 112,-88 L112,18 C112,66 60,113 0,138 C-60,113 -112,66 -112,18 L-112,-88 C-112,-94 -109,-99 -104,-101 Z"
+      fill="url(#shieldGrad)" opacity="0.95"/>
+
+    <!-- Shield Inner Dark Area -->
+    <path d="M0,-127 L95,-91 C99,-89 101,-85 101,-80 L101,14 C101,57 54,100 0,123 C-54,100 -101,57 -101,14 L-101,-80 C-101,-85 -99,-89 -95,-91 Z"
+      fill="url(#shieldInner)"/>
+
+    <!-- Inner Border Highlight -->
+    <path d="M0,-127 L95,-91 C99,-89 101,-85 101,-80 L101,14 C101,57 54,100 0,123 C-54,100 -101,57 -101,14 L-101,-80 C-101,-85 -99,-89 -95,-91 Z"
+      fill="none" stroke="#00D2FF" stroke-width="0.8" opacity="0.25"/>
+
+    <!-- Q Letter -->
+    <g filter="url(#outerGlow)">
+      <!-- Q Main Circle -->
+      <circle cx="0" cy="-10" r="52" fill="none" stroke="url(#shieldGrad)" stroke-width="9" stroke-linecap="round"/>
+      <!-- Q Tail -->
+      <line x1="22" y1="25" x2="48" y2="55" stroke="url(#shieldGrad)" stroke-width="9" stroke-linecap="round"/>
+    </g>
+
+    <!-- Checkmark inside Q circle -->
+    <g transform="translate(-8, -18)">
+      <polyline points="-12,6 -2,16 18,-12"
+        fill="none" stroke="url(#checkGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#outerGlow)"/>
+    </g>
+
+    <!-- Top Accent Line -->
+    <line x1="-30" y1="-130" x2="30" y2="-130" stroke="#00D2FF" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+  </g>
+
+  <!-- === TYPOGRAPHY === -->
+  <g transform="translate(240, 430)">
+    <!-- Q-GUARD Main Text -->
+    <text x="0" y="0" text-anchor="middle"
+      font-family="'SF Pro Display', 'Inter', 'Segoe UI', -apple-system, sans-serif"
+      font-size="44" font-weight="700" letter-spacing="8" fill="#FFFFFF" filter="url(#textGlow)">
+      Q-GUARD
+    </text>
+
+    <!-- Decorative Line -->
+    <line x1="-80" y1="22" x2="80" y2="22" stroke="url(#shieldGrad)" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Subtitle -->
+    <text x="0" y="46" text-anchor="middle"
+      font-family="'SF Pro Display', 'Inter', 'Segoe UI', -apple-system, sans-serif"
+      font-size="13" font-weight="400" letter-spacing="6" fill="#00D2FF" opacity="0.7">
+      URL THREAT DETECTOR
+    </text>
+  </g>
+
+  <!-- === BOTTOM DECORATIVE ELEMENTS === -->
+
+  <!-- Bottom Accent Dots -->
+  <g opacity="0.3">
+    <circle cx="220" cy="520" r="1.5" fill="#0090FF"/>
+    <circle cx="240" cy="520" r="1.5" fill="#00D2FF"/>
+    <circle cx="260" cy="520" r="1.5" fill="#0090FF"/>
+  </g>
+
+  <!-- Version Tag -->
+  <text x="240" y="600" text-anchor="middle"
+    font-family="'SF Pro Text', 'Inter', 'Segoe UI', monospace"
+    font-size="10" font-weight="400" letter-spacing="2" fill="#0090FF" opacity="0.35">
+    v2.0
+  </text>
+
+</svg>

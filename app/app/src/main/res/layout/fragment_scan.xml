@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_scan">
+
+    <!-- 카메라 프리뷰 -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/preview_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:scaleType="fillCenter" />
+
+    <!-- 반투명 상단 그라데이션 오버레이 (가독성 확보) -->
+    <View
+        android:id="@+id/overlay_top"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:background="@drawable/bg_scan_gradient_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 상단 타이틀 -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR 코드를 스캔하세요"
+        android:textAppearance="@style/TextAppearance.QGuard.HeadlineMedium"
+        android:textColor="@color/color_text_on_dark"
+        android:layout_marginTop="52dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AI가 URL을 실시간으로 분석하여 보호합니다"
+        android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+        android:textColor="@color/color_text_on_dark_secondary"
+        android:layout_marginTop="@dimen/space_sm"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 스캔 가이드 박스 -->
+    <View
+        android:id="@+id/scan_guide"
+        android:layout_width="@dimen/scan_guide_size"
+        android:layout_height="@dimen/scan_guide_size"
+        android:background="@drawable/bg_scan_guide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <!-- 스캔 가이드 안내 텍스트 -->
+    <TextView
+        android:id="@+id/tv_guide_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가이드 박스 안에 QR 코드를 위치시켜주세요"
+        android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+        android:textColor="@color/color_text_on_dark_secondary"
+        android:alpha="0.8"
+        android:layout_marginTop="@dimen/space_lg"
+        app:layout_constraintTop_toBottomOf="@id/scan_guide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 분석 중 로딩 스피너 -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="@dimen/space_4xl"
+        android:layout_height="@dimen/space_4xl"
+        android:indeterminateTint="@color/color_text_on_dark"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/scan_guide"
+        app:layout_constraintBottom_toBottomOf="@id/scan_guide"
+        app:layout_constraintStart_toStartOf="@id/scan_guide"
+        app:layout_constraintEnd_toEndOf="@id/scan_guide" />
+
+    <!-- ── 카메라 권한 거부 오버레이 ── -->
+    <LinearLayout
+        android:id="@+id/layout_permission_denied"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/space_2xl"
+        android:background="@color/color_bg_scan"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/icon_3xl"
+            android:layout_height="@dimen/icon_3xl"
+            android:src="@drawable/ic_shield"
+            android:contentDescription="카메라 권한 필요"
+            app:tint="@color/color_primary"
+            android:layout_marginBottom="@dimen/space_xl" />
+
+        <TextView
+            android:id="@+id/tv_permission_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카메라 권한이 필요합니다"
+            android:textAppearance="@style/TextAppearance.QGuard.TitleLarge"
+            android:textColor="@color/color_text_on_dark"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/space_md" />
+
+        <TextView
+            android:id="@+id/tv_permission_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QR 코드 스캔을 위해\n카메라 접근 권한이 필요합니다."
+            android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
+            android:textColor="@color/color_text_on_dark_secondary"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.4"
+            android:layout_marginBottom="@dimen/space_2xl" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_grant_permission"
+            style="@style/Widget.QGuard.Button.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height_md"
+            android:text="권한 허용하기"
+            android:paddingHorizontal="@dimen/space_2xl" />
+
+    </LinearLayout>
+
+    <!-- 하단 영역: 보호 상태 표시 -->
+    <LinearLayout
+        android:id="@+id/ll_bottom_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/space_xl"
+        android:layout_marginBottom="@dimen/space_xl"
+        app:layout_constraintBottom_toTopOf="@id/ll_sim_buttons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 보호 활성 상태 배지 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_scan_status_badge"
+            android:paddingHorizontal="@dimen/space_base"
+            android:paddingVertical="@dimen/space_sm">
+
+            <View
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@drawable/bg_dot_green"
+                android:layout_marginEnd="@dimen/space_sm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="실시간 보호 활성"
+                android:textAppearance="@style/TextAppearance.QGuard.LabelMedium"
+                android:textColor="@color/color_text_on_dark" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 하단 시뮬레이션 버튼 (DEBUG 빌드에서만 표시 - Fragment에서 제어) -->
+    <LinearLayout
+        android:id="@+id/ll_sim_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/space_xl"
+        android:layout_marginBottom="@dimen/space_xl"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/btn_normal_scan"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_md"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_sim_btn_normal"
+            android:layout_marginBottom="@dimen/space_sm"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="@dimen/icon_sm"
+                android:layout_height="@dimen/icon_sm"
+                android:src="@drawable/ic_shield"
+                android:contentDescription="정상 QR 시뮬레이션"
+                app:tint="@color/color_status_online"
+                android:layout_marginEnd="@dimen/space_md" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="정상 QR 시뮬레이션"
+                android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+                android:textColor="@color/color_text_on_dark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_suspicious_scan"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_md"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_sim_btn_suspicious"
+            android:layout_marginBottom="@dimen/space_sm"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="@dimen/icon_sm"
+                android:layout_height="@dimen/icon_sm"
+                android:src="@drawable/ic_shield"
+                android:contentDescription="의심 QR 시뮬레이션"
+                app:tint="@color/color_warning"
+                android:layout_marginEnd="@dimen/space_md" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="의심 QR 시뮬레이션"
+                android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+                android:textColor="@color/color_text_on_dark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_malicious_scan"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_md"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_sim_btn_malicious"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="@dimen/icon_sm"
+                android:layout_height="@dimen/icon_sm"
+                android:src="@drawable/ic_shield"
+                android:contentDescription="악성 QR 시뮬레이션"
+                app:tint="@color/color_threat"
+                android:layout_marginEnd="@dimen/space_md" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="악성 QR 시뮬레이션"
+                android:textAppearance="@style/TextAppearance.QGuard.BodySmall"
+                android:textColor="@color/color_text_on_dark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
