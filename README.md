@@ -16,7 +16,7 @@ QR 코드 큐싱 탐지 시스템 Q-Guard의 서버와 Android 앱을 한 폴더
 Q-Guard-integrated/
 ├─ README.md                    이 문서
 ├─ .gitignore                   비밀값(.env, local.properties)·빌드 산출물 제외
-├─ docs/                        최종 발표자료 · 포스터 · 학술대회 논문 (PDF)
+├─ docs/                        최종 발표자료 · 포스터 · 학술대회 논문 (PDF), 시연용 QR (demo_qr/)
 ├─ server/                      FastAPI 서버 + 실험 + 문서
 └─ app/                         Android 앱 (Kotlin)
 ```
