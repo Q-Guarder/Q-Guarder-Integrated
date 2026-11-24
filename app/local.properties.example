@@ -8,7 +8,7 @@ sdk.dir=
 #
 #  1) 같은 PC 에서 server/ 를 docker compose 로 띄우고 에뮬레이터로 실행 (기본)
 #       BASE_URL=http://10.0.2.2:8000/
-#  2) ngrok 등 HTTPS 터널 / 배포된 API Gateway
+#  2) ngrok 등 HTTPS 터널 (실제 휴대폰에서 접속할 때)
 #       BASE_URL=https://xxxx.ngrok-free.app/
 #
 #  http:// 주소는 debug 빌드에서 10.0.2.2 · localhost 만 허용된다

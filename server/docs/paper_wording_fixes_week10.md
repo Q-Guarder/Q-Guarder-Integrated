@@ -66,5 +66,5 @@ ML 가중치 0.80이 적용되므로 결과가 달라집니다.
 ## 3. 시스템 이름 — 수정 불필요
 
 논문의 "Q-Guard"가 맞습니다. 프로젝트 문서(`03_api_specification.md`, `04_db_schema.md`)도 Q-Guard로 쓰고 있고,
-"Q-Guarder"는 서버 저장소 이름일 뿐입니다. 옛 초안 `kci_research_analysis.md`에만 "Q-Guarder"로 남아 있어
+"Q-Guarder"는 서버 저장소 이름일 뿐입니다. 옛 초안 `kci_research_analysis.md`(현재 저장소에서는 삭제됨)에만 "Q-Guarder"로 남아 있어
 문서 상단에 안내를 추가했습니다.

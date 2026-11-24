@@ -71,7 +71,7 @@ async def _send_kisa_background(
         "사용자가 스캔 결과를 기반으로 URL을 악성으로 신고합니다. "
         "신고 접수 후 Feedback Queue에 적재되며, "
         "해당 URL이 BLOCKED 판정인 경우 BackgroundTasks를 통해 "
-        "AWS SES → KISA(cert@kisa.or.kr) 자동 신고 메일을 비동기로 발송합니다."
+        "SMTP로 KISA 신고 메일을 비동기로 발송합니다 (받는 주소: KISA_REPORT_RECIPIENT)."
     ),
 )
 async def report_url(

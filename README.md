@@ -26,7 +26,7 @@ Q-Guard-integrated/
 ```
 server/
 ├─ app/                         서버 애플리케이션
-│  ├─ main.py                   FastAPI 앱 생성, 라우터 등록, /health, Lambda 핸들러
+│  ├─ main.py                   FastAPI 앱 생성, 라우터 등록, /health
 │  ├─ api/v1/                   HTTP 라우터
 │  │  ├─ auth.py                회원가입 · 로그인 · 토큰 갱신 · 로그아웃
 │  │  ├─ scan.py                URL 위험도 분석 (POST /scan/url)
@@ -35,25 +35,24 @@ server/
 │  ├─ services/                 핵심 로직
 │  │  ├─ url_features.py        URL 전처리 + 26개 특징 추출 (논문 Table 1)
 │  │  ├─ ensemble_model.py      XGB+LGBM Soft Voting 앙상블 클래스 (pkl 복원용)
-│  │  ├─ s3_loader.py           모델 로딩 (S3 또는 local_models/)
+│  │  ├─ model_loader.py        모델 로딩 (local_models/)
 │  │  ├─ fusion.py              상황 적응형 가중 융합 — 논문 식 (2)~(7), SERVER_PARAMS
 │  │  ├─ hybrid_engine.py       ML 추론 + VT 조회 + 융합을 묶는 분석 엔진
 │  │  ├─ feature_metadata.py    XAI용 특징 한글 설명, 위험도 문구
-│  │  └─ kisa_reporter.py       KISA 신고 메일 (KISA_REPORT_ENABLED로 on/off)
+│  │  └─ kisa_reporter.py       KISA 신고 메일 (SMTP 발송, KISA_REPORT_ENABLED로 on/off)
 │  ├─ schemas/                  요청·응답 스키마 (Pydantic) — 앱의 Dtos.kt와 대응
 │  ├─ models/                   DB 테이블 정의 (SQLAlchemy)
 │  ├─ crud/                     DB 조회·저장 함수
 │  ├─ core/                     설정(config.py), 인증·JWT(security.py)
 │  └─ db/session.py             DB 세션
-├─ background/queue_processor.py   신고 큐 재검증 (운영: EventBridge → Lambda)
+├─ background/queue_processor.py   신고 큐 재검증 (필요할 때 직접 실행)
 ├─ local_models/                학습된 모델 파일 (.pkl)
 ├─ experiments/                 논문 실험 스크립트와 데이터 → 2장 참고
 │  ├─ *.py                      실험 스크립트 (2.4절)
 │  ├─ data/                     실험 데이터와 결과 (2.2~2.3절)
 │  └─ figures/                  1차 심사본 민감도 그림 (PDF)
 ├─ tests/                       단위 테스트 (pytest, 126개)
-├─ docs/                        설계 문서 (API 명세, DB 스키마, AWS 구조, 트러블슈팅 등)
-├─ infrastructure/              AWS 배포 Terraform (VPC, RDS, Lambda, API Gateway, S3)
+├─ docs/                        설계 문서 (API 명세, DB 스키마, 트러블슈팅 등)
 ├─ Dockerfile, docker-compose.yml   로컬 실행 (서버 + PostgreSQL)
 ├─ requirements.txt             Python 의존성
 └─ .env.example                 환경 변수 템플릿 (.env로 복사해 사용)
@@ -97,7 +96,7 @@ app/
 
 | 경로 | 내용 |
 |---|---|
-| `server/local_models/final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl` | 최종 모델. XGBoost + LightGBM Soft Voting 앙상블, Top-17 특징, 분류 임계값 0.41. 서버가 `S3_MODEL_BUCKET`이 비어 있을 때 이 파일을 읽습니다. |
+| `server/local_models/final_with_fs_top17_e1_top17_xgb_lgbm_threshold041.pkl` | 최종 모델. XGBoost + LightGBM Soft Voting 앙상블, Top-17 특징, 분류 임계값 0.41. 서버가 시작할 때 이 파일을 읽습니다. |
 | `server/experiments/data/raw/offline_urls.csv` | 전처리를 마친 오프라인 URL 전체 **116,119건**. 열: `url, label, source`. 정상 59,960건(Kaggle), 피싱 56,159건(PhishTank 55,861 + OpenPhish 298). 학습 6 : 검증 2 : 테스트 2로 나눠 썼고, 온라인 평가셋과의 중복(누수) 검사에도 씁니다. |
 | `server/experiments/data/test_feature_dataset.csv` | 오프라인 **테스트 분할 23,224건**(정상 11,992 / 피싱 11,232). 열: 26개 특징 + `label`. URL 원문은 없습니다. |
 | `server/experiments/data/model_validation.json` | 위 테스트 분할로 모델을 다시 평가한 결과. 논문 Table 3·4의 XGB+LGBM Top-17 행(재현율 0.9452, TP 10,616 / FP 892 / TN 11,100 / FN 616)이 재현됩니다. |
@@ -219,8 +218,12 @@ docker compose up --build
 
 - `.env.example`의 기본값 그대로 로컬에서 동작합니다 (DB는 compose의 `db` 컨테이너).
 - **`VIRUSTOTAL_API_KEY`를 꼭 넣으세요**(무료 키: <https://www.virustotal.com/gui/my-apikey>). 비워 두면 VT 조회를 건너뛰고 ML 점수만으로 판정하는데(상황 C), 이 경우 `https://www.google.com` 같은 정상 루트 URL도 "위험"으로 나옵니다. 논문에서 다룬 ML 단독의 루트 URL 오탐이며, VT 정보가 있어야 억제됩니다.
-- **KISA 신고 메일은 기본으로 꺼져 있습니다.** BLOCKED로 판정된 URL을 앱에서 신고하면 신고 접수는 정상 처리되지만, `KISA_REPORT_ENABLED=False`(기본값)인 동안에는 KISA(cert@kisa.or.kr)로 메일을 보내지 않습니다. 운영 배포에서만 `KISA_REPORT_ENABLED=True`와 `SES_SENDER_EMAIL`을 설정하세요(`server/infrastructure/main.tf`의 Lambda 환경 변수에는 켜져 있습니다).
-- ML 모델은 `server/local_models/`의 pkl을 읽습니다(`S3_MODEL_BUCKET`이 비어 있을 때).
+- **KISA 신고 메일은 기본으로 꺼져 있습니다.** BLOCKED로 판정된 URL을 앱에서 신고하면 신고 접수는 정상 처리되지만, 아래 세 가지가 모두 설정된 경우에만 서버가 SMTP로 메일을 보냅니다.
+  - `KISA_REPORT_ENABLED=True`
+  - `KISA_REPORT_RECIPIENT` — 받는 주소. 테스트할 때는 **본인 메일 주소**, 실제로 신고할 때만 `cert@kisa.or.kr`을 넣으세요. 비어 있으면 보내지 않습니다.
+  - `SMTP_USERNAME`, `SMTP_PASSWORD` — 보내는 Gmail 계정. 구글 계정에서 2단계 인증을 켠 뒤 <https://myaccount.google.com/apppasswords>에서 만든 **앱 비밀번호**(16자리)를 넣습니다. 일반 비밀번호로는 로그인되지 않습니다.
+  - 발송 결과는 서버 로그에 `KISA 위협 리포트 발송 성공` 또는 `발송 실패`로 남습니다.
+- ML 모델은 `server/local_models/`의 pkl을 읽습니다.
 - 확인: 브라우저에서 <http://localhost:8000/docs>, <http://localhost:8000/api/v1/health>
 
 ## 4. 앱 실행 (Android Studio + 에뮬레이터)
@@ -230,7 +233,7 @@ docker compose up --build
    기본값 `BASE_URL=http://10.0.2.2:8000/`은 "같은 PC에서 띄운 서버"를 가리킵니다(에뮬레이터에서 PC는 `10.0.2.2`).
 3. 에뮬레이터에서 debug 빌드로 실행합니다 → 회원가입 → 로그인 → QR 스캔 또는 URL 직접 입력.
 
-실기기나 외부 서버를 쓸 때는 `BASE_URL`을 HTTPS 주소(ngrok, API Gateway 등)로 바꾸면 됩니다. 주소는 반드시 `/`로 끝나야 합니다.
+실기기나 외부 서버를 쓸 때는 `BASE_URL`을 HTTPS 주소(ngrok 등)로 바꾸면 됩니다. 주소는 반드시 `/`로 끝나야 합니다.
 
 ## 5. 앱 ↔ 서버 API 대응
 
@@ -255,6 +258,8 @@ docker compose up --build
 - `GET /api/v1/health` 추가 — 앱의 `HealthData` 형식(status, version, model, checks). 기존 `/health`는 그대로 둡니다.
 - DB 커밋을 응답 전에 하도록 변경(`Depends(get_db, scope="function")`, `fastapi>=0.121.0`). 최신 FastAPI는 응답을 보낸 뒤 커밋해서, 앱이 로그인 직후 보내는 프로필 조회가 401로 튕기고 강제 로그아웃되는 문제가 있었습니다.
 - KISA 메일 발송 스위치 `KISA_REPORT_ENABLED` 추가(기본 False) — 로컬 개발·시연에서 실제 메일이 나가지 않게 합니다.
+- 클라우드(AWS) 배포를 하지 않기로 하면서 관련 코드를 모두 제거했습니다 — Terraform(`infrastructure/`), Lambda 핸들러(Mangum), S3 모델 로딩, `boto3`·`mangum` 의존성, AWS 설정값. 서버는 Docker(로컬)로만 실행합니다.
+- KISA 신고 메일을 AWS SES 대신 **SMTP(Gmail 등)**로 보내도록 변경. 받는 주소는 코드에 고정하지 않고 `.env`의 `KISA_REPORT_RECIPIENT`로 정합니다.
 - `requirements.txt`: `sqlalchemy` → `sqlalchemy[asyncio]`. 최신 SQLAlchemy(2.1)는 `greenlet`을 기본 설치하지 않아, 새로 빌드하면 서버가 import 단계에서 죽었습니다.
 
 앱
@@ -275,4 +280,3 @@ docker compose up --build
 - 즐겨찾기의 `risk_level`은 앱이 서버로 보내지 않아 서버에는 비어 있습니다(앱은 로컬에 저장한 값을 씁니다).
 - 서버는 `http://` 또는 `https://`로 시작하는 URL만 분석합니다. 스킴이 없는 QR 문자열은 422로 거절됩니다.
 - 서버 테스트 실행: `server/`에서 `pip install -r requirements.txt` 후 `pytest tests` (환경 변수 `DATABASE_URL`, `JWT_SECRET_KEY` 필요 — `.env`가 있으면 자동으로 읽습니다).
-- `server/docs/kci_research_analysis.md`는 1차 설계 기록이라 현재 값과 다릅니다(문서 상단 안내 참고).

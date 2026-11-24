@@ -520,55 +520,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="회사는 원활한 서비스 제공과 효과적인 업무를 처리하기 위하여 다음과 같이 개인정보를 처리 위탁하고 있습니다."
-                android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
-                android:textColor="@color/color_text_secondary"
-                android:lineSpacingMultiplier="1.6"
-                android:layout_marginBottom="@dimen/space_sm" />
-
-            <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.QGuard.Card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/space_sm">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/space_base">
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="수탁자"
-                        android:textAppearance="@style/TextAppearance.QGuard.LabelLarge"
-                        android:textColor="@color/color_text_tertiary" />
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="Amazon Web Services (서울 리전)"
-                        android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
-                        android:textColor="@color/color_text_primary"
-                        android:layout_marginBottom="@dimen/space_md" />
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="위탁 업무"
-                        android:textAppearance="@style/TextAppearance.QGuard.LabelLarge"
-                        android:textColor="@color/color_text_tertiary" />
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="서비스 인프라 운영 및 데이터 보관"
-                        android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
-                        android:textColor="@color/color_text_primary"
-                        android:layout_marginBottom="@dimen/space_md" />
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="보유 기간"
-                        android:textAppearance="@style/TextAppearance.QGuard.LabelLarge"
-                        android:textColor="@color/color_text_tertiary" />
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="회원 탈퇴 시 또는 위탁계약 종료 시 지체 없이 파기"
-                        android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
-                        android:textColor="@color/color_text_primary" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="회사는 위탁계약 시 개인정보보호법 제26조에 따라 위탁업무 수행 목적 외 개인정보 처리 금지, 기술적·관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리·감독 등에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독합니다."
+                android:text="회사는 개인정보 처리 업무를 외부에 위탁하지 않으며, 이용자의 개인정보는 회사가 직접 운영하는 서버에 보관합니다.\n\n향후 처리 위탁이 필요한 경우 수탁자와 위탁 업무 내용을 본 방침을 통해 사전에 공개합니다."
                 android:textAppearance="@style/TextAppearance.QGuard.BodyMedium"
                 android:textColor="@color/color_text_secondary"
                 android:lineSpacingMultiplier="1.6"

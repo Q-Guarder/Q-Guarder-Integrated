@@ -5,19 +5,14 @@ __pycache__
 .venv
 venv/
 
-# ML 모델 파일 — S3에서 받아오므로 이미지에 포함시키지 않음
+# ML 모델 파일 — docker-compose가 local_models/를 볼륨으로 연결하므로 이미지에 포함시키지 않음
 *.pkl
 *.joblib
 local_models/
 .git
 .gitignore
-.terraform/
-*.tfstate
-*.tfstate.*
-*.tfvars
 docs/
 tests/
-infrastructure/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/

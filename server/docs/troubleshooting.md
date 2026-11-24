@@ -3,252 +3,22 @@
 > **작성일**: 2026-03-25  
 > **작성자**: DevSecOps 보안 감사팀  
 > **대상**: Q-Guarder-Server v1.0.0  
-> **감사 기준**: AWS Well-Architected Framework · OWASP Top 10 2021 · Zero-Trust Architecture
+> **감사 기준**: OWASP Top 10 2021 · Zero-Trust Architecture
 
 ---
 
 ## 목차
 
-1. [INFRA-01: Private Subnet Lambda 외부 API 통신 불가](#infra-01-private-subnet-lambda-외부-api-통신-불가)
-2. [INFRA-02: Terraform State 로컬 관리로 인한 인프라 드리프트 위험](#infra-02-terraform-state-로컬-관리로-인한-인프라-드리프트-위험)
-3. [INFRA-03: RDS Single-AZ 단일 장애점(SPOF)](#infra-03-rds-single-az-단일-장애점spof)
-4. [INFRA-04: API Gateway CORS 와일드카드로 앱 보안 핫픽스 무력화](#infra-04-api-gateway-cors-와일드카드로-앱-보안-핫픽스-무력화)
-5. [SEC-01: CORS allow_origins 와일드카드(*) + Credentials 동시 허용](#sec-01-cors-allow_origins-와일드카드--credentials-동시-허용)
-6. [SEC-02: Report API IDOR(Broken Object Level Authorization) 취약점](#sec-02-report-api-idorbroken-object-level-authorization-취약점)
-7. [SEC-03: Scan API 에러 바운더리 미비로 인한 스택트레이스 노출](#sec-03-scan-api-에러-바운더리-미비로-인한-스택트레이스-노출)
-8. [ASYNC-01: asyncio.get_event_loop() Deprecation으로 인한 런타임 충돌](#async-01-asyncioget_event_loop-deprecation으로-인한-런타임-충돌)
-9. [SEC-04: URL 스키마 검증 부재 — XSS 벡터 유입 가능](#sec-04-url-스키마-검증-부재--xss-벡터-유입-가능)
-10. [SEC-05: verify_password 예외 미처리로 인한 인증 우회 가능성](#sec-05-verify_password-예외-미처리로-인한-인증-우회-가능성)
-11. [AUTH-01: Refresh Token 쿠키 Secure 플래그로 인한 로컬 개발 환경 토큰 갱신 실패](#auth-01-refresh-token-쿠키-secure-플래그로-인한-로컬-개발-환경-토큰-갱신-실패)
-12. [AUTH-02: 로그아웃 후 Access Token 무효화 미구현](#auth-02-로그아웃-후-access-token-무효화-미구현)
-13. [개선 전후 안정성 점수 비교](#개선-전후-안정성-점수-비교)
-14. [GitHub Issue 템플릿 요약](#github-issue-템플릿-요약)
-
----
-
-## INFRA-01: Private Subnet Lambda 외부 API 통신 불가
-
-### [Phenomenon] 현상
-
-상용 배포 시 Lambda 함수에서 VirusTotal API 호출(`httpx.AsyncClient` → `https://www.virustotal.com/api/v3/urls`) 시 **30초 Timeout 후 `httpx.ConnectError`** 발생. AWS SES 이메일 발송(KISA 자동 신고)도 동일하게 실패. CloudWatch Logs에 `Lambda Timeout (30s exceeded)` 기록.
-
-```
-ERROR VirusTotal API 연결 실패 (네트워크 오류): https://example-phishing.com
-ERROR KISA 신고 메일 발송 실패: ConnectionError
-```
-
-API Gateway 응답으로는 **504 Gateway Timeout**이 클라이언트에 전달.
-
-### [Root Cause] 원인 분석
-
-Lambda 함수가 **Private Subnet**(`10.0.1.0/24`, `10.0.2.0/24`)에 배치되어 있으나, VPC에 **Internet Gateway → NAT Gateway → Route Table** 경로가 구성되지 않음. Private Subnet의 기본 라우팅은 VPC 내부(`10.0.0.0/16`)만 허용하며, `0.0.0.0/0`(인터넷)으로의 아웃바운드 경로가 존재하지 않음.
-
-AWS VPC 네트워크 설계 원칙상, Private Subnet에서 외부 인터넷으로 나가려면 반드시 **Public Subnet에 배치된 NAT Gateway**를 경유해야 함. 현재 아키텍처에는 Public Subnet 자체가 선언되지 않았음.
-
-```
-[AS-IS] Lambda (Private) ──X──▶ Internet (VirusTotal, SES)
-                               ❌ 라우팅 경로 없음
-
-[TO-BE] Lambda (Private) ──▶ NAT GW (Public) ──▶ IGW ──▶ Internet
-                            ✅ 0.0.0.0/0 → nat_gateway_id
-```
-
-### [Resolution] 해결책
-
-`infrastructure/main.tf`에 다음 리소스를 추가:
-
-| 리소스 | 목적 |
-|--------|------|
-| `aws_subnet.public_a/b` | NAT Gateway 배치용 Public Subnet (10.0.10.0/24, 10.0.11.0/24) |
-| `aws_internet_gateway.main` | VPC의 인터넷 게이트웨이 |
-| `aws_route_table.public` | Public Subnet → IGW 라우팅 |
-| `aws_eip.nat` | NAT Gateway용 Elastic IP |
-| `aws_nat_gateway.main` | Private→Internet 아웃바운드 NAT |
-| `aws_route_table.private` | Private Subnet → NAT Gateway 라우팅 (0.0.0.0/0) |
-| `aws_vpc_endpoint.s3` | S3 Gateway Endpoint (NAT 우회, 데이터 전송 비용 절감) |
-
-```hcl
-resource "aws_nat_gateway" "main" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public_a.id
-  depends_on    = [aws_internet_gateway.main]
-}
-
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.main.id
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.main.id
-  }
-}
-```
-
-S3 접근은 **VPC Gateway Endpoint**를 통해 NAT를 우회하도록 최적화하여 데이터 전송 비용을 절감.
-
-### [Security/Operational Impact] 보안 및 운영 영향
-
-- **서비스 가용성**: 핵심 기능(하이브리드 스캔 엔진)이 실제로 동작 가능한 상태로 전환. 수정 전에는 **Production 배포 자체가 불가능**했음.
-- **보안 계층 유지**: Lambda는 여전히 Private Subnet에 격리됨. 외부에서 Lambda로의 직접 접근은 불가하며, 아웃바운드만 NAT를 통해 허용. 공격 표면(Attack Surface) 최소화 원칙 유지.
-- **비용 영향**: NAT Gateway ~$32/월 + 데이터 전송 $0.045/GB. S3 Endpoint로 모델 로딩 트래픽은 무과금.
-
----
-
-## INFRA-02: Terraform State 로컬 관리로 인한 인프라 드리프트 위험
-
-### [Phenomenon] 현상
-
-`terraform plan` 실행 시 State 파일이 로컬 `terraform.tfstate`에만 존재. 팀원 B가 별도 환경에서 `terraform apply`를 실행하면 **State 충돌**이 발생하며, 리소스가 이중 생성되거나 기존 리소스가 untracked 상태로 전환됨.
-
-또한 `.tfstate` 파일에 `db_password`, `jwt_secret_key` 등 민감 정보가 **평문으로 포함**되어 있어, 로컬 파일 유출 시 전체 인프라 자격 증명이 노출됨.
-
-### [Root Cause] 원인 분석
-
-`terraform {}` 블록에 `backend` 설정이 없어 Terraform이 기본 로컬 파일 시스템(`terraform.tfstate`)을 사용. 이는 개인 실습 환경에서는 문제없으나, **팀 협업 · CI/CD · Production 운영**에서는 다음 문제를 야기:
-
-1. **State Lock 미지원** → 동시 `apply` 시 리소스 충돌
-2. **State 유실 위험** → 로컬 파일 삭제 시 인프라 관리 불가 (orphaned resources)
-3. **Secrets 노출** → `.tfstate`에 평문 비밀번호 저장
-
-### [Resolution] 해결책
-
-S3 + DynamoDB 기반 **Remote Backend** 설정 추가:
-
-```hcl
-terraform {
-  backend "s3" {
-    bucket         = "q-guarder-tfstate"
-    key            = "prod/terraform.tfstate"
-    region         = "ap-northeast-2"
-    encrypt        = true                        # AES-256 Server-Side Encryption
-    dynamodb_table = "q-guarder-tfstate-lock"    # State Lock (Pessimistic Locking)
-  }
-}
-```
-
-**사전 준비 (1회)**:
-```bash
-# State 버킷 생성 (버저닝 + 암호화)
-aws s3api create-bucket --bucket q-guarder-tfstate \
-  --region ap-northeast-2 \
-  --create-bucket-configuration LocationConstraint=ap-northeast-2
-
-aws s3api put-bucket-versioning --bucket q-guarder-tfstate \
-  --versioning-configuration Status=Enabled
-
-# DynamoDB Lock 테이블 생성
-aws dynamodb create-table --table-name q-guarder-tfstate-lock \
-  --attribute-definitions AttributeName=LockID,AttributeType=S \
-  --key-schema AttributeName=LockID,KeyType=HASH \
-  --billing-mode PAY_PER_REQUEST
-```
-
-### [Security/Operational Impact] 보안 및 운영 영향
-
-- **State 보안**: S3 서버 사이드 암호화(`encrypt = true`)로 `.tfstate` 내 시크릿 보호. IAM 정책으로 접근 통제 가능.
-- **동시성 안전**: DynamoDB 기반 Pessimistic Locking으로 동시 `terraform apply` 차단.
-- **복구 가능성**: S3 버저닝으로 과거 State 복원 가능. `terraform state pull/push`로 DR 대응.
-
----
-
-## INFRA-03: RDS Single-AZ 단일 장애점(SPOF)
-
-### [Phenomenon] 현상
-
-RDS가 `ap-northeast-2a` 단일 AZ에 배치된 상태에서 해당 AZ에 장애가 발생하면, 데이터베이스 연결이 끊기면서 **전체 API 및 Queue Processor가 동시에 마비**됨.
-
-FastAPI 앱에서 `sqlalchemy.exc.OperationalError: (asyncpg) connection refused` 발생 → 모든 API 응답이 **500 Internal Server Error**로 전환.
-
-추가로 `skip_final_snapshot = true` 설정으로 인해, `terraform destroy` 또는 RDS 인스턴스 교체 시 **사용자 데이터가 복구 불가능하게 영구 소실**.
-
-### [Root Cause] 원인 분석
-
-```hcl
-# AS-IS (위험)
-multi_az            = false    # ← 단일 AZ, Standby 복제본 없음
-skip_final_snapshot = true     # ← 삭제 시 스냅샷 미생성
-instance_class      = "db.t3.micro"  # ← Multi-AZ 성능 제한
-```
-
-- **Multi-AZ 미활성**: Primary 인스턴스만 운영, Synchronous Standby 미존재. AZ 장애 시 자동 Failover 불가.
-- **최종 스냅샷 건너뜀**: 개발 단계 편의 설정이 Production에 잔존. 스키마 변경이나 운영 실수로 인스턴스 삭제 시 데이터 전량 유실.
-
-### [Resolution] 해결책
-
-```hcl
-# TO-BE (Production Ready)
-multi_az                  = true
-skip_final_snapshot       = false
-final_snapshot_identifier = "${var.project_name}-final-snapshot"
-instance_class            = "db.t3.small"   # Multi-AZ 안정 운영을 위한 업그레이드
-```
-
-**아키텍처 변경:**
-```
-[AS-IS]                          [TO-BE]
-ap-northeast-2a                  ap-northeast-2a    ap-northeast-2b
-┌──────────┐                     ┌──────────┐      ┌──────────┐
-│ RDS      │                     │ RDS      │sync  │ RDS      │
-│ Primary  │                     │ Primary  │─────▶│ Standby  │
-│ (only)   │                     │          │      │          │
-└──────────┘                     └──────────┘      └──────────┘
-❌ SPOF                           ✅ Auto-Failover (~60초)
-```
-
-### [Security/Operational Impact] 보안 및 운영 영향
-
-- **가용성**: AZ 장애 시 **~60초 이내 DNS 기반 Auto-Failover**로 서비스 연속성 확보. SLA 99.95% → 99.99% 수준.
-- **데이터 보호**: `final_snapshot_identifier` 설정으로 인스턴스 삭제 시 자동 스냅샷 생성. Point-in-Time Recovery와 함께 이중 보호.
-- **Synchronous Replication**: Standby는 Primary와 동기 복제(Synchronous)되므로 RPO(Recovery Point Objective) = 0.
-
----
-
-## INFRA-04: API Gateway CORS 와일드카드로 앱 보안 핫픽스 무력화
-
-### [Phenomenon] 현상
-
-앱 코드(`app/main.py`)에서 CORS를 화이트리스트 기반으로 수정했음에도 불구하고, 브라우저에서 임의 Origin의 Cross-Origin 요청이 여전히 성공함. `Access-Control-Allow-Origin: *` 헤더가 응답에 포함됨.
-
-### [Root Cause] 원인 분석
-
-**CORS 설정이 2계층에 이중 적용**되어 있었음:
-
-1. **API Gateway 레벨** (`main.tf`): `allow_origins = ["*"]` → Preflight(OPTIONS) 응답에 와일드카드 포함
-2. **FastAPI 미들웨어 레벨** (`app/main.py`): `CORS_ORIGINS` 환경변수 기반 화이트리스트
-
-HTTP API의 CORS 구성은 Lambda 응답 이전에 API Gateway가 자체적으로 OPTIONS 응답을 반환하므로, **앱 레벨 수정이 실질적으로 무력화**됨. 이는 Cross-Origin Resource Sharing(CORS) 정책의 이중화 시 발생하는 전형적인 설정 충돌.
-
-### [Resolution] 해결책
-
-Terraform CORS 설정을 `var.cors_allowed_origins` 변수로 통일하고, Lambda 환경변수로도 동일 값을 전달:
-
-```hcl
-# API Gateway CORS
-cors_configuration {
-  allow_origins     = var.cors_allowed_origins  # ["https://q-guarder.example.com"]
-  allow_credentials = true
-  ...
-}
-
-# Lambda 환경변수 (FastAPI 동기화)
-environment {
-  variables = {
-    CORS_ORIGINS = join(",", var.cors_allowed_origins)
-  }
-}
-```
-
-```hcl
-# variables.tf
-variable "cors_allowed_origins" {
-  type    = list(string)
-  default = ["https://q-guarder.example.com"]
-}
-```
-
-### [Security/Operational Impact] 보안 및 운영 영향
-
-- **CSRF 방어 완성**: `allow_credentials = true`와 특정 Origin 조합으로, **HttpOnly Cookie 기반 Refresh Token이 허가된 도메인에서만 전송**됨. 기존 와일드카드 설정에서는 악성 사이트에서도 인증된 API 호출이 가능했음.
-- **단일 진실 공급원(Single Source of Truth)**: CORS 허용 도메인을 `var.cors_allowed_origins` 하나로 통합 관리. 인프라와 앱 설정 간 드리프트 방지.
+1. [SEC-01: CORS allow_origins 와일드카드(*) + Credentials 동시 허용](#sec-01-cors-allow_origins-와일드카드--credentials-동시-허용)
+2. [SEC-02: Report API IDOR(Broken Object Level Authorization) 취약점](#sec-02-report-api-idorbroken-object-level-authorization-취약점)
+3. [SEC-03: Scan API 에러 바운더리 미비로 인한 스택트레이스 노출](#sec-03-scan-api-에러-바운더리-미비로-인한-스택트레이스-노출)
+4. [ASYNC-01: asyncio.get_event_loop() Deprecation으로 인한 런타임 충돌](#async-01-asyncioget_event_loop-deprecation으로-인한-런타임-충돌)
+5. [SEC-04: URL 스키마 검증 부재 — XSS 벡터 유입 가능](#sec-04-url-스키마-검증-부재--xss-벡터-유입-가능)
+6. [SEC-05: verify_password 예외 미처리로 인한 인증 우회 가능성](#sec-05-verify_password-예외-미처리로-인한-인증-우회-가능성)
+7. [AUTH-01: Refresh Token 쿠키 Secure 플래그로 인한 로컬 개발 환경 토큰 갱신 실패](#auth-01-refresh-token-쿠키-secure-플래그로-인한-로컬-개발-환경-토큰-갱신-실패)
+8. [AUTH-02: 로그아웃 후 Access Token 무효화 미구현](#auth-02-로그아웃-후-access-token-무효화-미구현)
+9. [개선 전후 안정성 점수 비교](#개선-전후-안정성-점수-비교)
+10. [GitHub Issue 템플릿 요약](#github-issue-템플릿-요약)
 
 ---
 
@@ -326,7 +96,7 @@ if str(scan_log.user_id) != current_user_id:
 
 ### [Security/Operational Impact] 보안 및 운영 영향
 
-- **허위 신고 방지**: 타 사용자 명의의 스캔 기록으로 KISA 자동 신고(SES 이메일)가 발송되는 것을 원천 차단.
+- **허위 신고 방지**: 타 사용자 명의의 스캔 기록으로 KISA 자동 신고 메일이 발송되는 것을 원천 차단.
 - **BOLA/IDOR 방어**: Zero-Trust 원칙에 따라 "리소스 소유권은 항상 서버에서 검증"하는 패턴 적용. 토큰의 `sub` 파라미터와 리소스의 `user_id`를 명시적으로 비교.
 - **OWASP API1:2023** 직접 대응.
 
@@ -336,7 +106,7 @@ if str(scan_log.user_id) != current_user_id:
 
 ### [Phenomenon] 현상
 
-`analyze_url()` 내부에서 예외 발생 시(ML 모델 로딩 실패, VT 파싱 오류 등) FastAPI 기본 500 응답이 반환. Production에서 `debug=False`여도 응답 body에 `"Internal Server Error"` 외에 로그에 **전체 스택트레이스가 기록**되어 민감한 S3 경로, 모듈 구조 등이 노출 가능.
+`analyze_url()` 내부에서 예외 발생 시(ML 모델 로딩 실패, VT 파싱 오류 등) FastAPI 기본 500 응답이 반환. Production에서 `debug=False`여도 응답 body에 `"Internal Server Error"` 외에 로그에 **전체 스택트레이스가 기록**되어 민감한 파일 경로, 모듈 구조 등이 노출 가능.
 
 ### [Root Cause] 원인 분석
 
@@ -357,7 +127,7 @@ except Exception:
 
 ### [Security/Operational Impact] 보안 및 운영 영향
 
-- **정보 유출 방지**: 내부 스택트레이스, 모듈 경로, S3 버킷명 등이 응답에 노출되지 않음.
+- **정보 유출 방지**: 내부 스택트레이스, 모듈 경로, 서버 설정값 등이 응답에 노출되지 않음.
 - **Graceful Degradation**: 사용자에게 의미 있는 에러 메시지(502) 반환. 클라이언트가 재시도 로직을 구현할 수 있는 명확한 상태 코드 제공.
 
 ---
@@ -366,11 +136,11 @@ except Exception:
 
 ### [Phenomenon] 현상
 
-Python 3.10+에서 `DeprecationWarning: There is no current event loop` 발생. Python 3.12+에서는 **`RuntimeError`로 승격**되어 Queue Processor Lambda가 즉시 실패하며 FeedbackQueue 전체 미처리 상태 유지.
+Python 3.10+에서 `DeprecationWarning: There is no current event loop` 발생. Python 3.12+에서는 **`RuntimeError`로 승격**되어 큐 프로세서가 즉시 실패하며 FeedbackQueue 전체 미처리 상태 유지.
 
 ### [Root Cause] 원인 분석
 
-`background/queue_processor.py`의 Lambda 핸들러에서 `asyncio.get_event_loop().run_until_complete()`를 사용. Python 3.10 이후 메인 스레드에 기본 이벤트 루프가 자동 생성되지 않으며, `asyncio.get_event_loop()`는 실행 중인 루프가 없으면 Deprecation 경고 → 3.12에서 `RuntimeError`를 발생.
+`background/queue_processor.py`의 실행 코드에서 `asyncio.get_event_loop().run_until_complete()`를 사용. Python 3.10 이후 메인 스레드에 기본 이벤트 루프가 자동 생성되지 않으며, `asyncio.get_event_loop()`는 실행 중인 루프가 없으면 Deprecation 경고 → 3.12에서 `RuntimeError`를 발생.
 
 ### [Resolution] 해결책
 
@@ -386,7 +156,7 @@ result = asyncio.run(process_feedback_queue())
 
 ### [Security/Operational Impact] 보안 및 운영 영향
 
-- **Python 3.12+ 호환성**: Lambda 런타임을 `python3.12`로 업그레이드해도 안전하게 동작.
+- **Python 3.12+ 호환성**: Python 3.12 이상에서도 안전하게 동작.
 - **FeedbackQueue 처리 보장**: 런타임 에러로 인한 큐 프로세서 전체 실패 방지 → KISA 자동 신고 파이프라인 안정성 확보.
 
 ---
@@ -466,29 +236,6 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 | 비동기 안정성 | 6.0 | 8.5 |
 | **앱 코드 종합** | **7.1 / 10** | **9.1 / 10** |
 
-### 인프라 Production Readiness (4건 P0/P1)
-
-| 평가 항목 | 핫픽스 전 | 핫픽스 후 |
-|-----------|-----------|-----------|
-| NAT Gateway (외부 통신) | 🔴 Fail | ✅ Pass |
-| Terraform Remote Backend | 🔴 Fail | ✅ Pass |
-| RDS Multi-AZ | 🔴 Fail | ✅ Pass |
-| RDS Final Snapshot | 🔴 Fail | ✅ Pass |
-| API Gateway CORS 동기화 | 🔴 Fail | ✅ Pass |
-| S3 SSE 암호화 | ⚠️ Warning | ✅ Pass |
-| **인프라 Fail 항목** | **5건** | **0건** |
-| **인프라 종합** | **Not Ready** | **Conditionally Ready** |
-
-### 총합 Production Readiness Score
-
-| | 핫픽스 전 | 핫픽스 후 |
-|---|---|---|
-| **앱 코드** | 7.1 / 10 | 9.1 / 10 |
-| **인프라** | Fail (5건) | Pass (Warning 5건 잔여) |
-| **종합 판정** | 🔴 **배포 불가** | 🟡 **조건부 배포 가능** |
-
-> **잔여 Warning**: Secrets Manager 미연동, IAM 와일드카드 리소스, Lambda→RDS TLS 미강제, RDS Proxy 미도입, Terraform 모듈 미분리. 이들은 서비스 동작에 영향을 주지 않으나, SOC 2 / ISO 27001 인증 시 추가 조치 필요.
-
 ---
 
 ## GitHub Issue 템플릿 요약
@@ -497,58 +244,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 ---
 
-### Issue Template: INFRA-01 ~ INFRA-04
-
-```markdown
-## 🛡️ [Infra Hotfix] Production Readiness — NAT Gateway, Remote Backend, Multi-AZ, CORS 동기화
-
-### Summary
-아키텍처 감사에서 발견된 P0/P1 인프라 결함 5건을 일괄 해결합니다.
-
-### Issues Resolved
-
-#### INFRA-01: Private Subnet Lambda 외부 API 통신 불가 (P0)
-- **현상**: Lambda → VirusTotal/SES 통신 시 ConnectError, 504 Gateway Timeout
-- **원인**: Private Subnet에 NAT Gateway 및 Route Table 미설정
-- **해결**: IGW + NAT Gateway + Public/Private Route Table + S3 VPC Endpoint 추가
-
-#### INFRA-02: Terraform State 로컬 관리 (P0)
-- **현상**: .tfstate 로컬 관리로 State Lock 부재, Secrets 평문 노출
-- **원인**: backend "s3" 설정 누락
-- **해결**: S3 Remote Backend + DynamoDB State Lock 설정 추가
-
-#### INFRA-03: RDS Single-AZ SPOF (P1)
-- **현상**: AZ 장애 시 전체 서비스 중단, 데이터 복구 불가
-- **원인**: multi_az=false, skip_final_snapshot=true
-- **해결**: multi_az=true, skip_final_snapshot=false, final_snapshot_identifier 설정
-
-#### INFRA-04: API Gateway CORS 와일드카드 (P1)
-- **현상**: 앱 코드 CORS 핫픽스가 API Gateway 레벨에서 무력화
-- **원인**: API Gateway cors_configuration에 allow_origins=["*"] 잔존
-- **해결**: var.cors_allowed_origins 변수로 통합, Lambda 환경변수와 동기화
-
-#### INFRA-05: S3 ML 모델 버킷 SSE 미설정 (P2)
-- **현상**: IaC 감사 기준 미충족 (명시적 암호화 선언 없음)
-- **해결**: aws_s3_bucket_server_side_encryption_configuration (KMS) 추가
-
-### Changed Files
-- `infrastructure/main.tf` — 네트워크, RDS, API Gateway, S3 SSE, Outputs
-- `infrastructure/variables.tf` — cors_allowed_origins, db_instance_class 업데이트
-
-### Test Plan
-- [ ] `terraform validate` — HCL 문법 검증
-- [ ] `terraform plan` — 변경 리소스 사전 확인
-- [ ] NAT Gateway 기능 검증 (Lambda → VT API 호출 성공)
-- [ ] RDS Multi-AZ Failover 테스트
-- [ ] API Gateway CORS Preflight 검증
-
-### Labels
-`P0` `infrastructure` `security` `production-readiness`
-```
-
----
-
-### Issue Template: SEC-01 ~ SEC-05 + ASYNC-01
+### Issue Template: SEC-01 ~ SEC-05, ASYNC-01
 
 ```markdown
 ## 🔒 [Security] Zero-Trust 보안 감사 핫픽스 — IDOR, CORS, Input Validation

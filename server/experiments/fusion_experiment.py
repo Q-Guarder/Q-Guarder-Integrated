@@ -43,7 +43,7 @@ from app.services.fusion import (  # noqa: E402
     fuse, params_adaptive, params_fixed, params_ml_only,
 )
 from app.services.hybrid_engine import InvalidUrlError, predict_url_with_ml  # noqa: E402
-from app.services.s3_loader import _LOCAL_MODEL_PATH, _load_model, get_model  # noqa: E402
+from app.services.model_loader import _LOCAL_MODEL_PATH, _load_model, get_model  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("fusion_experiment")
@@ -799,7 +799,7 @@ def experiment_latency(records: list[Record]) -> dict:
         print(f"{name:<22} {s['n']:>5} {s['mean']:>9.1f}ms {s['p50']:>9.1f}ms "
               f"{s['p95']:>9.1f}ms {s['max']:>9.1f}ms")
 
-    # 콜드 스타트 — Lambda 배포 시 최초 요청 비용
+    # 콜드 스타트 — 서버 시작 후 첫 요청에서 모델을 처음 읽는 비용
     import time as _time
     started = _time.perf_counter()
     _load_model()

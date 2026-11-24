@@ -1,4 +1,4 @@
-"""Q-Guarder FastAPI 앱 — 라우터 통합 및 AWS Lambda(Mangum) 핸들러"""
+"""Q-Guarder FastAPI 앱 — 라우터 통합 (uvicorn으로 실행)"""
 
 import logging
 
@@ -6,7 +6,6 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from mangum import Mangum
 
 from app.core.config import get_settings
 from app.api.v1 import auth, scan, report, user_logs
@@ -92,7 +91,3 @@ async def health_check_v1():
         "model": "xgb+lgbm-top17-softvoting",
         "checks": {"api": "ok"},
     }
-
-
-# ── AWS Lambda 핸들러 (Mangum) ──
-handler = Mangum(app, lifespan="off")

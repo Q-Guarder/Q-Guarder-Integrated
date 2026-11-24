@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 from app.services.fusion import (
     SERVER_PARAMS, FusionParams, VTStatus, fuse,
 )
-from app.services.s3_loader import get_model
+from app.services.model_loader import get_model
 from app.services.url_features import extract_features, preprocess_url
 
 logger = logging.getLogger(__name__)

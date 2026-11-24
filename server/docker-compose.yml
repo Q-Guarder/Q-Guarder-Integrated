@@ -23,7 +23,7 @@ services:
       # Hot Reload: 로컬 소스 변경 → 컨테이너 즉시 반영
       - ./app:/app/app
       - ./background:/app/background
-      # ML 모델 로컬 로드 (S3_MODEL_BUCKET 비어있을 때 사용)
+      # ML 모델 파일 (local_models/)
       - ./local_models:/app/local_models
     env_file:
       - .env
