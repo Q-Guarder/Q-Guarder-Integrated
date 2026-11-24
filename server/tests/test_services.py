@@ -39,7 +39,7 @@ from app.services.hybrid_engine import (
     scan_url_with_virustotal,
     vt_url_id,
 )
-from app.services.s3_loader import S3LoadError
+from app.services.model_loader import ModelLoadError
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -441,35 +441,47 @@ class TestVTResult:
 
 
 # ═══════════════════════════════════════════════════════════════
-#  S3 로더
+#  모델 로더
 # ═══════════════════════════════════════════════════════════════
 
-class TestS3LoadError:
-    def test_s3_load_error_is_exception(self):
-        err = S3LoadError("bucket not found")
+class TestModelLoadError:
+    def test_model_load_error_is_exception(self):
+        err = ModelLoadError("model file not found")
         assert isinstance(err, Exception)
-        assert "bucket not found" in str(err)
+        assert "model file not found" in str(err)
 
 
 # ═══════════════════════════════════════════════════════════════
-#  KISA Reporter — 회귀 #5 (report_id 누락)
+#  KISA Reporter (SMTP) — 회귀 #5 (report_id 누락) 포함
 # ═══════════════════════════════════════════════════════════════
+
+def _sent_message(mock_smtp_cls):
+    """mock SMTP로 보낸 EmailMessage를 꺼낸다."""
+    smtp = mock_smtp_cls.return_value.__enter__.return_value
+    smtp.send_message.assert_called_once()
+    return smtp.send_message.call_args[0][0]
+
 
 @pytest.mark.asyncio
 class TestKisaReporter:
     @pytest.fixture(autouse=True)
     def _enable_sending(self):
-        """발송 스위치를 켠 운영 환경을 가정한다 (SES 호출은 각 테스트가 mock)."""
+        """발송 스위치와 받는 주소·SMTP 계정을 모두 설정한 상태를 가정한다 (SMTP 접속은 각 테스트가 mock)."""
         with patch("app.services.kisa_reporter.settings") as mock_settings:
             mock_settings.KISA_REPORT_ENABLED = True
-            mock_settings.SES_SENDER_EMAIL = "noreply@example.com"
-            mock_settings.AWS_REGION = "ap-northeast-2"
+            mock_settings.KISA_REPORT_RECIPIENT = "tester@example.com"
+            mock_settings.SMTP_HOST = "smtp.gmail.com"
+            mock_settings.SMTP_PORT = 587
+            mock_settings.SMTP_USERNAME = "sender@example.com"
+            mock_settings.SMTP_PASSWORD = "app-password"
+            mock_settings.SMTP_USE_TLS = True
+            mock_settings.MAIL_FROM = ""
             self.settings = mock_settings
             yield
 
-    @patch("app.services.kisa_reporter.boto3.client")
-    async def test_disabled_by_default_sends_nothing(self, mock_boto_client):
-        """KISA_REPORT_ENABLED=False 면 SES 클라이언트조차 만들지 않는다 — 실제 메일 오발송 방지"""
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_disabled_by_default_sends_nothing(self, mock_smtp_cls):
+        """KISA_REPORT_ENABLED=False 면 메일 서버에 접속하지도 않는다 — 실제 메일 오발송 방지"""
         from app.core.config import Settings
         from app.services.kisa_reporter import send_kisa_report
 
@@ -483,13 +495,17 @@ class TestKisaReporter:
             report_id="1234abcd-5678-90ef-1234-567890abcdef",
         )
         assert result is False
-        mock_boto_client.assert_not_called()
+        mock_smtp_cls.assert_not_called()
 
-    @patch("app.services.kisa_reporter.boto3.client")
-    async def test_missing_sender_sends_nothing(self, mock_boto_client):
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_missing_recipient_sends_nothing(self, mock_smtp_cls):
+        """받는 주소가 없으면 보내지 않는다 — 기본값으로 KISA에 가짜 신고가 나가는 일 방지"""
+        from app.core.config import Settings
         from app.services.kisa_reporter import send_kisa_report
 
-        self.settings.SES_SENDER_EMAIL = ""
+        assert Settings.model_fields["KISA_REPORT_RECIPIENT"].default == ""
+
+        self.settings.KISA_REPORT_RECIPIENT = ""
         result = await send_kisa_report(
             reported_url="https://malicious-test.com",
             threat_score=0.87,
@@ -497,14 +513,25 @@ class TestKisaReporter:
             report_id="1234abcd-5678-90ef-1234-567890abcdef",
         )
         assert result is False
-        mock_boto_client.assert_not_called()
+        mock_smtp_cls.assert_not_called()
 
-    @patch("app.services.kisa_reporter.boto3.client")
-    async def test_send_success(self, mock_boto_client):
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_missing_smtp_account_sends_nothing(self, mock_smtp_cls):
         from app.services.kisa_reporter import send_kisa_report
 
-        mock_ses = MagicMock()
-        mock_boto_client.return_value = mock_ses
+        self.settings.SMTP_PASSWORD = ""
+        result = await send_kisa_report(
+            reported_url="https://malicious-test.com",
+            threat_score=0.87,
+            vt_detected_count=3,
+            report_id="1234abcd-5678-90ef-1234-567890abcdef",
+        )
+        assert result is False
+        mock_smtp_cls.assert_not_called()
+
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_send_success(self, mock_smtp_cls):
+        from app.services.kisa_reporter import send_kisa_report
 
         result = await send_kisa_report(
             reported_url="https://malicious-test.com",
@@ -516,22 +543,25 @@ class TestKisaReporter:
             weighting_case="CASE_A_LOW",
         )
         assert result is True
-        mock_ses.send_email.assert_called_once()
 
-        kwargs = mock_ses.send_email.call_args[1]
-        assert kwargs["Destination"]["ToAddresses"] == ["cert@kisa.or.kr"]
-        body = kwargs["Message"]["Body"]["Text"]["Data"]
+        mock_smtp_cls.assert_called_once_with("smtp.gmail.com", 587, timeout=20)
+        smtp = mock_smtp_cls.return_value.__enter__.return_value
+        smtp.starttls.assert_called_once()
+        smtp.login.assert_called_once_with("sender@example.com", "app-password")
+
+        msg = _sent_message(mock_smtp_cls)
+        assert msg["To"] == "tester@example.com"      # 설정한 주소로만 보낸다
+        assert msg["From"] == "sender@example.com"     # MAIL_FROM이 비면 SMTP_USERNAME
+        body = msg.get_content()
         assert "87.0" in body           # threat_score × 100
         assert "3 / 70" in body         # VT 탐지 비율
         assert "QG-" in body            # incident reference
+        assert "QG-" in msg["Subject"]
 
-    @patch("app.services.kisa_reporter.boto3.client")
-    async def test_url_is_defanged(self, mock_boto_client):
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_url_is_defanged(self, mock_smtp_cls):
         """메일 본문의 악성 URL은 클릭되지 않도록 무력화되어야 한다"""
         from app.services.kisa_reporter import send_kisa_report
-
-        mock_ses = MagicMock()
-        mock_boto_client.return_value = mock_ses
 
         await send_kisa_report(
             reported_url="https://evil.example.com/login",
@@ -539,22 +569,33 @@ class TestKisaReporter:
             vt_detected_count=5,
             report_id="abcd1234-0000-0000-0000-000000000000",
         )
-        body = mock_ses.send_email.call_args[1]["Message"]["Body"]["Text"]["Data"]
+        body = _sent_message(mock_smtp_cls).get_content()
         assert "https://evil.example.com" not in body
         assert "hxxps[://]evil[.]example[.]com" in body
 
-    @patch("app.services.kisa_reporter.boto3.client")
-    async def test_ses_failure_returns_false(self, mock_boto_client):
-        from botocore.exceptions import ClientError
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_smtp_failure_returns_false(self, mock_smtp_cls):
+        """로그인 실패(앱 비밀번호 오류 등)는 예외 없이 False로 끝나야 한다"""
+        import smtplib
 
         from app.services.kisa_reporter import send_kisa_report
 
-        mock_ses = MagicMock()
-        mock_boto_client.return_value = mock_ses
-        mock_ses.send_email.side_effect = ClientError(
-            {"Error": {"Message": "Email address not verified", "Code": "MessageRejected"}},
-            "SendEmail",
+        smtp = mock_smtp_cls.return_value.__enter__.return_value
+        smtp.login.side_effect = smtplib.SMTPAuthenticationError(535, b"Username and Password not accepted")
+
+        result = await send_kisa_report(
+            reported_url="https://test.com",
+            threat_score=0.5,
+            vt_detected_count=1,
+            report_id="0000-1111",
         )
+        assert result is False
+
+    @patch("app.services.kisa_reporter.smtplib.SMTP")
+    async def test_network_failure_returns_false(self, mock_smtp_cls):
+        from app.services.kisa_reporter import send_kisa_report
+
+        mock_smtp_cls.side_effect = OSError("Network is unreachable")
 
         result = await send_kisa_report(
             reported_url="https://test.com",

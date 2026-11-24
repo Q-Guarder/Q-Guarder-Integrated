@@ -1,4 +1,4 @@
-"""KISA 자동 신고 메일 발송 — AWS SES 기반 CERT/CSIRT 수준 위협 리포트
+"""KISA 자동 신고 메일 발송 — SMTP(Gmail 등) 기반 CERT/CSIRT 수준 위협 리포트
 
 엔터프라이즈 사건 리포트 양식:
   - TLP:AMBER 정보 공유 등급 (FIRST.org 국제 표준)
@@ -9,12 +9,14 @@
   - 6-섹션 구조화 리포트
 """
 
+import asyncio
 import logging
+import smtplib
+import ssl
 from datetime import datetime, timezone
+from email.message import EmailMessage
+from email.utils import formatdate, make_msgid
 from urllib.parse import urlsplit
-
-import boto3
-from botocore.exceptions import ClientError
 
 from app.core.config import get_settings
 from app.services.feature_metadata import FEATURE_META
@@ -22,7 +24,7 @@ from app.services.feature_metadata import FEATURE_META
 logger = logging.getLogger(__name__)
 settings = get_settings()
 
-KISA_RECIPIENT = "cert@kisa.or.kr"
+SMTP_TIMEOUT_SECONDS = 20
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -106,7 +108,7 @@ _WEIGHTING_DESC = {
     "CASE_A_LOW":  "VT 소수 탐지 확인 — ML 50% + VT 50% 균등 적용",
     "CASE_B":      "VT 미탐지 (Clean) — ML 30% + VT 70% 가중 적용",
     "CASE_C":      "VT 응답 없음 — ML 80% + VT 20% (ML 의존 모드)",
-    "OVERRIDE":    "VT 하드 오버라이드 — 탐지율 30%+ 즉시 BLOCKED 처리",
+    "OVERRIDE":    "VT 규칙 우선 판정 — 탐지 비율 5% 이상 즉시 BLOCKED 처리",
 }
 
 
@@ -198,7 +200,7 @@ MAIL_BODY_TEMPLATE = """\
   System Name     : Q-Guarder Automated Threat Detection System
   Analysis Engine : XGBoost + LightGBM Top-17 Soft-Voting (t=0.41)
   Intel Source    : VirusTotal API v3 (70+ AV Engines)
-  Infrastructure  : AWS Lambda + API Gateway + RDS + SES
+  Infrastructure  : FastAPI + PostgreSQL (자체 운영 서버)
   Contact         : {sender_email}
 
 
@@ -228,8 +230,9 @@ async def send_kisa_report(
     detected_at: datetime | None = None,
 ) -> bool:
     """
-    AWS SES를 이용하여 KISA KrCERT/CC에 엔터프라이즈 수준
+    SMTP(Gmail 등)로 KISA KrCERT/CC에 엔터프라이즈 수준
     위협 인텔리전스 리포트를 발송합니다.
+    받는 주소는 .env의 KISA_REPORT_RECIPIENT입니다 (테스트: 본인 메일, 실제 신고: cert@kisa.or.kr).
 
     Args:
         reported_url:     신고 대상 URL 원문
@@ -243,22 +246,29 @@ async def send_kisa_report(
         detected_at:      탐지 일시 (None이면 현재 UTC 시각)
 
     Returns:
-        True: 발송 성공, False: 발송 실패 또는 발송 비활성화(KISA_REPORT_ENABLED=False)
+        True: 발송 성공, False: 발송 실패 또는 발송 비활성화(설정 누락 포함)
     """
     # ── 발송 차단 장치 ──
-    # 외부 기관으로 나가는 메일이므로 명시적으로 켠 환경에서만 보낸다.
-    # 꺼져 있으면 SES 클라이언트를 만들지도 않는다 (자격 증명 조회·네트워크 호출 없음).
+    # 외부 기관으로 나갈 수 있는 메일이므로 명시적으로 켜고 받는 주소를 정한 경우에만 보낸다.
+    # 하나라도 빠지면 메일 서버에 접속하지도 않는다.
     if not settings.KISA_REPORT_ENABLED:
         logger.warning(
             "KISA 자동 신고 비활성화(KISA_REPORT_ENABLED=False) — 메일을 보내지 않습니다: %s",
             reported_url,
         )
         return False
-    if not settings.SES_SENDER_EMAIL:
+    if not settings.KISA_REPORT_RECIPIENT:
         logger.warning(
-            "SES_SENDER_EMAIL 미설정 — KISA 메일을 보내지 않습니다: %s", reported_url
+            "KISA_REPORT_RECIPIENT 미설정 — 메일을 보내지 않습니다: %s", reported_url
         )
         return False
+    if not (settings.SMTP_HOST and settings.SMTP_USERNAME and settings.SMTP_PASSWORD):
+        logger.warning(
+            "SMTP_HOST/SMTP_USERNAME/SMTP_PASSWORD 미설정 — 메일을 보내지 않습니다: %s",
+            reported_url,
+        )
+        return False
+    sender = settings.MAIL_FROM or settings.SMTP_USERNAME
 
     if detected_at is None:
         detected_at = datetime.now(timezone.utc)
@@ -281,31 +291,40 @@ async def send_kisa_report(
         vt_total=vt_total_engines,
         weighting_desc=_WEIGHTING_DESC.get(weighting_case, weighting_case or "N/A"),
         xai_section=_build_xai_section(xai_features),
-        sender_email=settings.SES_SENDER_EMAIL or "(운영 환경에서 설정)",
+        sender_email=sender,
     )
 
     subject = f"[TLP:AMBER] 악성 URL 위협 리포트 — {incident_ref}"
 
-    ses = boto3.client("ses", region_name=settings.AWS_REGION)
+    msg = EmailMessage()
+    msg["Subject"] = subject
+    msg["From"] = sender
+    msg["To"] = settings.KISA_REPORT_RECIPIENT
+    msg["Date"] = formatdate(localtime=True)
+    msg["Message-ID"] = make_msgid(domain=sender.rsplit("@", 1)[-1] if "@" in sender else None)
+    msg.set_content(body, charset="utf-8")
 
     try:
-        response = ses.send_email(
-            Source=settings.SES_SENDER_EMAIL,
-            Destination={"ToAddresses": [KISA_RECIPIENT]},
-            Message={
-                "Subject": {"Data": subject, "Charset": "UTF-8"},
-                "Body": {"Text": {"Data": body, "Charset": "UTF-8"}},
-            },
-        )
-        message_id = response.get("MessageId", "N/A")
-        logger.info(
-            "KISA 위협 리포트 발송 성공 — incident=%s, ses_id=%s, url=%s",
-            incident_ref, message_id, reported_url,
-        )
-        return True
-    except ClientError as e:
+        # smtplib는 동기 라이브러리 → 이벤트 루프를 막지 않도록 스레드에서 실행
+        await asyncio.to_thread(_smtp_send, msg)
+    except (smtplib.SMTPException, OSError) as e:
         logger.error(
             "KISA 위협 리포트 발송 실패 — incident=%s, url=%s, error=%s",
-            incident_ref, reported_url, e.response["Error"]["Message"],
+            incident_ref, reported_url, e,
         )
         return False
+
+    logger.info(
+        "KISA 위협 리포트 발송 성공 — incident=%s, to=%s, message_id=%s, url=%s",
+        incident_ref, settings.KISA_REPORT_RECIPIENT, msg["Message-ID"], reported_url,
+    )
+    return True
+
+
+def _smtp_send(msg: EmailMessage) -> None:
+    """SMTP 서버에 접속해 메일 1건을 보낸다 (Gmail: 587 + STARTTLS + 앱 비밀번호)."""
+    with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=SMTP_TIMEOUT_SECONDS) as smtp:
+        if settings.SMTP_USE_TLS:
+            smtp.starttls(context=ssl.create_default_context())
+        smtp.login(settings.SMTP_USERNAME, settings.SMTP_PASSWORD)
+        smtp.send_message(msg)

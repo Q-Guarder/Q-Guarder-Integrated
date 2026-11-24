@@ -33,7 +33,7 @@ os.chdir(PROJECT_ROOT)
 import pandas as pd  # noqa: E402
 
 from app.services.ensemble_model import MODEL_THRESHOLD  # noqa: E402
-from app.services.s3_loader import _LOCAL_MODEL_PATH, get_model  # noqa: E402
+from app.services.model_loader import _LOCAL_MODEL_PATH, get_model  # noqa: E402
 from app.services.url_features import FEATURE_COLUMNS  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")

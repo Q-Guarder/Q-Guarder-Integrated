@@ -32,7 +32,7 @@ erDiagram %% [cite: 170]
     ML_MODELS { %% [cite: 188]
         uuid id PK %% [cite: 189]
         string version %% [cite: 190]
-        string s3_key %% [cite: 191]
+        string model_path %% local_models/ 기준 모델 파일 경로
         float f1_score %% [cite: 192]
         boolean is_active %% [cite: 193]
         timestamp trained_at %% [cite: 194]

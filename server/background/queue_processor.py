@@ -1,7 +1,9 @@
 """백그라운드 큐 프로세서 — FeedbackQueue 미처리 건을 VT 재검사
 
-AWS Lambda(EventBridge 스케줄)로 주기적으로 트리거되어
 FEEDBACK_QUEUE에서 processed_at이 NULL인 건들을 순차 처리합니다.
+필요할 때 server/ 폴더에서 직접 실행합니다:
+  python -m background.queue_processor
+  (Docker: docker compose exec web python -m background.queue_processor)
 
 처리 흐름:
   1. 미처리 FeedbackQueue 항목 조회
@@ -86,13 +88,7 @@ async def process_feedback_queue() -> dict:
     return summary
 
 
-# ── AWS Lambda 핸들러 (EventBridge 스케줄 트리거) ──
+# ── 직접 실행: python -m background.queue_processor ──
 
-def handler(event, context):
-    """Lambda 진입점 — EventBridge Rule에 의해 주기적으로 호출"""
-    logger.info("Queue processor Lambda 시작 — event: %s", event)
-    result = asyncio.run(process_feedback_queue())
-    return {
-        "statusCode": 200,
-        "body": result,
-    }
+if __name__ == "__main__":
+    asyncio.run(process_feedback_queue())

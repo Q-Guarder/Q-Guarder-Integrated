@@ -11,7 +11,7 @@ class MLModel(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     version = Column(String(50), nullable=False)
-    s3_key = Column(String(512), nullable=False)
+    model_path = Column(String(512), nullable=False)  # local_models/ 기준 모델 파일 경로
     f1_score = Column(Float, nullable=True)
     is_active = Column(Boolean, default=False, nullable=False)
     trained_at = Column(DateTime(timezone=True), nullable=True)

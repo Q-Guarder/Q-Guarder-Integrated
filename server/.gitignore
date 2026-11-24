@@ -211,18 +211,6 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Terraform
-.terraform/
-*.tfstate
-*.tfstate.*
-crash.log
-*.tfvars
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-.terraform.lock.hcl
-
 # 논문/원고 작업물 (저장소 대상 아님)
 ㅇㅇ/
 *.docx

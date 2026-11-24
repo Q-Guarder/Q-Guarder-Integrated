@@ -102,7 +102,7 @@ QR 스캔 시 URL의 위험도를 실시간으로 분석 (LightGBM + VirusTotal)
 오탐지 신고
 
 ### `POST /api/v1/report`
-* **설명:** 사용자가 URL을 악성으로 신고 (Feedback Queue 적재 후, 신규 악성 URL일 경우 AWS SES를 이용해서 KISA로 자동 신고)
+* **설명:** 사용자가 URL을 악성으로 신고 (Feedback Queue 적재 후, 위험 판정 URL일 경우 SMTP로 KISA 신고 메일 발송 — 받는 주소는 .env의 KISA_REPORT_RECIPIENT)
 * **Request (Body):**
 ```json
 {
